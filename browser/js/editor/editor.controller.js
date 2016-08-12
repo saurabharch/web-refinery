@@ -24,7 +24,7 @@ app.controller('EditorCtrl', function($scope, ProjectFactory, PageFactory, curre
     console.log(currentProject)
   }
 
-  $scope.projectUrl = '/' + currentProject.id + '/index.html'
+  $scope.projectUrl = 'hosted-projects/' + currentProject.id + '/index.html'
   console.log( currentProject)
 
 });
