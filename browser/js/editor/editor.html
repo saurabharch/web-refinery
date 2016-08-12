@@ -1,4 +1,4 @@
-<div class="col-xs-12 col-md-12 col-lg-12">
+<div class="col-xs-12 col-md-12 col-lg-12 noPadding">
   <div id="mySidenav" class="sidenav col-xs-2 col-md-2 col-lg-1">
     <div id="dragitemslist">
       <h3>Draggable Item List</h3>
@@ -19,18 +19,20 @@
     </div>
   </div>
   <div class="col-xs-8 col-md-8 col-lg-10">
+  <center>
     <button id="htmlButton" type="button" ng-click="parseHtml()" class="btn btn-primary">Save Button</button>
     <button id="htmlButton" type="button" ng-click="edit()" class="btn btn-primary">Edit Button</button>
     <button id="htmlButton" type="button" ng-click="createProject({title:'testing'})" class="btn btn-primary">Create Project</button>
     <button id="htmlButton" type="button" ng-click="displayCurrentProject()" class="btn btn-primary">Display project</button>
     <iframe id="skeleton" src="/freelancer/index.html"></iframe>
+  </center>
   </div>
-  <div id="mySidenav" class="sidenav col-xs-2 col-md-2 col-lg-1">
-    <div id="dragitemslist">
+  <div id="rightSidenav" class="sidenav col-xs-2 col-md-2 col-lg-1">
+    <div id="CSSitemlist">
       <h3>Draggable Item List</h3>
       <a class="closebtn" onclick="closeNav()">&times;</a>
       <div>
-        <ul id="dragitemslistcontainer">
+        <ul id="CSSitemlistcontainer">
           <li draggable="true" data-insert-html="<h1>HEADER GOES HERE</h1>"><i class="fa fa-header"></i>
             <p>Header</p>
           </li>
