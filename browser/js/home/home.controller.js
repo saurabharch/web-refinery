@@ -1,6 +1,5 @@
-app.controller('HomeCtrl', function($scope, ProjectFactory, PageFactory, allProjects) {
+app.controller('HomeCtrl', function($scope) {
 
-$scope.projects = allProjects;
 
 
 });
