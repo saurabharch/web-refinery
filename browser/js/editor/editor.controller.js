@@ -25,6 +25,6 @@ app.controller('EditorCtrl', function($scope, ProjectFactory, PageFactory, curre
   }
 
   $scope.projectUrl = '/' + currentProject.id + '/index.html'
-  console.log($scope.projectId,'asdsa', currentProject)
+  console.log( currentProject)
 
 });
