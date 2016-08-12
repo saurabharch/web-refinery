@@ -17,11 +17,10 @@ app.controller('EditorCtrl', function($scope, ProjectFactory, PageFactory, curre
     var beforeHtml = $('#skeleton').contents().find("html").html();
     var html = "<html>\n" + beforeHtml + "</html>"
     // saves HTML to backend
-    PageFactory.savePage({html: html, projectId:currentProject.id})
-    console.log(html);
+    PageFactory.savePage({html: html, title: 'index', projectId:currentProject.id})
   }
 
-  $scope.displayCurrentProject = function() { 
+  $scope.displayCurrentProject = function() {
     console.log(currentProject)
   }
 

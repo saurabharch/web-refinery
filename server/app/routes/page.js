@@ -9,10 +9,9 @@ var ncp = require('ncp');
 
 //creates HTML and CSS
 router.post('/', function (req, res, next){
-  Page.create(req.body)
-  .then(function(result){
-    return result.setProject(req.body.projectId)
-  })
+  // Will either create or update an existing record
+  // This gets called when we hit the save button
+  Page.createOrUpdate(req.body)
   .then(function(posted){
     return handler.renderHTML(posted.html,req.body.projectId)
   })
