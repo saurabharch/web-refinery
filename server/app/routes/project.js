@@ -11,6 +11,9 @@ router.post('/', function (req, res, next){
   .then(function(result){
     return result.setUser(req.user.id)
   })
+  .then(function(result) {
+    return handler.renderHTML(posted.html)
+  })
   .then(function(result){
     console.log(result)
     res.send(result)
