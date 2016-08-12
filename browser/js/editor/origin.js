@@ -2,8 +2,8 @@
 //$(clientFrameWindow.document.body).find('.reserved-drop-marker').remove();
 //$(event.target).append("<p class='reserved-drop-marker'></p>");
 
-$(function()
-{
+$(function(){
+
     var currentElement,currentElementChangeFlag,elementRectangle,countdown,dragoverqueue_processtimer;
 
 
