@@ -1,4 +1,4 @@
-app.controller('EditorCtrl', function($scope, ProjectFactory, PageFactory) {
+app.controller('EditorCtrl', function($scope, ProjectFactory, PageFactory, currentProject) {
 
 //makes all elements in body editable
   $scope.edit = function () {
@@ -21,6 +21,9 @@ app.controller('EditorCtrl', function($scope, ProjectFactory, PageFactory) {
     console.log(html);
   }
 
+  $scope.displayCurrentProject = function() { 
+    console.log(currentProject)
+  }
 
 
 });
