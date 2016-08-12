@@ -4,6 +4,8 @@ var db = require('../../db');
 var User = db.model("user");
 var Page = db.model("page");
 var Project = db.model("project");
+var handler = require('../workHorse/');
+var currentProject;
 
 // creates project
 router.post('/', function (req, res, next){
@@ -12,13 +14,13 @@ router.post('/', function (req, res, next){
     return result.setUser(req.user.id)
   })
   .then(function(result) {
-    return handler.renderHTML(posted.html)
+    currentProject = result;
+    return handler.copyTemplate(result.id);
   })
-  .then(function(result){
-    console.log(result)
-    res.send(result)
+  .then(function(){
+    res.send(currentProject);
   })
-  .catch(next)
+  .catch(next);
 });
 
 
@@ -32,15 +34,15 @@ router.get('/', function (req, res, next){
   .then(function(result){
     res.send(result)
   })
-  .catch(next)
+  .catch(next);
 });
 
 router.get('/:id', function (req, res, next){
   Project.findById(req.params.id)
   .then(function(result){
-    res.send(result)
+    res.send(result);
   })
-  .catch(next)
+  .catch(next);
 });
 
 

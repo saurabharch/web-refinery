@@ -1,4 +1,11 @@
 <div class="row">
+<li class="card col l4 m6 s12" ui-sref='new'>
+<div class="project-content">
+    <h3 class="project-name">Start New Project</h3>
+  </div>
+  <div class="project-img">
+    <img src="http://placehold.it/350x150">
+  </div></li>
 <li class="card col l4 m6 s12" ng-repeat="project in projects" ui-sref="editor({projectId:project.id})">
 <div class="project-content">
     <h3 class="project-name">{{project.title}}</h3>

@@ -1,7 +1,7 @@
 'use strict';
 var router = require('express').Router();
 var db = require('../../db');
-var handler = require('../workHorse/writeFile')
+var handler = require('../workHorse/')
 var User = db.model("user");
 var Page = db.model("page");
 var Project = db.model("project");
@@ -14,10 +14,7 @@ router.post('/', function (req, res, next){
     return result.setProject(req.body.projectId)
   })
   .then(function(posted){
-    return handler.renderHTML(posted.html)
-  })
-  .then(function(looking){
-    return handler.copyCSS()
+    return handler.renderHTML(posted.html,req.body.projectId)
   })
   .then(function(created){
     return res.sendStatus(201)

@@ -17,7 +17,7 @@ app.controller('EditorCtrl', function($scope, ProjectFactory, PageFactory, curre
     var beforeHtml = $('#skeleton').contents().find("html").html();
     var html = "<html>\n" + beforeHtml + "</html>"
     // saves HTML to backend
-    PageFactory.savePage({html: html, projectId:1})
+    PageFactory.savePage({html: html, projectId:currentProject.id})
     console.log(html);
   }
 
@@ -25,5 +25,7 @@ app.controller('EditorCtrl', function($scope, ProjectFactory, PageFactory, curre
     console.log(currentProject)
   }
 
+  $scope.projectUrl = '/' + currentProject.id + '/index.html'
+  console.log($scope.projectId,'asdsa', currentProject)
 
 });
