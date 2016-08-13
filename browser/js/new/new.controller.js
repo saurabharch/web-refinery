@@ -1,7 +1,10 @@
-app.controller('NewCtrl', function($scope, ProjectFactory, PageFactory,$state) {
+app.controller('NewCtrl', function($scope, ProjectFactory, PageFactory,$state, allTemplates) {
     $scope.error = null;
-
+    $scope.templates = allTemplates;
+    console.log('-------', $scope.templates)
+    
     $scope.newProject = function (newProjectInfo) {
+      if (!newProjectInfo.template) newProjectInfo.template = $scope.templates[0].title 
         $scope.error = null;
 
         ProjectFactory.create(newProjectInfo)
@@ -11,7 +14,7 @@ app.controller('NewCtrl', function($scope, ProjectFactory, PageFactory,$state) {
           $state.go('editor', {projectId: newProject.id})
         })
         .catch(function() {
-          $scope.error = 'Invalid login credentials.';
+          $scope.error = 'Please fill out everything.';
         })
     };
 });
