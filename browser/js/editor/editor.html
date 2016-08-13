@@ -1,5 +1,5 @@
-<div class="col-xs-12 col-md-12 col-lg-12 noPadding">
-  <div id="mySidenav" class="sidenav col-xs-2 col-md-2 col-lg-1">
+<div class="col-xs-12 col-md-12 col-lg-12" id="editPage">
+  <div id="mySidenav" class="sidenav col-xs-3 col-md-3 col-lg-2">
     <div id="dragitemslist">
       <h3>Draggable Item List</h3>
       <a class="closebtn" onclick="closeNav()">&times;</a>
@@ -18,35 +18,14 @@
       </div>
     </div>
   </div>
-  <div class="col-xs-8 col-md-8 col-lg-10">
-  <center>
+  <div class="col-xs-9 col-md-9 col-lg-10" id="editorView">
+    <center>
     <button id="htmlButton" type="button" ng-click="parseHtml()" class="btn btn-primary">Save Button</button>
     <button id="htmlButton" type="button" ng-click="edit()" class="btn btn-primary">Edit Button</button>
     <button id="htmlButton" type="button" ng-click="createProject({title:'testing'})" class="btn btn-primary">Create Project</button>
     <button id="htmlButton" type="button" ng-click="displayCurrentProject()" class="btn btn-primary">Display project</button>
-    <iframe id="skeleton" ng-src='{{projectUrl}}'></iframe>
-  </center>
-  </div>
-
-  <div id="rightSidenav" class="sidenav col-xs-2 col-md-2 col-lg-1">
-    <div id="CSSitemlist">
-      <h3>Draggable Item List</h3>
-      <a class="closebtn" onclick="closeNav()">&times;</a>
-      <div>
-        <ul id="CSSitemlistcontainer">
-          <li draggable="true" data-insert-html="<h1>HEADER GOES HERE</h1>"><i class="fa fa-header"></i>
-            <p>Header</p>
-          </li>
-          <li draggable="true" data-insert-html="<img src='http://blogs-images.forbes.com/anthonykosner/files/2014/06/us-browser-share-adobe-index-2014.jpg'>"><i class="fa fa-bar-chart"></i>
-            <p>Chart Image</p>
-          </li>
-          <li draggable="true" data-insert-html='<div class="well login-box"> <form action=""> <legend>Login</legend> <div class="form-group"> <label for="username-email">E-mail or Username</label> <input value="" id="username-email" placeholder="E-mail or Username" type="text" class="form-control"/> </div><div class="form-group"> <label for="password">Password</label> <input id="password" value="" placeholder="Password" type="text" class="form-control"/> </div><div class="form-group text-center"> <button class="btn btn-danger btn-cancel-action">Cancel</button> <input type="submit" class="btn btn-success btn-login-submit" value="Login"/> </div></form> </div>'><i class="fa fa-sign-in"></i>
-            <p>Login Form</p>
-          </li>
-        </ul>
-      </div>
-
-    </div>
+    </center>
+    <iframe id="skeleton" src="/freelancer/index.html"></iframe>
   </div>
 </div>
 <!-- //clientframe = skeleton -->

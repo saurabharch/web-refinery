@@ -7,6 +7,8 @@ var Project = db.model("project");
 var handler = require('../workHorse/');
 var path = require('path')
 
+var rootPath = path.join(__dirname, '../../../');
+
 //maybe add a helper function for this route
 // router.get('/:id*', helperFunction, fcuntion(req,res,next) .... )
 
@@ -19,14 +21,14 @@ router.get('/:id/*', function(req,res,next){
         if (req.user){
             if (req.user.id === project.userId) 
                 //change this to a rootPath later
-                res.sendFile('/Users/yuriy/Dev/web-refinery/' + req.originalUrl)
-            else res.sendStatus(401)
+                res.sendFile(rootPath + req.originalUrl);
+            else res.sendStatus(401);
         }
     else 
-        res.sendStatus(401)
+        res.sendStatus(401);
 
     })
-    .catch(next)
+    .catch(next);
 })
 
 
