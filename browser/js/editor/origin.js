@@ -6,43 +6,62 @@ $(function(){
 
     var currentElement,currentElementChangeFlag,elementRectangle,countdown,dragoverqueue_processtimer;
 
-
-    $("#dragitemslistcontainer li").on('dragstart',function(event) {
+    // Dragstart/dragend HTML5 event
+    // Only items with the #dragitemslistcontainer will respond
+    $("#dragitemslistcontainer li").on('dragstart', function(event) {
         console.log("Drag Started");
         dragoverqueue_processtimer = setInterval(function() {
             DragDropFunctions.ProcessDragOverQueue();
         },100);
+
+        // data-insert-html holds html data. insertingHTML grabs that html
         var insertingHTML = $(this).attr('data-insert-html');
+
+        // Event is jquery event. Comes with additional functions and properties
+        // OriginalEvent is the unmodified version
+        // DataTransfer holds data that will be transferred during drap/drop
         event.originalEvent.dataTransfer.setData("Text",insertingHTML);
     });
-    $("#dragitemslistcontainer li").on('dragend',function() {
+
+    $("#dragitemslistcontainer li").on('dragend', function() {
         console.log("Drag End");
+        // Cancels action that was setup with setInterval
         clearInterval(dragoverqueue_processtimer);
+
+        // Removes the outlines that you see when dragging in the iframe
+        // First one is the drop marker (blue) second represents the
+        // container that you're dropping the data in (green).
         DragDropFunctions.removePlaceholder();
         DragDropFunctions.ClearContainerContext();
     });
-    $('#skeleton').on('load', function()
-    {
+
+    $('#skeleton').on('load', function() {
+         // $('#skeleton').get(0).contentWindow equivalent to window
+         // with clientFrameWindow our iframe has all the functionality
+         // as our outer/main window
          var clientFrameWindow = $('#skeleton').get(0).contentWindow;
         //Add CSS File to iFrame
+        //----------------------
+        // Added here so that any page that we load will have the same styles
+        // that you see when dragging into the iframe (green and blue markers)
         var style = $("<style data-reserved-styletag></style>").html(GetInsertionCSS());
         $(clientFrameWindow.document.head).append(style);
 
         var htmlBody = $(clientFrameWindow.document).find('body,html');
-        htmlBody.find('*').addBack().on('dragenter',function(event)
-        {
+        // Register event for when something is dragged into the iframe
+        htmlBody.find('*').addBack().on('dragenter', function(event) {
             event.stopPropagation();
             currentElement = $(event.target);
             currentElementChangeFlag = true;
             elementRectangle = event.target.getBoundingClientRect();
             countdown = 1;
 
-        }).on('dragover',function(event)
-        {
+        // Register event for dragging event is over
+        }).on('dragover', function(event) {
+            // Important. Without preventDefault won't add to dom
             event.preventDefault();
             event.stopPropagation();
-            if(countdown%15 != 0 && currentElementChangeFlag == false)
-            {
+            if (countdown%15 != 0 && currentElementChangeFlag == false) {
                 countdown = countdown+1;
                 return;
             }
@@ -56,7 +75,8 @@ $(function(){
             DragDropFunctions.AddEntryToDragOverQueue(currentElement,elementRectangle,mousePosition)
         })
 
-        $(clientFrameWindow.document).find('body,html').on('drop',function(event) {
+        // Event that's first called when you drop an item into the iframe
+        $(clientFrameWindow.document).find('body,html').on('drop', function(event) {
             event.preventDefault();
             event.stopPropagation();
             console.log('Drop event');
@@ -66,102 +86,88 @@ $(function(){
             else
                 var e = event.originalEvent;
             try {
+                // dataTransfer setData added in dragstart event
                 var textData = e.dataTransfer.getData('text');
                 var insertionPoint = $("#skeleton").contents().find(".drop-marker");
                 var checkDiv = $(textData);
                 insertionPoint.after(checkDiv);
                 insertionPoint.remove();
-            }
-            catch(e)
-            {
+            } catch(e) {
                 console.log(e);
             }
         });
     });
 
-    var DragDropFunctions =
-    {
+    var DragDropFunctions = {
         dragoverqueue : [],
-        GetMouseBearingsPercentage : function($element,elementRect,mousePos)
-        {
-            if(!elementRect)
+
+        GetMouseBearingsPercentage : function($element,elementRect,mousePos) {
+            if (!elementRect)
                 elementRect = $element.get(0).getBoundingClientRect();
             var mousePosPercent_X = ((mousePos.x-elementRect.left)/(elementRect.right-elementRect.left))*100;
             var mousePosPercent_Y = ((mousePos.y-elementRect.top) /(elementRect.bottom-elementRect.top))*100;
 
             return {x:mousePosPercent_X,y:mousePosPercent_Y};
         },
-        OrchestrateDragDrop : function($element, elementRect, mousePos)
-        {
+
+        OrchestrateDragDrop : function($element, elementRect, mousePos) {
             //If no element is hovered or element hovered is the placeholder -> not valid -> return false;
-            if(!$element || $element.length == 0 || !elementRect || !mousePos)
+            if (!$element || $element.length == 0 || !elementRect || !mousePos)
                 return false;
 
-            if($element.is('html'))
+            if ($element.is('html'))
                 $element = $element.find('body');
             //Top and Bottom Area Percentage to trigger different case. [5% of top and bottom area gets reserved for this]
             var breakPointNumber = {x:5,y:5};
 
             var mousePercents = this.GetMouseBearingsPercentage($element,elementRect,mousePos);
-            if((mousePercents.x > breakPointNumber.x && mousePercents.x < 100-breakPointNumber.x) && (mousePercents.y > breakPointNumber.y && mousePercents.y < 100-breakPointNumber.y))
-            {
+            if ((mousePercents.x > breakPointNumber.x && mousePercents.x < 100-breakPointNumber.x) && (mousePercents.y > breakPointNumber.y && mousePercents.y < 100-breakPointNumber.y)) {
                 //Case 1 -
                 $tempelement = $element.clone();
                 $tempelement.find(".drop-marker").remove();
-                if($tempelement.html() == "" && !this.checkVoidElement($tempelement))
-                {
-                    if(mousePercents.y < 90)
+                if ($tempelement.html() == "" && !this.checkVoidElement($tempelement)) {
+                    if (mousePercents.y < 90)
                         return this.PlaceInside($element);
-                }
-                else if($tempelement.children().length == 0)
-                {
+                } else if ($tempelement.children().length == 0) {
                     //text element detected
                     //console.log("Text Element");
                     this.DecideBeforeAfter($element,mousePercents);
-                }
-                else if($tempelement.children().length == 1)
-                {
+                } else if ($tempelement.children().length == 1) {
                     //only 1 child element detected
                     //console.log("1 Child Element");
                     this.DecideBeforeAfter($element.children(":not(.drop-marker,[data-dragcontext-marker])").first(),mousePercents);
-                }
-                else
-                {
+                } else {
                     var positionAndElement = this.findNearestElement($element,mousePos.x,mousePos.y);
                     this.DecideBeforeAfter(positionAndElement.el,mousePercents,mousePos);
                     //more than 1 child element present
                     //console.log("More than 1 child detected");
                 }
             }
-            else if((mousePercents.x <= breakPointNumber.x) || (mousePercents.y <= breakPointNumber.y))
-            {
+            else if ((mousePercents.x <= breakPointNumber.x) || (mousePercents.y <= breakPointNumber.y)) {
                 var validElement = null
-                if(mousePercents.y <= mousePercents.x)
+                if (mousePercents.y <= mousePercents.x)
                     validElement = this.FindValidParent($element,'top');
                 else
                     validElement = this.FindValidParent($element,'left');
 
-                if(validElement.is("body,html"))
+                if (validElement.is("body,html"))
                     validElement = $("#skeleton").contents().find("body").children(":not(.drop-marker,[data-dragcontext-marker])").first();
                 this.DecideBeforeAfter(validElement,mousePercents,mousePos);
-            }
-            else if((mousePercents.x >= 100-breakPointNumber.x) || (mousePercents.y >= 100-breakPointNumber.y))
-            {
+            } else if ((mousePercents.x >= 100-breakPointNumber.x) || (mousePercents.y >= 100-breakPointNumber.y)) {
                 var validElement = null
-                if(mousePercents.y >= mousePercents.x)
+                if (mousePercents.y >= mousePercents.x)
                     validElement = this.FindValidParent($element,'bottom');
                 else
                     validElement = this.FindValidParent($element,'right');
 
-                if(validElement.is("body,html"))
+                if (validElement.is("body,html"))
                     validElement = $("#skeleton").contents().find("body").children(":not(.drop-marker,[data-dragcontext-marker])").last();
                 this.DecideBeforeAfter(validElement,mousePercents,mousePos);
             }
         },
-        DecideBeforeAfter : function($targetElement,mousePercents,mousePos)
-        {
-            if(mousePos)
-            {
+
+        DecideBeforeAfter : function($targetElement,mousePercents,mousePos) {
+            if (mousePos) {
                 mousePercents = this.GetMouseBearingsPercentage($targetElement,null,mousePos);
             }
 
@@ -171,100 +177,86 @@ $(function(){
              } */
 
             $orientation = ($targetElement.css('display') == "inline" || $targetElement.css('display') == "inline-block");
-            if($targetElement.is("br"))
+            if ($targetElement.is("br"))
                 $orientation = false;
 
-            if($orientation)
-            {
-                if(mousePercents.x < 50)
-                {
+            if ($orientation) {
+                if (mousePercents.x < 50) {
                     return this.PlaceBefore($targetElement);
-                }
-                else
-                {
+                } else {
                     return this.PlaceAfter($targetElement);
                 }
-            }
-            else
-            {
-                if(mousePercents.y < 50)
-                {
+            } else {
+                if (mousePercents.y < 50) {
                     return this.PlaceBefore($targetElement);
-                }
-                else
-                {
+                } else {
                     return this.PlaceAfter($targetElement);
                 }
             }
         },
-        checkVoidElement : function($element)
-        {
+
+        checkVoidElement : function($element) {
             var voidelements = ['i','area','base','br','col','command','embed','hr','img','input','keygen','link','meta','param','video','iframe','source','track','wbr'];
             var selector = voidelements.join(",")
-            if($element.is(selector))
+            if ($element.is(selector))
                 return true;
             else
                 return false;
         },
-        calculateDistance : function(elementData, mouseX, mouseY)
-        {
+
+        calculateDistance : function(elementData, mouseX, mouseY) {
             return Math.sqrt(Math.pow(elementData.x - mouseX, 2) + Math.pow(elementData.y - mouseY, 2));
         },
-        FindValidParent : function($element,direction)
-        {
-            switch(direction)
-            {
+
+        FindValidParent : function($element,direction) {
+            switch(direction) {
                 case "left":
-                    while(true)
-                    {
+                    while(true) {
                         var elementRect = $element.get(0).getBoundingClientRect();
                         var $tempElement = $element.parent();
                         var tempelementRect = $tempElement.get(0).getBoundingClientRect();
-                        if($element.is("body"))
+                        if ($element.is("body"))
                             return $element;
-                        if(Math.abs(tempelementRect.left - elementRect.left) == 0)
+                        if (Math.abs(tempelementRect.left - elementRect.left) == 0)
                             $element = $element.parent();
                         else
                             return $element;
                     }
                     break;
                 case "right":
-                    while(true)
-                    {
+                    while(true) {
                         var elementRect = $element.get(0).getBoundingClientRect();
                         var $tempElement = $element.parent();
                         var tempelementRect = $tempElement.get(0).getBoundingClientRect();
-                        if($element.is("body"))
+                        if ($element.is("body"))
                             return $element;
-                        if(Math.abs(tempelementRect.right - elementRect.right) == 0)
+                        if (Math.abs(tempelementRect.right - elementRect.right) == 0)
                             $element = $element.parent();
                         else
                             return $element;
                     }
                     break;
                 case "top":
-                    while(true)
-                    {
+                    while(true) {
                         var elementRect = $element.get(0).getBoundingClientRect();
                         var $tempElement = $element.parent();
                         var tempelementRect = $tempElement.get(0).getBoundingClientRect();
-                        if($element.is("body"))
+                        if ($element.is("body"))
                             return $element;
-                        if(Math.abs(tempelementRect.top - elementRect.top) == 0)
+                        if (Math.abs(tempelementRect.top - elementRect.top) == 0)
                             $element = $element.parent();
                         else
                             return $element;
                     }
                     break;
                 case "bottom":
-                    while(true)
-                    {
+                    while(true) {
                         var elementRect = $element.get(0).getBoundingClientRect();
                         var $tempElement = $element.parent();
                         var tempelementRect = $tempElement.get(0).getBoundingClientRect();
-                        if($element.is("body"))
+                        if ($element.is("body"))
                             return $element;
-                        if(Math.abs(tempelementRect.bottom - elementRect.bottom) == 0)
+                        if (Math.abs(tempelementRect.bottom - elementRect.bottom) == 0)
                             $element = $element.parent();
                         else
                             return $element;
@@ -272,13 +264,12 @@ $(function(){
                     break;
             }
         },
-        addPlaceHolder : function($element,position,placeholder)
-        {
-            if(!placeholder)
+
+        addPlaceHolder : function($element,position,placeholder) {
+            if (!placeholder)
                 placeholder = this.getPlaceHolder();
             this.removePlaceholder();
-            switch(position)
-            {
+            switch(position) {
                 case "before":
                     placeholder.find(".message").html($element.parent().data('sh-dnd-error'));
                     $element.before(placeholder);
@@ -309,33 +300,31 @@ $(function(){
                     break;
             }
         },
-        removePlaceholder : function()
-        {
+
+        removePlaceholder : function() {
             $("#skeleton").contents().find(".drop-marker").remove();
         },
-        getPlaceHolder : function()
-        {
+
+        getPlaceHolder : function() {
             return $("<li class='drop-marker'></li>");
         },
-        PlaceInside : function($element)
-        {
+
+        PlaceInside : function($element) {
             var placeholder = this.getPlaceHolder();
             placeholder.addClass('horizontal').css('width',$element.width()+"px");
             this.addPlaceHolder($element,"inside-append",placeholder);
         },
-        PlaceBefore : function($element)
-        {
+
+        PlaceBefore : function($element) {
             var placeholder = this.getPlaceHolder();
             var inlinePlaceholder = ($element.css('display') == "inline" || $element.css('display') == "inline-block");
-            if($element.is("br"))
-            {
+            if ($element.is("br")) {
                 inlinePlaceholder = false;
-            }
-            else if($element.is("td,th"))
-            {
+            } else if($element.is("td,th")) {
                 placeholder.addClass('horizontal').css('width',$element.width()+"px");
                 return this.addPlaceHolder($element,"inside-prepend",placeholder);
             }
+
             if(inlinePlaceholder)
                 placeholder.addClass("vertical").css('height',$element.innerHeight()+"px");
             else
@@ -343,35 +332,30 @@ $(function(){
             this.addPlaceHolder($element,"before",placeholder);
         },
 
-        PlaceAfter : function($element)
-        {
+        PlaceAfter : function($element) {
             var placeholder = this.getPlaceHolder();
             var inlinePlaceholder = ($element.css('display') == "inline" || $element.css('display') == "inline-block");
-            if($element.is("br"))
-            {
+            if ($element.is("br")) {
                 inlinePlaceholder = false;
-            }
-            else if($element.is("td,th"))
-            {
+            } else if ($element.is("td,th")) {
                 placeholder.addClass('horizontal').css('width',$element.width()+"px");
                 return this.addPlaceHolder($element,"inside-append",placeholder);
             }
+
             if(inlinePlaceholder)
                 placeholder.addClass("vertical").css('height',$element.innerHeight()+"px");
             else
                 placeholder.addClass("horizontal").css('width',$element.parent().width()+"px");
             this.addPlaceHolder($element,"after",placeholder);
         },
-        findNearestElement : function($container,clientX,clientY)
-        {
+
+        findNearestElement : function($container,clientX,clientY) {
             var _this = this;
             var previousElData = null;
             var childElement = $container.children(":not(.drop-marker,[data-dragcontext-marker])");
-            if(childElement.length > 0)
-            {
-                childElement.each(function()
-                {
-                    if($(this).is(".drop-marker"))
+            if (childElement.length > 0) {
+                childElement.each(function() {
+                    if ($(this).is(".drop-marker"))
                         return;
 
                     var offset = $(this).get(0).getBoundingClientRect();
@@ -386,53 +370,36 @@ $(function(){
                     var corner2 = null;
 
                     //Parellel to Yaxis and intersecting with x axis
-                    if(clientY > yPosition1 && clientY <  yPosition2 )
-                    {
-                        if(clientX < xPosition1 && clientY < xPosition2)
-                        {
+                    if (clientY > yPosition1 && clientY <  yPosition2 ) {
+                        if (clientX < xPosition1 && clientY < xPosition2) {
                             corner1 = {x:xPosition1, y:clientY,'position':'before'};
-                        }
-                        else
-                        {
+                        } else {
                             corner1 = {x:xPosition2, y:clientY,'position':'after'};
                         }
 
                     }
                     //Parellel to xAxis and intersecting with Y axis
-                    else if(clientX > xPosition1 && clientX < xPosition2)
-                    {
-                        if(clientY < yPosition1 && clientY < yPosition2)
-                        {
+                    else if (clientX > xPosition1 && clientX < xPosition2) {
+                        if (clientY < yPosition1 && clientY < yPosition2) {
                             corner1 = {x:clientX, y:yPosition1,'position':'before'};
-                        }
-                        else
-                        {
+                        } else {
                             corner1 = {x:clientX, y:yPosition2,'position':'after'};
                         }
 
-                    }
-                    else
-                    {
+                    } else {
                         //runs if no element found!
-                        if(clientX < xPosition1 && clientX < xPosition2)
-                        {
+                        if (clientX < xPosition1 && clientX < xPosition2) {
                             corner1 = {x:xPosition1, y:yPosition1,'position':'before'};          //left top
                             corner2 = {x:xPosition1, y :yPosition2,'position':'after'};       //left bottom
-                        }
-                        else if(clientX > xPosition1 && clientX > xPosition2)
-                        {
+                        } else if (clientX > xPosition1 && clientX > xPosition2) {
                             //console.log('I m on the right of the element');
                             corner1 = {x:xPosition2, y:yPosition1,'position':'before'};   //Right top
                             corner2 = {x:xPosition2, y :yPosition2,'position':'after'}; //Right Bottom
-                        }
-                        else if(clientY < yPosition1 && clientY < yPosition2)
-                        {
+                        } else if (clientY < yPosition1 && clientY < yPosition2) {
                             // console.log('I m on the top of the element');
                             corner1 = {x :xPosition1, y:yPosition1,'position':'before'}; //Top Left
                             corner2 = {x :xPosition2, y:yPosition1,'position':'after'}; //Top Right
-                        }
-                        else if(clientY > yPosition1 && clientY > yPosition2)
-                        {
+                        } else if (clientY > yPosition1 && clientY > yPosition2) {
                             // console.log('I m on the bottom of the element');
                             corner1 = {x :xPosition1, y:yPosition2,'position':'before'}; //Left bottom
                             corner2 = {x :xPosition2, y:yPosition2,'position':'after'} //Right Bottom
@@ -441,82 +408,73 @@ $(function(){
 
                     distance1 = _this.calculateDistance(corner1, clientX, clientY);
 
-                    if(corner2 !== null)
+                    if (corner2 !== null)
                         distance2 = _this.calculateDistance(corner2, clientX, clientY);
 
-                    if(distance1 < distance2 || distance2 === null)
-                    {
+                    if (distance1 < distance2 || distance2 === null) {
                         distance = distance1;
                         position = corner1.position;
-                    }
-                    else
-                    {
+                    } else {
                         distance = distance2;
                         position = corner2.position;
                     }
 
-                    if(previousElData !== null)
-                    {
-                        if(previousElData.distance < distance)
-                        {
+                    if (previousElData !== null) {
+                        if (previousElData.distance < distance) {
                             return true; //continue statement
                         }
                     }
                     previousElData =    {'el':this,'distance':distance,'xPosition1':xPosition1,'xPosition2':xPosition2,'yPosition1':yPosition1,'yPosition2':yPosition2, 'position':position}
                 });
-                if(previousElData !== null)
-                {
+                if (previousElData !== null) {
                     var position = previousElData.position;
                     return {'el':$(previousElData.el),'position':position};
-                }
-                else
-                {
+                } else {
                     return false;
                 }
             }
         },
-        AddEntryToDragOverQueue : function($element,elementRect,mousePos)
-        {
+
+        AddEntryToDragOverQueue : function($element,elementRect,mousePos) {
             var newEvent = [$element,elementRect,mousePos];
             this.dragoverqueue.push(newEvent);
         },
-        ProcessDragOverQueue : function($element,elementRect,mousePos)
-        {
+
+        ProcessDragOverQueue : function($element,elementRect,mousePos) {
             var processing = this.dragoverqueue.pop();
             this.dragoverqueue = [];
-            if(processing && processing.length == 3)
-            {
+
+            if (processing && processing.length == 3) {
                 var $el = processing[0];
                 var $elRect = processing[1];
                 var mousePos = processing[2];
+                // Most of the magic is in the OrchestrateDragDrop
                 this.OrchestrateDragDrop($el, $elRect, mousePos);
             }
 
         },
-        GetContextMarker : function()
-        {
+
+        GetContextMarker : function() {
             $contextMarker = $("<div data-dragcontext-marker><span data-dragcontext-marker-text></span></div>");
             return $contextMarker;
         },
-        AddContainerContext : function($element,position)
-        {
+
+        AddContainerContext : function($element,position) {
 
             $contextMarker = this.GetContextMarker();
             this.ClearContainerContext();
-            if($element.is('html,body'))
-            {
+            if ($element.is('html,body')) {
                 position = 'inside';
                 $element =  $("#skeleton").contents().find("body");
             }
-            switch(position)
-            {
+            switch(position) {
                 case "inside":
                     this.PositionContextMarker($contextMarker,$element);
-                    if($element.hasClass('stackhive-nodrop-zone'))
+                    if ($element.hasClass('stackhive-nodrop-zone'))
                         $contextMarker.addClass('invalid');
                     var name = this.getElementName($element);
                     $contextMarker.find('[data-dragcontext-marker-text]').html(name);
-                    if($("#skeleton").contents().find("body [data-sh-parent-marker]").length != 0)
+                    if ($("#skeleton").contents().find("body [data-sh-parent-marker]").length != 0)
                         $("#skeleton").contents().find("body [data-sh-parent-marker]").first().before($contextMarker);
                     else
                         $("#skeleton").contents().find("body").append($contextMarker);
@@ -528,15 +486,15 @@ $(function(){
                     var name = this.getElementName($element.parent());
                     $contextMarker.find('[data-dragcontext-marker-text]').html(name);
                     $contextMarker.attr("data-dragcontext-marker",name.toLowerCase());
-                    if($("#skeleton").contents().find("body [data-sh-parent-marker]").length != 0)
+                    if ($("#skeleton").contents().find("body [data-sh-parent-marker]").length != 0)
                         $("#skeleton").contents().find("body [data-sh-parent-marker]").first().before($contextMarker);
                     else
                         $("#skeleton").contents().find("body").append($contextMarker);
                     break;
             }
         },
-        PositionContextMarker : function($contextMarker,$element)
-        {
+
+        PositionContextMarker : function($contextMarker,$element) {
             var rect = $element.get(0).getBoundingClientRect();
             $contextMarker.css({
                 height: (rect.height + 4) +"px",
@@ -544,21 +502,20 @@ $(function(){
                 top: (rect.top+$($("#skeleton").get(0).contentWindow).scrollTop() - 2) +"px",
                 left: (rect.left+$($("#skeleton").get(0).contentWindow).scrollLeft() - 2)+"px"
             });
-            if(rect.top+$("#skeleton").contents().find("body").scrollTop() < 24)
+            if (rect.top+$("#skeleton").contents().find("body").scrollTop() < 24)
                 $contextMarker.find("[data-dragcontext-marker-text]").css('top','0px');
         },
-        ClearContainerContext : function()
-        {
+
+        ClearContainerContext : function() {
             $("#skeleton").contents().find('[data-dragcontext-marker]').remove();
         },
-        getElementName : function($element)
-        {
+
+        getElementName : function($element) {
             return $element.prop('tagName');
         }
     };
 
-    var GetInsertionCSS = function()
-    {
+    var GetInsertionCSS = function() {
         var styles = ""+
             ".reserved-drop-marker{width:100%;height:2px;background:#00a8ff;position:absolute}.reserved-drop-marker::after,.reserved-drop-marker::before{content:'';background:#00a8ff;height:7px;width:7px;position:absolute;border-radius:50%;top:-2px}.reserved-drop-marker::before{left:0}.reserved-drop-marker::after{right:0}";
         styles += "[data-dragcontext-marker],[data-sh-parent-marker]{outline:#19cd9d solid 2px;text-align:center;position:absolute;z-index:123456781;pointer-events:none;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}[data-dragcontext-marker] [data-dragcontext-marker-text],[data-sh-parent-marker] [data-sh-parent-marker-text]{background:#19cd9d;color:#fff;padding:2px 10px;display:inline-block;font-size:14px;position:relative;top:-24px;min-width:121px;font-weight:700;pointer-events:none;z-index:123456782}[data-dragcontext-marker].invalid{outline:#dc044f solid 2px}[data-dragcontext-marker].invalid [data-dragcontext-marker-text]{background:#dc044f}[data-dragcontext-marker=body]{outline-offset:-2px}[data-dragcontext-marker=body] [data-dragcontext-marker-text]{top:0;position:fixed}";
@@ -570,7 +527,6 @@ $(function(){
 //end of drag and drop from bar to iframe
 
 //nav bar operation
-
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
      $(".target").css("margin-left", 250);
