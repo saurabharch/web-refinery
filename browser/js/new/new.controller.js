@@ -4,7 +4,7 @@ app.controller('NewCtrl', function($scope, ProjectFactory, PageFactory,$state, a
     console.log('-------', $scope.templates)
     
     $scope.newProject = function (newProjectInfo) {
-      console.log(newProjectInfogit )
+      
         $scope.error = null;
 
         ProjectFactory.create(newProjectInfo)
