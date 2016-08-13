@@ -4,7 +4,7 @@ app.controller('NewCtrl', function($scope, ProjectFactory, PageFactory,$state, a
     console.log('-------', $scope.templates)
     
     $scope.newProject = function (newProjectInfo) {
-      
+      if (!newProjectInfo.template) newProjectInfo.template = $scope.templates[0].title 
         $scope.error = null;
 
         ProjectFactory.create(newProjectInfo)
