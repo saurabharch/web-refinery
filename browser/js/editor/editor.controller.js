@@ -20,11 +20,9 @@ app.controller('EditorCtrl', function($scope, ProjectFactory, PageFactory, curre
     PageFactory.savePage({html: html, title: 'index', projectId:currentProject.id})
   }
 
-  $scope.displayCurrentProject = function() {
-    console.log(currentProject)
-  }
+  $scope.currentProject = currentProject.title
+  
 
   $scope.projectUrl = 'hosted-projects/' + currentProject.id + '/index.html'
-  console.log( currentProject)
-
+  
 });

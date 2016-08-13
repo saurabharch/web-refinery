@@ -4,18 +4,19 @@ var db = require('../../db');
 var User = db.model("user");
 var Page = db.model("page");
 var Project = db.model("project");
-var handler = require('../workHorse/');
+var workHorse = require('../workHorse/');
 var currentProject;
 
 // creates project
 router.post('/', function (req, res, next){
+  var template = req.body.template;  // save this for the copytemplate function
   Project.create(req.body)
   .then(function(result){
     return result.setUser(req.user.id)
   })
   .then(function(result) {
-    currentProject = result;
-    return handler.copyTemplate(result.id);
+    currentProject = result; //save this so we can use it in our res.send below
+    return workHorse.copyTemplate(template,result.id);
   })
   .then(function(){
     res.send(currentProject);

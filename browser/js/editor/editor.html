@@ -24,9 +24,8 @@
     <button id="htmlButton" type="button" ng-click="parseHtml()" class="btn btn-primary">Save Button</button>
     <button id="htmlButton" type="button" ng-click="edit()" class="btn btn-primary">Edit Button</button>
     <button id="htmlButton" type="button" ng-click="createProject({title:'testing'})" class="btn btn-primary">Create Project</button>
-    <button id="htmlButton" type="button" ng-click="displayCurrentProject()" class="btn btn-primary">Display project</button>
     </center>
-    <iframe id="skeleton" src="/freelancer/index.html"></iframe>
+    <iframe id="skeleton" ng-src="{{projectUrl}}"></iframe>
   </div>
 </div>
 <!-- //clientframe = skeleton -->

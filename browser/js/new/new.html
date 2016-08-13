@@ -7,20 +7,20 @@
 
     <div class="form-group">
         <label for="email">Project name</label>
-        <input type="text" ng-model="new.title" class="form-control" id="title" placeholder="Enter project name">
+        <input type="text" ng-model="new.title" class="form-control" id="title" placeholder="Enter project name" ng-required>
     </div>
 
     <strong>Pick a template</strong>
     <div class="row">
       <!-- Template Columns -->
       <!-- Single template thumbnail/radio - START -->
-      <div class="col-sm-6 col-md-4">
+      <div class="col-sm-6 col-md-4" ng-repeat= 'template in templates'>
         <div class="thumbnail">
-          <img src="images/freelancer.png" alt="...">
+          <img ng-src="images/{{template.title}}.png" alt="...">
           <div class="caption">
             <div class="radio">
               <label>
-                <input type="radio" name="template" ng-model="new.template" value="portfilio" checked>Freelancer Bootstrap
+                <input type="radio" name="template" ng-model="new.template" value="{{template.title}}" ng-required>{{template.title}}
               </label>
             </div>
           </div>
@@ -28,7 +28,8 @@
       </div>
       <!-- Single template thumbnail/radio - END -->
 
-      <!-- Single template thumbnail/radio - START -->
+      <!-- 
+      <!-- Single template thumbnail/radio - START
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
           <img src="images/freelancer.png" alt="...">
@@ -41,9 +42,9 @@
           </div>
         </div>
       </div>
-      <!-- Single template thumbnail/radio - END -->
+      <!-- Single template thumbnail/radio - END 
 
-      <!-- Single template thumbnail/radio - START -->
+      Single template thumbnail/radio - START
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
           <img src="images/freelancer.png" alt="...">
@@ -56,8 +57,8 @@
           </div>
         </div>
       </div>
-      <!-- Single template thumbnail/radio - END -->
-    </div>
+      <!-- Single template thumbnail/radio - END 
+    </div> -->
 
     <div class="row">
       <div class="col-sm-12 col-md-12">
