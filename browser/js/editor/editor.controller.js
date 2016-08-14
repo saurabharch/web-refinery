@@ -2,23 +2,25 @@ app.controller('EditorCtrl', function($scope, ProjectFactory, PageFactory, curre
 
 //makes all elements in body editable
   $scope.edit = function () {
-    $('#skeleton').contents().find('body').each(function() {
+    $('#skeleton').contents().find('h1,h2,h3,h4,h5,h6,p,span,button,a').each(function() {
       // var self = $(this);
-      $(this).attr('contenteditable', 'true');
-
+      // $(this).attr('contenteditable', 'true');
+      $(this).addClass('editable');
       var handlerIn = function() {
         // self.addClass("hoverHandler");
         self.css('border', '2px dashed rgb(189, 195, 199)');
         self.dblclick(function() {
           self.css('border', '2px dashed #18BC9C');
-          self.attr('contenteditable', 'true');
+          // self.attr('contenteditable', 'true');
+          self.addClass('editable');
         });
       };
 
       var handlerOut = function() {
         // self.removeClass("hover-handler");
         self.css('border', '');
-        self.attr('contenteditable', 'false');
+        // self.attr('contenteditable', 'false');
+        self.removeClass('editable');
       };
 
       // Function to give the element that you
@@ -37,14 +39,14 @@ app.controller('EditorCtrl', function($scope, ProjectFactory, PageFactory, curre
   $scope.parseHtml = function() {
     // console.log('made it');
     var beforeHtml = $('#skeleton').contents().find("html").html();
-    var html = "<html>\n" + beforeHtml + "</html>"
+    var html = "<html>\n" + beforeHtml + "</html>";
     // saves HTML to backend
-    PageFactory.savePage({html: html, title: 'index', projectId:currentProject.id})
+    PageFactory.savePage({html: html, title: 'index', projectId:currentProject.id});
   }
 
-  $scope.currentProject = currentProject.title
+  $scope.currentProject = currentProject.title;
   
 
-  $scope.projectUrl = 'hosted-projects/' + currentProject.id + '/index.html'
-  
+  $scope.projectUrl = 'hosted-projects/' + currentProject.id + '/index.html';
+
 });
