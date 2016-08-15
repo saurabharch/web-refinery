@@ -5,7 +5,7 @@
 }
 
 #dragitemslist {
- 
+
   position: absolute;
   left: 0px;
   width: 10vw;
@@ -36,19 +36,14 @@
   margin-bottom: 2px;
   padding: 16px 15px;
   cursor: move;
-  border: 1px solid;
-  min-width: 62px;
-  max-width: 62px;
-  min-height: 62px;
-  max-height: 62px;
-  background-color: #F2F2F2;
+
   font-style: "Gotham SSm A";
 }
 
 #dragitemslistcontainer > li i {
   font-size: 20px;
   /* color: rgb(0, 187, 255); */
-  
+
 }
 
 #dragitemslistcontainer > li p {

@@ -8,7 +8,7 @@ $(function(){
 
     // Dragstart/dragend HTML5 event
     // Only items with the #dragitemslistcontainer will respond
-    $("#dragitemslistcontainer").on('dragstart', function(event) {
+    $("#dragitemslistcontainer li").on('dragstart', function(event) {
         console.log("Drag Started");
         dragoverqueue_processtimer = setInterval(function() {
             DragDropFunctions.ProcessDragOverQueue();
@@ -23,7 +23,7 @@ $(function(){
         event.originalEvent.dataTransfer.setData("Text",insertingHTML);
     });
 
-    $("#dragitemslistcontainer").on('dragend', function() {
+    $("#dragitemslistcontainer li").on('dragend', function() {
         console.log("Drag End");
         // Cancels action that was setup with setInterval
         clearInterval(dragoverqueue_processtimer);
