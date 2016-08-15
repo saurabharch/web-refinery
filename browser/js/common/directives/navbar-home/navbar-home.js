@@ -1,11 +1,10 @@
-app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) {
+app.directive('navbarHome', function ($rootScope, AuthService, AUTH_EVENTS, $state) {
 
     return {
         restrict: 'EA',
         scope: {},
-        templateUrl: 'js/common/directives/navbar/navbar.html',
+        templateUrl: 'js/common/directives/navbar-home/navbar-home.html',
         link: function (scope) {
-
             scope.items = [
                 { label: 'Home', state: 'home' },
                 // { label: 'Editor', state: 'editor' },
