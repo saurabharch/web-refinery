@@ -1,0 +1,53 @@
+ <style type="text/css">
+  form.tab-form-demo .tab-pane {
+    margin: 20px 20px;
+    }
+</style>
+
+<div ng-controller="TabsDemoCtrl" class="mySideNav col-xs-3 col-md-3 col-lg-2">
+
+
+
+<body>
+
+  <h2>Simple Collapsible</h2>
+  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">ADD TEXT</button>
+  <div id="demo" class="collapse">
+    <ul id="dragitemslistcontainer">
+           <li draggable="true" data-insert-html="<h1>HEADER GOES HERE</h1>"><h1>H1 TEXT</h1></li>
+           <li draggable="true" data-insert-html="<h2>HEADER GOES HERE</h2>"><h2>H2 Text</h2></li>
+           <li draggable="true" data-insert-html="<h3>HEADER GOES HERE</h3>"><h3>H2 Text</h3></li>
+           <li draggable="true" data-insert-html="<h4>HEADER GOES HERE</h4>"><h4>H2 Text</h4></li>
+           <li draggable="true" data-insert-html="<h5>HEADER GOES HERE</h5>"><h5>H2 Text</h5></li>
+           <li draggable="true" data-insert-html="<h6>HEADER GOES HERE</h6>"><h6>H2 Text</h6></li>
+
+      </li>
+    </ul>
+  </div>
+
+    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#buttons">ADD BUTTON</button>
+  <div id="buttons" class="collapse">
+    <ul id="dragitemslistcontainer">
+           <li draggable="true" data-insert-html="<button type='button' class='btn btn-primary'>Primary</button>">
+           <button type='button' class='btn btn-primary'>Primary</button></li>
+           <li draggable="true" data-insert-html="<button type='button' class='btn btn-secondary'>Secondary</button>"><button type='button' class='btn btn-secondary'>Secondary</button></li>
+            <li draggable="true" data-insert-html="<button type='button' class='btn btn-success'>Secondary</button>"><button type='button' class='btn btn-success'>Success</button></li>
+          <li draggable="true" data-insert-html="<button type='button' class='btn btn-info'>Success</button>"><button type='button' class='btn btn-info'>Info</button></li>
+              <li draggable="true" data-insert-html="<button type='button' class='btn btn-warning'>Warning</button>"><button type='button' class='btn btn-warning'>Warning</button></li>
+          <li draggable="true" data-insert-html="<button type='button' class='btn btn-danger'>Danger</button>"><button type='button' class='btn btn-danger'>Danger</button></li>
+
+
+
+      </li>
+    </ul>
+  </div>
+
+</body>
+
+  </div>
+
+
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

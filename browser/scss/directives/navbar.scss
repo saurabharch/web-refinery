@@ -1,28 +1,30 @@
 .navbar {
-
   display: block;
   background: #f2f2f2;
   border-bottom: 1px solid black;
   margin-bottom: 0px;
-
+  background-color: transparent;
+  background: transparent;
+  border-color: transparent;
+  min-width: 100%;
+  li {
+    color: #000;
+  }
   .container {
-    width: 91%;
+    width: 100%;
     max-width: 1340px;
     padding-top: 20px;
     margin-bottom: 0px;
   }
-
   fullstack-logo {
     margin-top: 5px;
     margin-right: 20px;
     width: 40px;
   }
-
   a {
     color: black;
     font-size: 16px;
   }
-
   .nav > li > a {
     cursor: pointer;
     transition: color 0.2s;
@@ -37,7 +39,6 @@
       background: none;
     }
   }
-
   .login-button {
     float: right;
     border: 1px solid black;
@@ -45,7 +46,6 @@
     background: none;
     outline: none !important;
   }
-
   .welcome {
     float: right;
     margin-top: 12px;
@@ -59,5 +59,4 @@
       cursor: pointer;
     }
   }
-
 }
