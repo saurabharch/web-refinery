@@ -3,6 +3,16 @@ app.controller('HomeCtrl', function($scope) {
   //jQuery is required to run this code
   $(document).ready(function() {
 
+    // Highlight the top nav as scrolling occurs
+    $(window).scroll(function(event) {
+        var height = $(window).scrollTop();
+        if (height > 300) {
+          $('#mainNav').addClass('affix');
+        } else {
+          $('#mainNav').removeClass('affix');
+        }
+    });
+
     scaleVideoContainer();
 
     initBannerVideoSize('.video-container .poster img');

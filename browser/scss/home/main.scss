@@ -1,11 +1,11 @@
 #home {
-  fullstack-logo {
-    padding-top: 30px;
+  .fullstack-logo {
+    padding-top: 0px;
     width: 150px;
     margin: 0 auto;
   }
   h1 {
-    margin-top: 40px;
+    margin-top: 20px;
     text-align: center;
   }
 }
@@ -90,5 +90,175 @@
     border-color: transparent;
     color: #fff !important;
     font-weight: 100 !important;
+  }
+}
+
+
+// ------------------------------------------------
+// Navbar variables and custom styles for home page
+// ------------------------------------------------
+
+// Variables
+$brand-primary: #ffffff;
+$brand-danger: #e74c3c;
+$gray-darkest: #222;
+$gray: #777;
+$gray-lighter: #f7f7f7;
+$placeholder-text: #bbbbbb;
+
+// Custom Navigation Bar
+
+#mainNav .nav > li > a.active {
+    color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .navbar-custom.affix {
+    background-color: #222222;
+    padding: 5px 0;
+  }
+  .navbar-custom.affix .navbar-brand {
+    font-size: 1.5em;
+  }
+}
+
+.navbar {
+  // border-color: transparent;
+  // border-bottom: 1px solid transparent !important;
+  .welcome {
+    float: right;
+    margin-top: 8px;
+    span {
+      color: #ffffff;
+      font-size: 16px;
+      margin-right: 5px;
+    }
+    .welcome-message {
+        float:left;
+        margin-top: 6px;
+    }
+    a {
+      color: #ffffff;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+
+  .login-button {
+    color: #fff;
+    border: 1px solid #fff;
+  }
+
+  .logout-button {
+    color: #fff;
+    float: right;
+    border: 1px solid #fff;
+    background: none;
+    margin-top: 2px;
+    // outline: none !important;
+  }
+
+  .navbar-buttons {
+    margin-top: 2px;
+  }
+}
+
+.navbar-home .nav > li > a.active {
+    color: #fff;
+}
+
+.navbar-home {
+  background-color: $gray-darkest;
+  border-bottom: 0px solid transparent;
+  border-color: transparent;
+
+  background-color: transparent;
+
+  .navbar-brand {
+    color: $brand-primary;
+
+    &.active,
+    &:active,
+    &:focus,
+    &:hover {
+      color: darken($brand-primary, 10%);
+    }
+  }
+
+  .navbar-collapse {
+    border-color: fade(white, 2%);
+  }
+
+  .navbar-toggle {
+    background-color: $brand-primary;
+    border-color: $brand-primary;
+
+    .icon-bar {
+      background-color: white;
+    }
+
+    &:focus,
+    &:hover {
+      background-color: $brand-primary;
+    }
+  }
+
+  .nav {
+    li {
+      a {
+        font-weight: 400;
+        letter-spacing: 1px;
+        color: white;
+
+        &:focus,
+        &:hover {
+          color: $brand-primary;
+          outline: none;
+        }
+      }
+    }
+  }
+
+  .navbar-nav > .active > a {
+    border-radius: 0;
+    color: white;
+    background-color: $brand-primary;
+  }
+
+  .navbar-nav > .active > a:focus,
+  .navbar-nav > .active > a:hover {
+    color: white;
+    background-color: darken($brand-primary, 10%);
+  }
+}
+
+@media(min-width:768px) {
+  .navbar-home {
+    background-color: transparent;
+    padding: 5px 0;
+    -webkit-transition: padding 0.3s;
+    -moz-transition: padding 0.3s;
+    transition: padding 0.3s;
+    border: none;
+
+    .navbar-brand {
+      font-size: 2em;
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+      transition: all 0.3s;
+    }
+
+    .navbar-nav > .active > a {
+      border-radius: 3px;
+    }
+  }
+
+  .navbar-home.navbar-shrink {
+    background-color: $gray-darkest;
+    padding: 10px 0;
+
+    .navbar-brand {
+      font-size: 1.5em;
+    }
   }
 }
