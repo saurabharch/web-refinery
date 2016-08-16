@@ -35,7 +35,7 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
     ProjectFactory.create(obj)
   }
 
-//parses HTML from iFrame
+  //parses HTML from iFrame
   $scope.parseHtml = function() {
     // console.log('made it');
     var beforeHtml = $('#skeleton').contents().find("html").html();
@@ -45,7 +45,6 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
   }
 
   $scope.currentProject = currentProject.title;
-
 
   $scope.projectUrl = 'hosted-projects/' + currentProject.id + '/index.html';
 
@@ -65,9 +64,6 @@ $scope.upload = function() {
   }
 }
 
-
-
 $scope.imageFactory = ImageFactory
-
 
 });
