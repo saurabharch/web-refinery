@@ -41,13 +41,14 @@
 
 <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#image">ADD IMAGE</button>
   <div id="image" class="collapse">
-    <ul id="dragitemslistcontainer">
-           <li draggable="true" data-insert-html="<img src='https://lh4.ggpht.com/M1XTibfCgpi5pgjSDb7kXDh21N8fpn-8evzQVAX-qGFhSyArDmSuCAv1pjVp4jbAt_g=h900'>">
-              <img class="icon" src='https://lh4.ggpht.com/M1XTibfCgpi5pgjSDb7kXDh21N8fpn-8evzQVAX-qGFhSyArDmSuCAv1pjVp4jbAt_g=h900'>
+    <ul id="dragitemslistcontainer" ng-repeat='image in allImages'>
+           <li draggable="true" data-insert-html="<img src={{image.url}}/>">
+              <img class="icon" ng-src='{{image.url}}'/>
            </li>
-           <input type = "file"  file-model='file'>
-           <button ng-click='upload()'>Upload</button>
+           
     </ul>
+    <input type = "file"  file-model='file'>
+           <button ng-click='upload()'>Upload</button>
   </div>
 
 </body>

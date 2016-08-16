@@ -1,4 +1,4 @@
-app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory) {
+app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory, allImages) {
 
 //makes all elements in body editable
   $scope.edit = function () {
@@ -49,7 +49,7 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
 
   $scope.projectUrl = 'hosted-projects/' + currentProject.id + '/index.html';
 
-
+  $scope.allImages = allImages;
 
 $scope.upload = function() {
   var uploadUrl = '/api/upload';
@@ -57,6 +57,7 @@ $scope.upload = function() {
     projectId: currentProject.id,
     file: $scope.file
   }
+  console.log($scope.file)
   if($scope.file.type!=="image/png" && $scope.file.type!=="image/jpeg" && $scope.file.type!=="image/jpg"){
     alert("Please upload an image")
   }else {

@@ -8,7 +8,8 @@ var storage = multer.diskStorage({
         cb(null, './hosted-projects/'+req.body.projectId +"/img")
     },
     filename:function(req,file,cb){
-        cb(null, file.originalname)
+        var newName = file.originalname.replace(' ', '_');
+        cb(null, newName)
     },
  });
 

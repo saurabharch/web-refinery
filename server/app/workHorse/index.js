@@ -8,6 +8,7 @@ var Promise = require('bluebird')
 //this way it can work with out template route as a promise
 var readDir = Promise.promisify(fs.readdir);
 var templatePath = path.join(__dirname, '../../../templates/');
+
 module.exports = {
 
 //saving HTML locally
@@ -36,9 +37,8 @@ copyTemplate: function(template, projectId) {
 copyImage: function(image, projectId){
   fs.readFile(image, function(err, data){
     if(err){
-      console.error("$$$$$$$$$",err)
+      console.error(err)
     } else {
-      console.log("$#(*$&(@#*&$(@*&#($*&@#($&*(@#*&$( hit this")
       fs.writeFile(projectPath+projectId+"/image.png", function(err,data){
         if(err){
           console.error(err)
@@ -68,8 +68,24 @@ getTemplateList: function() {
     })
      return items;
  })
+},
 
-
+//parses through the hosted-projects/:projectid/img folder to get a list of all the 
+//file names... returns the array back to the front end
+//just like gettemplateList
+getImageList: function (projectId) {
+  var imagePath = path.join(__dirname, '../../../hosted-projects/' + projectId + '/img/');
+  return readDir(imagePath)
+    .then(function(images){
+      images = images.filter(image => image.includes('.') )
+      images = images.map(image => {
+        return {
+          title: image,
+          url: '/hosted-projects/'+ projectId +'/img/' + image
+        }
+      })
+      return images;
+    })
 }
 
 }
