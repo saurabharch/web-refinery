@@ -9,6 +9,7 @@ var ENABLED_AUTH_STRATEGIES = [
     //'twitter',
     //'facebook',
     //'google'
+    'github'
 ];
 
 module.exports = function (app, db) {

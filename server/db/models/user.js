@@ -18,7 +18,7 @@ module.exports = db.define('user', {
     twitter_id: {
         type: Sequelize.STRING
     },
-    facebook_id: {
+    github_id: {
         type: Sequelize.STRING
     },
     google_id: {
