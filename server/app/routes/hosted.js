@@ -15,7 +15,6 @@ var rootPath = path.join(__dirname, '../../../');
 //authentication for serving up hosted-pages
 // checks that you are the authorized user for this project
 router.get('/:id/*', function(req,res,next){
-    console.log(req.originalUrl, 'asdsad')
     Project.findById(req.params.id)
     .then(function(project){
         if (req.user){

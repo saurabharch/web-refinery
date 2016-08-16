@@ -6,6 +6,9 @@ app.config(function ($stateProvider) {
         resolve: {
             currentProject: function(ProjectFactory,$stateParams) {
                 return ProjectFactory.getOne($stateParams.projectId)
+            },
+            allImages: function(ImageFactory,$stateParams){
+                return ImageFactory.getAllImages($stateParams.projectId)
             }
         }
     });
