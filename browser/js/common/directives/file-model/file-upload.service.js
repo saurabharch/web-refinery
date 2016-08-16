@@ -1,11 +1,11 @@
-app.service('fileUpload', ['$http', function ($http) {
+app.service('fileUpload', function ($http, $log) {
     this.upload = function(data, uploadUrl){
         var fd = new FormData()
         for (var key in data)
             fd.append(key,data[key])
-       
-        console.log('fd', fd, data)
-        $http.post(uploadUrl, fd, {
+
+        console.log('(*&#($*&(#*&@(*&$(*#&$(fd', fd, data.file)
+        return $http.post(uploadUrl, fd, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
         })
@@ -14,7 +14,7 @@ app.service('fileUpload', ['$http', function ($http) {
             return(res)
         })
         .error(function(){
-            console.log('error')
+            $log.error('error')
         });
     }
-}]);
+});

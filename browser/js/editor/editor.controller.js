@@ -57,8 +57,11 @@ $scope.upload = function() {
     projectId: currentProject.id,
     file: $scope.file
   }
-  console.log(uploadObj)
+  if($scope.file.type!=="image/png" && $scope.file.type!=="image/jpeg" && $scope.file.type!=="image/jpg"){
+    alert("Please upload an image")
+  }else {
   fileUpload.upload(uploadObj, uploadUrl)
+  }
 }
 
 
