@@ -7,16 +7,15 @@ module.exports = function (app, db) {
 
     var User = db.model('user');
 
-    var googleConfig = app.getValue('env').GOOGLE;
+    var config = require('../../../../config.json');
 
     var googleCredentials = {
-        clientID: googleConfig.clientID,
-        clientSecret: googleConfig.clientSecret,
-        callbackURL: googleConfig.callbackURL
+        clientID: config.googleConfig.clientID,
+        clientSecret: config.googleConfig.clientSecret,
+        callbackURL: config.googleConfig.callbackURL
     };
 
     var verifyCallback = function (accessToken, refreshToken, profile, done) {
-
         User.findOne({
                 where: {
                     google_id: profile.id
@@ -27,7 +26,10 @@ module.exports = function (app, db) {
                     return user;
                 } else {
                     return User.create({
-                        google_id: profile.id
+                        email: profile.emails[0].value,
+                        google_id: profile.id,
+                        first_name: profile.name.givenName,
+                        last_name: profile.name.familyName
                     });
                 }
             })
