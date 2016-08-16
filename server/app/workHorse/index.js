@@ -5,9 +5,8 @@ var path = require('path')
 var Promise = require('bluebird')
 
 //fs.readdir is not a promise so we use bluebird to promisify it
-//this way it can work with out template route as a promise 
+//this way it can work with out template route as a promise
 var readDir = Promise.promisify(fs.readdir);
-
 var templatePath = path.join(__dirname, '../../../templates/');
 
 module.exports = {
@@ -35,18 +34,31 @@ copyTemplate: function(template, projectId) {
 });
   console.log("saving CSS")
 },
+copyImage: function(image, projectId){
+  fs.readFile(image, function(err, data){
+    if(err){
+      console.error(err)
+    } else {
+      fs.writeFile(projectPath+projectId+"/image.png", function(err,data){
+        if(err){
+          console.error(err)
+        }
+      })
+    }
+  })
 
+},
 
 //checks our templates directory for folders and puts titles in an array
 //also omits any folder that starts with '.' because those are usually hiddne folders
-//for example there is a .DSstore folder hidden in directory, we ignore that 
+//for example there is a .DSstore folder hidden in directory, we ignore that
 getTemplateList: function() {
   return readDir(templatePath)
-    
+
     .then(function(items) {
-        //filter out an .something folders that are supposed to be hidden 
+        //filter out an .something folders that are supposed to be hidden
      items = items.filter(item => item[0] !== '.');
-     
+
      //return this array as an array of objects with a title key and a location key
      items = items.map(item => {
         return {
@@ -54,10 +66,26 @@ getTemplateList: function() {
             location: templatePath + item
         }
     })
-     return items;  
+     return items;
  })
+},
 
-
+//parses through the hosted-projects/:projectid/img folder to get a list of all the 
+//file names... returns the array back to the front end
+//just like gettemplateList
+getImageList: function (projectId) {
+  var imagePath = path.join(__dirname, '../../../hosted-projects/' + projectId + '/img/');
+  return readDir(imagePath)
+    .then(function(images){
+      images = images.filter(image => image.includes('.') )
+      images = images.map(image => {
+        return {
+          title: image,
+          url: '/hosted-projects/'+ projectId +'/img/' + image
+        }
+      })
+      return images;
+    })
 }
 
 }

@@ -1,4 +1,16 @@
 #login-form {
-  width: 60%;
+  width: 80%;
   margin: 0 auto;
+  padding-top: 40px;
+}
+
+#auth {
+  padding-top: 25px;
+}
+
+.btn-google {
+  height: 40px;
+  .fa-google{
+    text-align: center;
+  }
 }

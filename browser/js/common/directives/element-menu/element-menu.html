@@ -4,7 +4,7 @@
     }
 </style>
 
-<div ng-controller="TabsDemoCtrl" class="mySideNav col-xs-3 col-md-3 col-lg-2">
+<div class="mySideNav col-xs-3 col-md-3 col-lg-2">
 
 
 
@@ -35,11 +35,20 @@
           <li draggable="true" data-insert-html="<button type='button' class='btn btn-info'>Success</button>"><button type='button' class='btn btn-info'>Info</button></li>
               <li draggable="true" data-insert-html="<button type='button' class='btn btn-warning'>Warning</button>"><button type='button' class='btn btn-warning'>Warning</button></li>
           <li draggable="true" data-insert-html="<button type='button' class='btn btn-danger'>Danger</button>"><button type='button' class='btn btn-danger'>Danger</button></li>
-
-
-
       </li>
     </ul>
+  </div>
+
+<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#image">ADD IMAGE</button>
+  <div id="image" class="collapse">
+    <ul id="dragitemslistcontainer" ng-repeat='image in allImages'>
+           <li draggable="true" data-insert-html="<img src={{image.url}}/>">
+              <img class="icon" ng-src='{{image.url}}'/>
+           </li>
+           
+    </ul>
+    <input type = "file"  file-model='file'>
+           <button ng-click='upload()'>Upload</button>
   </div>
 
 </body>
