@@ -1,4 +1,4 @@
-app.controller('EditorCtrl', function($scope, ProjectFactory, PageFactory, currentProject, ImageFactory) {
+app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory) {
 
 //makes all elements in body editable
   $scope.edit = function () {
@@ -49,29 +49,19 @@ app.controller('EditorCtrl', function($scope, ProjectFactory, PageFactory, curre
 
   $scope.projectUrl = 'hosted-projects/' + currentProject.id + '/index.html';
 
-//   $scope.add = function(){
-//   var f = document.getElementById('file').files[0],
-//       r = new FileReader();
-//   r.onloadend = function(e){
-//     var data = e.target.result;
-//     ImageFactory.upload (data)
-//     //send your binary data via $http or $resource or do anything else with it
-//   }
-//   r.readAsBinaryString(f);
-// }
 
-$scope.uploadFile = function(files) {
-    var fd = new FormData();
-    //Take the first selected file
-    fd.append("file", files[0]);
 
-    $http.post("/api/image", fd, {
-        withCredentials: true,
-        headers: {'Content-Type': undefined },
-        transformRequest: angular.identity
-    }).success( ...all right!... ).error( ..damn!... );
+$scope.upload = function() {
+  var uploadUrl = '/api/upload';
+  var uploadObj = {
+    projectId: currentProject.id,
+    file: $scope.file
+  }
+  console.log(uploadObj)
+  fileUpload.upload(uploadObj, uploadUrl)
+}
 
-};
+
 
 $scope.imageFactory = ImageFactory
 
