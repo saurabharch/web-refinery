@@ -1,4 +1,14 @@
 'use strict';
+
+var multer = require('multer');
+
+var storage = multer.diskStorage({
+    destination: function (req,file,cb) {
+        cb(null, './hosted-projects/')
+    }
+});
+
+
 module.exports = function (app, db) {
 
     // setValue and getValue are merely alias
@@ -17,6 +27,8 @@ module.exports = function (app, db) {
     // Logging middleware, set as application
     // variable inside of server/app/configure/app-variables.js
     app.use(app.getValue('log'));
+
+    app.use(multer({storage:storage}).any())
 
     require('./authentication')(app, db);
 
