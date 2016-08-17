@@ -23,12 +23,10 @@ $(document).ready(function () {
     if(counter>=1){
         console.log("remove")
         $("iframe").contents().find("*").removeClass("changeThis")
-        $(event.target).css("border-style", "none")
         $(event.target).addClass("changeThis")
-
     }
 $(event.target).addClass("changeThis")
-$(event.target).css("border-style", "solid")
+
 
 console.log($(event.target))
 
