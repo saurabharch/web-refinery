@@ -5,8 +5,9 @@ module.exports = router;
 router.use('/members', require('./members'));
 router.use('/project', require('./project'));
 router.use('/page', require('./page'));
-router.use('/templates', require('./template'))
-router.use('/image', require('./image'))
+router.use('/templates', require('./template'));
+router.use('/image', require('./image'));
+router.use('/user', require('./user'));
 
 router.post('/upload', function(req,res,next){
     res.end();

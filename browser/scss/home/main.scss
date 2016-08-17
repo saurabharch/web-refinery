@@ -1,3 +1,16 @@
+.modal-content {
+  background-color: transparent !important;
+  text-align: center;
+  font-family: 'Avenir Next', 'sans-serif';
+  color: hsla(0, 0%, 100%, .55);
+}
+
+#modalinput {
+  width:21%;
+  display: inline;
+}
+
+
 #home {
   .fullstack-logo {
     padding-top: 0px;

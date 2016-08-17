@@ -74,10 +74,10 @@ app.run(function ($rootScope, AuthService, $state) {
             // otherwise, if no user is logged in, go to "login" state.
             if (user) {
                 $state.go(toState.name, toParams);
-            } else {
-                $state.go('login');
-            }
-        });
+            // } else {
+            //     $state.go('login');
+            // }
+        };
 
     });
 

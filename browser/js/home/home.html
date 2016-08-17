@@ -1,4 +1,20 @@
 <navbar-home></navbar-home>
+<div class="modal fade bs-example-modal-lg" id='myModal' tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+    <h1 class = "home">The all-in-one web design platform
+    </h1>
+    <p>Design, prototype, and launch dynamic, responsive websites<br>
+    All in your browser, without writing code.
+    </p>
+      <input class="form-control" id="modalinput" type="text" placeholder="First Name" ng-model="user.first_name">
+      <input class="form-control" id="modalinput" type="text" placeholder="Last Name" ng-model="user.last_name">
+      <input class="form-control" id="modalinput" type="text" placeholder="Email" ng-model="user.email">
+      <input class="form-control" id="modalinput" type="text" placeholder="password" ng-model="user.password">
+      <button type="button" class="btn btn-info" ng-click="createuser(user)">Sign-Up</button>
+    </div>
+  </div>
+</div>
 
 <div class="homepage-hero-module">
   <div class="video-container">
@@ -15,7 +31,7 @@
       <h1 id="title">Web-Refinery</h1>
       <h2 class="title-text">Set Your Website Apart</h2>
       <h3 class="title-text">Build a Beautiful, free webpage templates</h3>
-      <button id='btn' type="submit">
+      <button id='btn' type="submit" data-toggle="modal" data-target=".bs-example-modal-lg">
         <i class="fa fa-home faa-home animated fa-3x"></i>
         <h5 class = "faa-burst animated">Click Here</h5></button>
       </center>
