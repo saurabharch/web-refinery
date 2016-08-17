@@ -35,7 +35,6 @@
           <li draggable="true" data-insert-html="<button type='button' class='btn btn-info'>Success</button>"><button type='button' class='btn btn-info'>Info</button></li>
               <li draggable="true" data-insert-html="<button type='button' class='btn btn-warning'>Warning</button>"><button type='button' class='btn btn-warning'>Warning</button></li>
           <li draggable="true" data-insert-html="<button type='button' class='btn btn-danger'>Danger</button>"><button type='button' class='btn btn-danger'>Danger</button></li>
-      </li>
     </ul>
   </div>
 
@@ -45,10 +44,16 @@
            <li draggable="true" data-insert-html="<img src={{image.url}}/>">
               <img class="icon" ng-src='{{image.url}}'/>
            </li>
-           
+
     </ul>
     <input type = "file"  file-model='file'>
            <button ng-click='upload()'>Upload</button>
+  </div>
+
+    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#color">Change Color</button>
+  <div id="color" class="collapse">
+            <input id='colorpicker' />
+    </ul>
   </div>
 
 </body>
@@ -60,3 +65,4 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+

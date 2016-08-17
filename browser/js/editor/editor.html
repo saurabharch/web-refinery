@@ -9,16 +9,13 @@
 
   <button type="button" class="btn btn-default" ng-click="open()">Open me!</button>
 </div>
-<!-- <center>
-<button id="htmlButton" type="button" ng-click="parseHtml()" class="btn btn-primary">Save Button</button>
-  <button id="htmlButton" type="button" ng-click="edit()" class="btn btn-primary">Edit Button</button>
-  <button id="htmlButton" type="button" ng-click="createProject({title:'testing'})" class="btn btn-primary">Create Project</button>
-</center> -->
+
 
   <div class="col-xs-9 col-md-9 col-lg-10" id="editorView">
     <iframe id="skeleton" ng-src="{{projectUrl}}"></iframe>
   </div>
 </div>
+
 
 <script type="text/ng-template" id="editor.modal.html">
     <div class="modal-body">
@@ -30,8 +27,15 @@
     </div>
 </script>
 
-<!-- //clientframe = skeleton -->
+
 <script src="js/editor/origin.js "></script>
+
+<!-- colorpicker script and CSS -->
+<script src="js/colorpicker/colorpicker.js "></script>
+<link rel="stylesheet" type="text/css" href="js/colorpicker/spectrum.css">
+<!-- end of colorpicker script and css -->
+
+
 <script>
 var editor = new MediumEditor('.editable', {
   toolbar: {
