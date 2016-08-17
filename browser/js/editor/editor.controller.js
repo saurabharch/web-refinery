@@ -1,3 +1,4 @@
+
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, textSelected) {
 
   $scope.textSelected = textSelected;
@@ -78,6 +79,7 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
     });
   }
 
+
   $scope.createProject = function (obj){
     ProjectFactory.create(obj)
   }
@@ -96,21 +98,27 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
   $scope.projectUrl = 'hosted-projects/' + currentProject.id + '/index.html';
 
   $scope.allImages = allImages;
+  console.log($scope.allImages)
 
-$scope.upload = function() {
-  var uploadUrl = '/api/upload';
-  var uploadObj = {
-    projectId: currentProject.id,
-    file: $scope.file
-  }
-  console.log($scope.file)
-  if($scope.file.type!=="image/png" && $scope.file.type!=="image/jpeg" && $scope.file.type!=="image/jpg"){
-    alert("Please upload an image")
-  }else {
-  fileUpload.upload(uploadObj, uploadUrl)
-  }
-}
+  $scope.upload = function() {
+    var uploadUrl = '/api/upload';
+    var uploadObj = {
+      projectId: currentProject.id,
+      file: $scope.file
+    }
 
-$scope.imageFactory = ImageFactory
+    if($scope.file.type!=="image/png" && $scope.file.type!=="image/jpeg" && $scope.file.type!=="image/jpg"){
+      alert("Please upload an image")
+    }else {
+      return fileUpload.upload(uploadObj, uploadUrl)
+      .then(function(imageArray) {
+        $scope.allImages = imageArray;
+        console.log($scope.allImages)
+      })
+    }
+  }
+
+
+
 
 });
