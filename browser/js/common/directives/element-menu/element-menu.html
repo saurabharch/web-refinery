@@ -41,9 +41,10 @@
 
 <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#image">ADD IMAGE</button>
   <div id="image" class="collapse">
-    <ul id="dragitemslistcontainer" ng-repeat='image in allImages'>
-           <li draggable="true" data-insert-html="<img src={{image.url}}/>">
-              <img class="icon" ng-src='{{image.url}}'/>
+    <ul id="dragitemslistcontainer"   >
+           <li ng-repeat='image in allImages' draggable="true" >
+              <span>{{image.title}}</span>
+              <img  class="icon" ng-src='{{image.url}}' data-insert-html="<img src= '{{image.url}}'> "/>
            </li>
            
     </ul>
