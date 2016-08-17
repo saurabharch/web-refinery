@@ -1,6 +1,45 @@
-app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory, allImages) {
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, textSelected) {
 
-//makes all elements in body editable
+  $scope.textSelected = textSelected;
+
+  $scope.ok = function () {
+    $uibModalInstance.close($scope.selected.item);
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+});
+
+app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory, allImages, $uibModal, $log) {
+
+  $scope.animationsEnabled = true;
+  $scope.open = function (size) {
+
+    var modalInstance = $uibModal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'editor.modal.html',
+      controller: 'ModalInstanceCtrl',
+      size: size,
+      resolve: {
+        textSelected: function () {
+          return $scope.textSelected;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      $scope.selected = selectedItem;
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+
+  $scope.toggleAnimation = function () {
+    $scope.animationsEnabled = !$scope.animationsEnabled;
+  };
+
+  //makes all elements in body editable
   $scope.edit = function () {
     $('#skeleton').contents().find('h1,h2,h3,h4,h5,h6,p,span,button,a').each(function() {
       // var self = $(this);
@@ -27,6 +66,10 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
       // are hovering over some style and remove it
       // Only works with find('h1,h2,h3,h4,h5,h6,p,span,button,a')
       // self.hover(handlerIn, handlerOut);
+      $(this).dblclick(function() {
+        $scope.textSelected = $(this).text();
+        $scope.open();
+      })
 
     });
   }
