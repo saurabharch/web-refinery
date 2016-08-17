@@ -23,21 +23,20 @@ module.exports = function (app, db) {
     // };
 
     var verifyCallback = function (token, tokenSecret, profile, done) {
-        console.log("TWITTER!!!!", profile);
-        UserModel.findOne({
+        User.findOne({
             where: {
                 twitter_id: profile.id
             }
-        }).exec()
-            .then(function (user) {
+        })
+        .then(function (user) {
                 if (user) { // If a user with this twitter id already exists.
                     return user;
                 } else { // If this twitter id has never been seen before and no user is attached.
-                    let first = profile.split(" ");
+                    let first = profile.displayName.split(" ");
                     return User.create({
                        first_name: first[0],
                        last_name: first[1],
-//                        email: profile.username +'@gmail.com',
+                       email: profile.username +'@gmail.com',
                        twitter_id: profile.id
                     })
                 }
