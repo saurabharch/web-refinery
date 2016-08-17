@@ -529,4 +529,3 @@ $(function(){
 });
 
 //end of drag and drop from bar to iframe
-

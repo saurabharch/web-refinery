@@ -1,4 +1,83 @@
-app.controller('EditorCtrl', function($scope, $state,fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory, allImages) {
+
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, textSelected) {
+
+  $scope.textSelected = textSelected;
+
+  $scope.ok = function () {
+    $uibModalInstance.close($scope.textSelected);
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+});
+
+app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory, allImages, $uibModal, $log) {
+
+  $scope.animationsEnabled = true;
+  $scope.open = function (size) {
+
+    var modalInstance = $uibModal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'editor.modal.html',
+      controller: 'ModalInstanceCtrl',
+      size: size,
+      resolve: {
+        textSelected: function () {
+          return $scope.textSelected;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (editedModalText) {
+      $scope.textSelected = editedModalText;
+
+      $($scope.textTag).html($scope.textSelected);
+
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+
+  $scope.toggleAnimation = function () {
+    $scope.animationsEnabled = !$scope.animationsEnabled;
+  };
+
+  //makes all elements in body editable
+  $scope.edit = function () {
+    $('#skeleton').contents().find('h1,h2,h3,h4,h5,h6,p,span,button,a').each(function() {
+      var self = $(this);
+      // $(this).attr('contenteditable', 'true');
+      // $(this).addClass('editable');
+      var handlerIn = function() {
+        // self.addClass("hoverHandler");
+        self.css('border', '2px dashed rgb(189, 195, 199)');
+      };
+
+      var handlerOut = function() {
+        // self.removeClass("hover-handler");
+        self.css('border', '');
+        // self.attr('contenteditable', 'false');
+        self.removeClass('editable');
+      };
+
+      // Function to give the element that you
+      // are hovering over some style and remove it
+      // Only works with find('h1,h2,h3,h4,h5,h6,p,span,button,a')
+      if (self.text() != '') self.hover(handlerIn, handlerOut);
+      self.dblclick(function() {
+
+        console.log('=============');
+        console.log($(this)[0].outerHTML);
+        console.log($(this));
+        console.log('=============');
+        $scope.textSelected = $(this)[0].outerHTML;
+        $scope.textTag = $(this);
+        $scope.open();
+      })
+
+    });
+  }
 
 
   $scope.createProject = function (obj){
