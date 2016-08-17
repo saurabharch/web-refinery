@@ -18,6 +18,10 @@ body {
   margin: 0 auto;
 }
 
+.changeThis{
+  border-style: solid;
+}
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
