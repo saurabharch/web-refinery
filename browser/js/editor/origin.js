@@ -37,6 +37,10 @@ $(function(){
         // container that you're dropping the data in (green).
         DragDropFunctions.removePlaceholder();
         DragDropFunctions.ClearContainerContext();
+
+        //re runs the edit() function on our controller on every drop
+        //to recheck all the elements and make them editable
+        angular.element(document.getElementsByTagName('element-menu')[0]).scope().edit();
     });
 
     $('#skeleton').on('load', function() {
