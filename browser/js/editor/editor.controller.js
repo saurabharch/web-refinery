@@ -119,6 +119,4 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
   }
 
 
-
-
 });
