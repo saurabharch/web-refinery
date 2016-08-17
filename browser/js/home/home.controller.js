@@ -84,7 +84,7 @@ app.controller('HomeCtrl', function($scope, userFactory, $state, AuthService) {
   $scope.createuser = function(user) {
     userFactory.createUser($scope.user)
     .then(function() {
-      var obj = {email: $scope.user.email, password: $scope.user.password}
+      var obj = {email: $scope.user.email, password: $scope.user.password};
       console.log("USER OBJECT", obj);
       closeModal();
       AuthService.login(obj).then(function () {
