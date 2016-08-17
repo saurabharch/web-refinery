@@ -77,7 +77,7 @@ getImageList: function (projectId) {
   var imagePath = path.join(__dirname, '../../../hosted-projects/' + projectId + '/img/');
   return readDir(imagePath)
     .then(function(images){
-      images = images.filter(image => image.includes('.') )
+      images = images.filter(image => image[0] !== '.' && image.includes('.') )
       images = images.map(image => {
         return {
           title: image,

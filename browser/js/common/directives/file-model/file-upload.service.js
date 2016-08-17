@@ -1,20 +1,23 @@
-app.service('fileUpload', function ($http, $log) {
+app.service('fileUpload', function ($http, $log, ImageFactory) {
     this.upload = function(data, uploadUrl){
+        var projectId = data.projectId;
         var fd = new FormData()
         for (var key in data)
             fd.append(key,data[key])
 
-        console.log('(*&#($*&(#*&@(*&$(*#&$(fd', fd, data.file)
+        
         return $http.post(uploadUrl, fd, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
         })
-        .success(function(res){
-            console.log('here', res)
-            return(res)
+        .then(function(res){
+            return ImageFactory.getAllImages(projectId);
         })
-        .error(function(){
-            $log.error('error')
+        .then(function(array){
+            return array;
+        })
+        .catch(function(){
+            $log.error('error on fileUpload')
         });
     }
 });

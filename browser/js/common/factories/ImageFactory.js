@@ -5,18 +5,18 @@ app.factory('ImageFactory', function ($http) {
     return res.data;
   };
 
-//saves page to the backend
-  imageFactory.upload = function (obj){
-    //object has data = binary data of image, and projectId = currentProject.id
-    return $http.post('/api/image', obj)
-    .then(getData);
-  };
+  //this is the array to store on the scope of editor controller
+  //on every upload, we add to this array and force the dom to re-render with the new image
+  imageFactory.imageCache = [];
+
 
   imageFactory.getAllImages = function (projectId){
-    console.log('proj', projectId)
     return $http.get('/api/image/' + projectId)
-    .then(getData)
-  } 
+    .then(function(res) {
+      imageFactory.imageCache = res.data;
+      return res.data
+    })
+  }
 
   return imageFactory
 
