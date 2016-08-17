@@ -111,6 +111,7 @@ $scope.upload = function() {
   }
 }
 
+
 $scope.imageFactory = ImageFactory
 
 });
