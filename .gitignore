@@ -1,9 +1,10 @@
 .idea
-node_modules
+node_modules/
 npm-debug.log
-public
+public/
 .DS_Store
 coverage
-hosted-projects
-bower_components
+hosted-projects/
+bower_components/
 config.json
+templates/

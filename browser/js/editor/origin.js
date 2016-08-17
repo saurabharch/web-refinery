@@ -8,22 +8,26 @@ $(function(){
 
     // Dragstart/dragend HTML5 event
     // Only items with the #dragitemslistcontainer will respond
-    $("#dragitemslistcontainer li").on('dragstart', function(event) {
+    $("#dragitemslistcontainer").on('dragstart', function(event) {
+        var insertingHTML;
         console.log("Drag Started");
+        insertingHTML = $(event.target).attr('data-insert-html')
         dragoverqueue_processtimer = setInterval(function() {
             DragDropFunctions.ProcessDragOverQueue();
         },100);
 
         // data-insert-html holds html data. insertingHTML grabs that html
-        var insertingHTML = $(this).attr('data-insert-html');
-
+        
+        //old code i edited , changed it up top in insertingHTMl
+        // var insertingHTML = $(this).attr('data-insert-html');
+        
         // Event is jquery event. Comes with additional functions and properties
         // OriginalEvent is the unmodified version
         // DataTransfer holds data that will be transferred during drap/drop
         event.originalEvent.dataTransfer.setData("Text",insertingHTML);
     });
 
-    $("#dragitemslistcontainer li").on('dragend', function() {
+    $("#dragitemslistcontainer").on('dragend', function() {
         console.log("Drag End");
         // Cancels action that was setup with setInterval
         clearInterval(dragoverqueue_processtimer);
@@ -33,6 +37,10 @@ $(function(){
         // container that you're dropping the data in (green).
         DragDropFunctions.removePlaceholder();
         DragDropFunctions.ClearContainerContext();
+
+        //re runs the edit() function on our controller on every drop
+        //to recheck all the elements and make them editable
+        angular.element(document.getElementsByTagName('element-menu')[0]).scope().edit();
     });
 
     $('#skeleton').on('load', function() {

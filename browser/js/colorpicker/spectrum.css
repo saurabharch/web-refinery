@@ -37,6 +37,8 @@ License: MIT
 }
 .sp-top-inner {
    position:absolute;
+   width:124px;
+   height:100px;
    top:0;
    left:0;
    bottom:0;
@@ -300,20 +302,17 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
     border: 1px solid red;
     background: #fdd;
 }
-.sp-picker-container , .sp-palette-container {
-    float:left;
-    position: relative;
-    padding-bottom: 300px;
-    margin-bottom: -290px;
-}
+
 .sp-picker-container {
-    width: 172px;
+    float:right;
+    width: 11vw;
+    padding-left: 5px;
     border-left: solid 1px #fff;
 }
 
 /* Palettes */
 .sp-palette-container {
-    border-right: solid 1px #ccc;
+   float:left;
 }
 
 .sp-palette-only .sp-palette-container {
