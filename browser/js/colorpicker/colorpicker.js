@@ -20,13 +20,15 @@ $(document).ready(function () {
             iframe.contents().click(function (event) {
               var counter = $("iframe").contents().find(".changeThis").length
     console.log(counter)
-    if(counter>0){
+    if(counter>=1){
         console.log("remove")
         $("iframe").contents().find("*").removeClass("changeThis")
+        $(event.target).css("border-style", "none")
         $(event.target).addClass("changeThis")
 
     }
 $(event.target).addClass("changeThis")
+$(event.target).css("border-style", "solid")
 
 console.log($(event.target))
 
