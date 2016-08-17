@@ -119,7 +119,9 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
     }
   }
 
+
   $('#skeleton').on('load',function() {
     $scope.edit();
   })
+
 });

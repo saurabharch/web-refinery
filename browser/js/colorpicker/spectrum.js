@@ -44,7 +44,7 @@
         appendTo: "body",
         maxSelectionSize: 7,
         cancelText: "cancel",
-        chooseText: "choose",
+        chooseText: "Save for Later",
         togglePaletteMoreText: "more",
         togglePaletteLessText: "less",
         clearText: "Clear Color Selection",
@@ -123,7 +123,7 @@
                     "<div class='sp-initial sp-thumb sp-cf'></div>",
                     "<div class='sp-button-container sp-cf'>",
                         // "<a class='sp-cancel' href='#'></a>",
-                        // "<button type='button' class='sp-choose'></button>",
+                        "<button type='button' class='sp-choose'></button>",
                     "</div>",
                 "</div>",
             "</div>"
