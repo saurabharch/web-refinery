@@ -79,6 +79,7 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
     });
   }
 
+  
 
   $scope.createProject = function (obj){
     ProjectFactory.create(obj)
@@ -118,5 +119,9 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
     }
   }
 
+
+  $('#skeleton').on('load',function() {
+    $scope.edit();
+  })
 
 });
