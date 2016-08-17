@@ -31,10 +31,14 @@
   padding: 0px;
 }
 
+.btn-spacer {
+  margin: 3px 0;
+}
+
 #dragitemslistcontainer > li {
-  display: inline-block;
+  display: block;
   margin-bottom: 2px;
-  padding: 16px 15px;
+  padding: 1px 0;
   cursor: move;
 
   font-style: "Gotham SSm A";
