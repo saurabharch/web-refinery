@@ -3,7 +3,7 @@ app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, textSel
   $scope.textSelected = textSelected;
 
   $scope.ok = function () {
-    $uibModalInstance.close($scope.selected.item);
+    $uibModalInstance.close($scope.textSelected);
   };
 
   $scope.cancel = function () {
@@ -28,8 +28,11 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
       }
     });
 
-    modalInstance.result.then(function (selectedItem) {
-      $scope.selected = selectedItem;
+    modalInstance.result.then(function (editedModalText) {
+      $scope.textSelected = editedModalText;
+
+      $($scope.textTag).html($scope.textSelected);
+
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
     });
@@ -42,17 +45,12 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
   //makes all elements in body editable
   $scope.edit = function () {
     $('#skeleton').contents().find('h1,h2,h3,h4,h5,h6,p,span,button,a').each(function() {
-      // var self = $(this);
+      var self = $(this);
       // $(this).attr('contenteditable', 'true');
-      $(this).addClass('editable');
+      // $(this).addClass('editable');
       var handlerIn = function() {
         // self.addClass("hoverHandler");
         self.css('border', '2px dashed rgb(189, 195, 199)');
-        self.dblclick(function() {
-          self.css('border', '2px dashed #18BC9C');
-          // self.attr('contenteditable', 'true');
-          self.addClass('editable');
-        });
       };
 
       var handlerOut = function() {
@@ -65,9 +63,15 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
       // Function to give the element that you
       // are hovering over some style and remove it
       // Only works with find('h1,h2,h3,h4,h5,h6,p,span,button,a')
-      // self.hover(handlerIn, handlerOut);
-      $(this).dblclick(function() {
-        $scope.textSelected = $(this).text();
+      if (self.text() != '') self.hover(handlerIn, handlerOut);
+      self.dblclick(function() {
+
+        console.log('=============');
+        console.log($(this)[0].outerHTML);
+        console.log($(this));
+        console.log('=============');
+        $scope.textSelected = $(this)[0].outerHTML;
+        $scope.textTag = $(this);
         $scope.open();
       })
 
