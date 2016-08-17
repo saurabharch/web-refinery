@@ -10,9 +10,9 @@ module.exports = function (app, db) {
     var config = require('../../../../config.json');
 
     var githubCredentials = {
-        clientID: config.githubConfig.clientID,
-        clientSecret: config.githubConfig.clientSecret,
-        callbackURL: config.githubConfig.callbackURL
+        clientID: config[1].githubConfig.clientID,
+        clientSecret: config[1].githubConfig.clientSecret,
+        callbackURL: config[1].githubConfig.callbackURL
     };
 
     var createNewUser = function (token, tokenSecret, profile) {

@@ -10,9 +10,9 @@ module.exports = function (app, db) {
     var config = require('../../../../config.json');
 
     var googleCredentials = {
-        clientID: config.googleConfig.clientID,
-        clientSecret: config.googleConfig.clientSecret,
-        callbackURL: config.googleConfig.callbackURL
+        clientID: config[0].googleConfig.clientID,
+        clientSecret: config[0].googleConfig.clientSecret,
+        callbackURL: config[0].googleConfig.callbackURL
     };
 
     var verifyCallback = function (accessToken, refreshToken, profile, done) {
