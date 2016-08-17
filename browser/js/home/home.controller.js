@@ -1,16 +1,16 @@
-app.controller('HomeCtrl', function($scope) {
+app.controller('HomeCtrl', function($scope, userFactory, $state, AuthService) {
 
   //jQuery is required to run this code
   $(document).ready(function() {
 
     // Highlight the top nav as scrolling occurs
     $(window).scroll(function(event) {
-        var height = $(window).scrollTop();
-        if (height > 300) {
-          $('#mainNav').addClass('affix');
-        } else {
-          $('#mainNav').removeClass('affix');
-        }
+      var height = $(window).scrollTop();
+      if (height > 300) {
+        $('#mainNav').addClass('affix');
+      } else {
+        $('#mainNav').removeClass('affix');
+      }
     });
 
     scaleVideoContainer();
@@ -72,6 +72,31 @@ app.controller('HomeCtrl', function($scope) {
       $('.homepage-hero-module .video-container video').addClass('fadeIn animated');
 
     });
+  }
+
+  function closeModal() {
+    $('#myModal').modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+  }
+
+  //modal usercreation page.
+  $scope.createuser = function(user) {
+    userFactory.createUser($scope.user)
+    .then(function() {
+      var obj = {email: $scope.user.email, password: $scope.user.password};
+      console.log("USER OBJECT", obj);
+      closeModal();
+      AuthService.login(obj).then(function () {
+            $state.go('dashboard');
+      })
+      .catch(function() {
+        console.log("ERROR!!!!");
+      })
+    })
+    .catch(function() {
+      console.log("ERRRRRRRORRRR!!!");
+    })
   }
 
 });

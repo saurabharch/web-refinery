@@ -48,8 +48,8 @@ module.exports = function(app, db) {
         console.error('Error creating user from Twitter authentication', err);
         done(err);
       });
+};
 
-  };
 
   passport.use(new TwitterStrategy(twitterCredentials, verifyCallback));
 
