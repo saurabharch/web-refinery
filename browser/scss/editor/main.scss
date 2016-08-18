@@ -4,6 +4,49 @@
   font-style: "Gotham";
 }
 
+
+.category-links {
+    text-decoration: none;
+    display: inline-block;
+    border-bottom: 2px solid transparent;
+    width: 200px;
+    font-size: 18px;
+    color: #777;
+    width: 0px;
+    transition: 0.5s ease;
+    white-space: nowrap;
+    height: 25px;
+}
+.category-links:hover {
+    color: #777;
+    text-decoration: none;
+    border-bottom: 2px solid #777;
+    width: 115px;
+}
+
+// .category-links a {
+//     color: #ccc;
+//     font: 800 24px/24px 'Vaud Display',Helvetica,sans-serif;
+//     font-size: 18px;
+//     border-bottom: 2px solid rgba(255,255,255,0);
+//     display: inline;
+// }
+
+// .category-links a:after {
+//     text-decoration: none;
+//     display: inline-block;
+//     border-bottom: 3px solid transparent;
+//     width: 0px;
+//     transition: 0.5s ease;
+//     white-space: nowrap;
+//     height: 25px;
+// }
+
+// .category-links a:hover:after {
+//   width: 100%;
+//   background: blue;
+// }
+
 #dragitemslist {
 
   position: absolute;
