@@ -39,6 +39,9 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
     });
   };
 
+  $scope.toggleAnimation = function () {
+    $scope.animationsEnabled = !$scope.animationsEnabled;
+  };
 
   //makes all elements in body editable
   $scope.edit = function () {
