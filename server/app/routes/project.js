@@ -5,6 +5,8 @@ var User = db.model("user");
 var Page = db.model("page");
 var Project = db.model("project");
 var workHorse = require('../workHorse/');
+var Archiver = require('archiver');
+var baseDir = __dirname + '/../../../hosted-projects/';
 var currentProject;
 
 // creates project
@@ -46,6 +48,36 @@ router.get('/:id', function (req, res, next){
   .catch(next);
 });
 
+
+router.get('/:id/download', (req, res, next) => {
+  var id = req.params.id;
+  Project.findById(id)
+    .then(function(project) {
+        var archive = Archiver('zip');
+        archive.on('error', function(err) {
+          res.status(500).send({ error: err.message });
+        });
+
+        archive.on('end', function() {
+            console.log('Archive wrote %d bytes', archive.pointer())
+          })
+          //on stream closed we can end the request
+          // res.on('close', function() {
+          //     console.log('Archive wrote %d bytes', archive.pointer());
+          //     return res.status(200).send('OK').end();
+          // });
+          //set the archive name
+        res.attachment('file-txt.zip');
+        //this is the streaming magic
+        archive.pipe(res);
+        //you can add a directory using directory function
+        // archive.append(fs.createReadStream(baseDir + 'index.html'), {name:'index.html'});
+        archive.directory(baseDir + id + '/', false);
+
+        archive.finalize();
+    })
+    .catch(next);
+});
 
 module.exports = router;
 
