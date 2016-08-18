@@ -18,7 +18,7 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
   $scope.open = function (size) {
 
     var modalInstance = $uibModal.open({
-      animation: $scope.animationsEnabled,
+      animation: true,
       templateUrl: 'editor.modal.html',
       controller: 'ModalInstanceCtrl',
       size: size,
@@ -39,9 +39,6 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
     });
   };
 
-  $scope.toggleAnimation = function () {
-    $scope.animationsEnabled = !$scope.animationsEnabled;
-  };
 
   //makes all elements in body editable
   $scope.edit = function () {
