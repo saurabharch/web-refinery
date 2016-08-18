@@ -14,7 +14,7 @@ app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, textSel
 
 app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory, allImages, $uibModal, $log) {
 
-  $scope.animationsEnabled = true;
+  $scope.animationsEnabled = false;
   $scope.open = function (size) {
 
     var modalInstance = $uibModal.open({
@@ -81,8 +81,6 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
 
     });
       }
-
-
 
       $scope.createProject = function (obj){
         ProjectFactory.create(obj)
