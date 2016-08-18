@@ -4,7 +4,7 @@
 
 $(function(){
 
-    var currentElement,currentElementChangeFlag,elementRectangle,countdown,dragoverqueue_processtimer;
+    var currentElement,currentElementChangeFlag,elementRectangle,countdown,dragoverqueue_processtimer, elementToRemove;
 
     // Dragstart/dragend HTML5 event
     // Only items with the #dragitemslistcontainer will respond
@@ -64,11 +64,8 @@ $(function(){
                 DragDropFunctions.ProcessDragOverQueue();
             },100);
 
-            console.log('=== drag start ===');
-            console.log($(this));
-            console.log('=== drag end ===');
-
             var htmlElement = event.target.outerHTML;
+            elementToRemove = $(event.target);
             event.originalEvent.dataTransfer.setData("Text",htmlElement);
 
         });
@@ -80,7 +77,7 @@ $(function(){
 
             DragDropFunctions.removePlaceholder();
             DragDropFunctions.ClearContainerContext();
-
+            elementToRemove.remove();
             angular.element(document.getElementsByTagName('element-menu')[0]).scope().edit();
         });
 
