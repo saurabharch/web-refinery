@@ -13,7 +13,7 @@ var changeBorder = function(){
 }
 
 $(document).ready(function () {
-    $("iframe").each(function () {
+    $("iframe").on('load').each(function () {
         //Using closures to capture each one
         var iframe = $(this);
         iframe.on("load", function () { //Make sure it is fully loaded
@@ -25,7 +25,7 @@ $(document).ready(function () {
         $(event.target).addClass("changeThis")
     }
 $(event.target).addClass("changeThis")
-$("iframe").contents().find(".changeThis").css("border", "2px dashed rgb(189, 195, 199)");
+$("iframe").contents().find(".changeThis").css("border", "4px solid rgb(189, 195, 199)");
 
 
 // console.log($(event.target))

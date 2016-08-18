@@ -56,10 +56,12 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
 
       var handlerOut = function() {
         // self.removeClass("hover-handler");
-        self.css('border', '');
+        if (!self.hasClass('changeThis')){
+          self.css('border', '');
         // self.attr('contenteditable', 'false');
         self.removeClass('editable');
-      };
+      }
+    };
 
       // Function to give the element that you
       // are hovering over some style and remove it
@@ -76,14 +78,13 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
         $scope.open();
       })
 
+
     });
-  }
+      }
 
-
-
-  $scope.createProject = function (obj){
-    ProjectFactory.create(obj)
-  }
+      $scope.createProject = function (obj){
+        ProjectFactory.create(obj)
+      }
 
   //parses HTML from iFrame
   $scope.parseHtml = function() {
@@ -119,9 +120,16 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
     }
   }
 
+  $scope.colorBool = false;
+  $scope.toggleColor = function() {
+    $scope.colorBool = !$scope.colorBool;
+  }
 
   $('#skeleton').on('load',function() {
     $scope.edit();
+    $('#skeleton').find('img').on('click', function(event){
+      $(event.target).attr('draggable', 'true')
+    })
   })
 
 });
