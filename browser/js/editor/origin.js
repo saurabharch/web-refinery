@@ -10,17 +10,18 @@ $(function(){
     // Only items with the #dragitemslistcontainer will respond
     $("#dragitemslistcontainer").on('dragstart', function(event) {
         var insertingHTML;
-        console.log("Drag Started");
+        // console.log("Drag Started");
+
+        ///<[a-z][\s\S]*>/i.test(e.dataTransfer.getData('text'))
         insertingHTML = $(event.target).attr('data-insert-html')
         dragoverqueue_processtimer = setInterval(function() {
             DragDropFunctions.ProcessDragOverQueue();
         },100);
-
         // data-insert-html holds html data. insertingHTML grabs that html
-        
+
         //old code i edited , changed it up top in insertingHTMl
         // var insertingHTML = $(this).attr('data-insert-html');
-        
+
         // Event is jquery event. Comes with additional functions and properties
         // OriginalEvent is the unmodified version
         // DataTransfer holds data that will be transferred during drap/drop
@@ -28,7 +29,7 @@ $(function(){
     });
 
     $("#dragitemslistcontainer").on('dragend', function() {
-        console.log("Drag End");
+        // console.log("Drag End");
         // Cancels action that was setup with setInterval
         clearInterval(dragoverqueue_processtimer);
 
@@ -45,7 +46,7 @@ $(function(){
 
     $('#skeleton').on('load', function() {
          // $('#skeleton').get(0).contentWindow equivalent to window
-         // with clientFrameWindow our iframe has all the functionality
+     // with clientFrameWindow our iframe has all the functionality
          // as our outer/main window
          var clientFrameWindow = $('#skeleton').get(0).contentWindow;
         //Add CSS File to iFrame
@@ -56,6 +57,33 @@ $(function(){
         $(clientFrameWindow.document.head).append(style);
 
         var htmlBody = $(clientFrameWindow.document).find('body,html');
+
+        htmlBody.on('dragstart', function(event) {
+
+            dragoverqueue_processtimer = setInterval(function() {
+                DragDropFunctions.ProcessDragOverQueue();
+            },100);
+
+            console.log('=== drag start ===');
+            console.log($(this));
+            console.log('=== drag end ===');
+
+            var htmlElement = event.target.outerHTML;
+            event.originalEvent.dataTransfer.setData("Text",htmlElement);
+
+        });
+
+        htmlBody.on('dragend', function(event) {
+
+            // Cancels action that was setup with setInterval
+            clearInterval(dragoverqueue_processtimer);
+
+            DragDropFunctions.removePlaceholder();
+            DragDropFunctions.ClearContainerContext();
+
+            angular.element(document.getElementsByTagName('element-menu')[0]).scope().edit();
+        });
+
         // Register event for when something is dragged into the iframe
         htmlBody.find('*').addBack().on('dragenter', function(event) {
             event.stopPropagation();
@@ -80,6 +108,7 @@ $(function(){
             countdown = countdown+1;
             currentElementChangeFlag = false;
             var mousePosition = {x:x,y:y};
+
             DragDropFunctions.AddEntryToDragOverQueue(currentElement,elementRectangle,mousePosition)
         })
 
@@ -95,7 +124,15 @@ $(function(){
                 var e = event.originalEvent;
             try {
                 // dataTransfer setData added in dragstart event
-                var textData = e.dataTransfer.getData('text');
+                if (/<[a-z][\s\S]*>/i.test(e.dataTransfer.getData('text'))) {
+                    var textData = e.dataTransfer.getData('text');
+                }
+                else {
+                    console.log('==== Something went wrong ====');
+                    console.log(e);
+                    console.log('==============================');
+                    var textData = e.dataTransfer.getData('text');
+                }
                 var insertionPoint = $("#skeleton").contents().find(".drop-marker");
                 var checkDiv = $(textData);
                 insertionPoint.after(checkDiv);
@@ -281,30 +318,30 @@ $(function(){
                 case "before":
                     placeholder.find(".message").html($element.parent().data('sh-dnd-error'));
                     $element.before(placeholder);
-                    console.log($element);
-                    console.log("BEFORE");
+                    // console.log($element);
+                    // console.log("BEFORE");
                     this.AddContainerContext($element,'sibling');
                     break;
                 case "after":
                     placeholder.find(".message").html($element.parent().data('sh-dnd-error'));
                     $element.after(placeholder);
-                    console.log($element);
-                    console.log("AFTER");
+                    // console.log($element);
+                    // console.log("AFTER");
                     this.AddContainerContext($element,'sibling');
                     break
                 case "inside-prepend":
                     placeholder.find(".message").html($element.data('sh-dnd-error'));
                     $element.prepend(placeholder);
                     this.AddContainerContext($element,'inside');
-                    console.log($element);
-                    console.log("PREPEND");
+                    // console.log($element);
+                    // console.log("PREPEND");
                     break;
                 case "inside-append":
                     placeholder.find(".message").html($element.data('sh-dnd-error'));
                     $element.append(placeholder);
                     this.AddContainerContext($element,'inside');
-                    console.log($element);
-                    console.log("APPEND");
+                    // console.log($element);
+                    // console.log("APPEND");
                     break;
             }
         },

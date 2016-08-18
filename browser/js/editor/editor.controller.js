@@ -67,10 +67,10 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
       if (self.text() != '') self.hover(handlerIn, handlerOut);
       self.dblclick(function() {
 
-        console.log('=============');
-        console.log($(this)[0].outerHTML);
-        console.log($(this));
-        console.log('=============');
+        // console.log('=============');
+        // console.log($(this)[0].outerHTML);
+        // console.log($(this));
+        // console.log('=============');
         $scope.textSelected = $(this)[0].outerHTML;
         $scope.textTag = $(this);
         $scope.open();
@@ -99,7 +99,7 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
   $scope.projectUrl = 'hosted-projects/' + currentProject.id + '/index.html';
 
   $scope.allImages = allImages;
-  console.log($scope.allImages)
+  // console.log($scope.allImages)
 
   $scope.upload = function() {
     var uploadUrl = '/api/upload';
@@ -114,7 +114,7 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
       return fileUpload.upload(uploadObj, uploadUrl)
       .then(function(imageArray) {
         $scope.allImages = imageArray;
-        console.log($scope.allImages)
+        // console.log($scope.allImages)
       })
     }
   }

@@ -28,7 +28,7 @@ $(event.target).addClass("changeThis")
 $("iframe").contents().find(".changeThis").css("border", "2px dashed rgb(189, 195, 199)");
 
 
-console.log($(event.target))
+// console.log($(event.target))
 
             });
         });
