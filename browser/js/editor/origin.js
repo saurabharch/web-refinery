@@ -132,6 +132,7 @@ $(function(){
                 }
                 var insertionPoint = $("#skeleton").contents().find(".drop-marker");
                 var checkDiv = $(textData);
+                checkDiv.removeClass('alreadyEditable')
                 insertionPoint.after(checkDiv);
                 insertionPoint.remove();
             } catch(e) {

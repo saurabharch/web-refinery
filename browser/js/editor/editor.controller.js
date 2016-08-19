@@ -18,7 +18,7 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
   $scope.open = function (size) {
 
     var modalInstance = $uibModal.open({
-      animation: true,
+      animation: false,
       templateUrl: 'editor.modal.html',
       controller: 'ModalInstanceCtrl',
       size: size,
@@ -47,7 +47,9 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
   $scope.edit = function () {
     $('#skeleton').contents().find('h1,h2,h3,h4,h5,h6,p,span,button,a').each(function() {
       var self = $(this);
-      // $(this).attr('contenteditable', 'true');
+     
+      
+       // $(this).attr('contenteditable', 'true');
       // $(this).addClass('editable');
       var handlerIn = function() {
         // self.addClass("hoverHandler");
@@ -55,11 +57,10 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
       };
 
       var handlerOut = function() {
-        // self.removeClass("hover-handler");
         if (!self.hasClass('changeThis')){
           self.css('border', '');
         // self.attr('contenteditable', 'false');
-        self.removeClass('editable');
+        // self.removeClass('editable');
       }
     };
 
@@ -67,7 +68,10 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
       // are hovering over some style and remove it
       // Only works with find('h1,h2,h3,h4,h5,h6,p,span,button,a')
       if (self.text() != '') self.hover(handlerIn, handlerOut);
-      self.dblclick(function() {
+      
+      if(!self.hasClass('alreadyEditable') ) {
+        self.addClass('alreadyEditable')
+        self.dblclick(function() {
 
         // console.log('=============');
         // console.log($(this)[0].outerHTML);
@@ -77,6 +81,9 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
         $scope.textTag = $(this);
         $scope.open();
       })
+
+      }
+      
 
 
     });
@@ -127,9 +134,9 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
 
   $('#skeleton').on('load',function() {
     $scope.edit();
-    $('#skeleton').find('img').on('click', function(event){
-      $(event.target).attr('draggable', 'true')
-    })
+    // $('#skeleton').find('img').on('click', function(event){
+    //   $(event.target).attr('draggable', 'true')
+    // })
   })
 
 });
