@@ -1,0 +1,27 @@
+<div class="navbar navbar-wr navbar-static-top hr">
+  <div class="container">
+    <div class="navbar-header">
+      <fullstack-logo></fullstack-logo>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
+        <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
+      </li>
+    </ul>
+
+    <div ng-show="user" class="welcome">
+      <!-- <span class="welcome-message">Welcome, {{ user.email }}!</span> -->
+      <span class="navbar-buttons">
+        <button id="htmlButton" type="button" ng-click="parseHtml()" class="btn btn-default btn-wr btn-spacer"><i class="fa fa-undo" aria-hidden="true"></i>&nbsp;Undo</button>
+        <button id="htmlButton" type="button" ng-click="parseHtml()" class="btn btn-default btn-wr btn-spacer"><i class="fa fa-repeat" aria-hidden="true"></i>&nbsp;Redo</button>
+        &nbsp; &#124; &nbsp;
+        <button id="htmlButton" type="button" ng-click="parseHtml()" class="btn btn-default btn-wr btn-spacer"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Save</button>
+        <button id="htmlButton" type="button" class="btn btn-default btn-wr btn-spacer" ng-click="download(currentProject)"><i class="fa fa-cloud-download" aria-hidden="true"></i>&nbsp;Export</button>
+        &nbsp; &#124; &nbsp;
+        <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
+        <button class="btn logout-button" ng-click="logout()">Logout</button>
+      </span>
+    </div>
+    <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
+  </div>
+</div>
