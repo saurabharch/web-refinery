@@ -37,6 +37,9 @@ setUser();
 
 //parses HTML from iFrame
   scope.parseHtml = function() {
+    $('#skeleton').contents().find('h1,h2,h3,h4,h5,h6,p,span,button,a').each(function() {
+        if ($(this).hasClass('alreadyEditable')) $(this).removeClass('alreadyEditable')
+    })
     var beforeHtml = $('#skeleton').contents().find("html").html();
     var html = "<html>\n" + beforeHtml + "</html>";
     // saves HTML to backend

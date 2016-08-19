@@ -49,20 +49,14 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
   $scope.edit = function () {
     $('#skeleton').contents().find('h1,h2,h3,h4,h5,h6,p,span,button,a').each(function() {
       var self = $(this);
-     
-      
-       // $(this).attr('contenteditable', 'true');
-      // $(this).addClass('editable');
       var handlerIn = function() {
-        // self.addClass("hoverHandler");
         self.css('border', '2px dashed rgb(189, 195, 199)');
       };
 
       var handlerOut = function() {
         if (!self.hasClass('changeThis')){
           self.css('border', '');
-        // self.attr('contenteditable', 'false');
-        // self.removeClass('editable');
+  
       }
     };
 
@@ -75,10 +69,6 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
         self.addClass('alreadyEditable')
         self.dblclick(function() {
 
-        // console.log('=============');
-        // console.log($(this)[0].outerHTML);
-        // console.log($(this));
-        // console.log('=============');
         $scope.textSelected = $(this)[0].outerHTML;
         $scope.textTag = $(this);
         $scope.open();
