@@ -5,13 +5,15 @@
 }
 
 
+
 .category-links {
+  margin-bottom:12px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   border-bottom: 2px solid transparent;
   width: 200px;
-  font-size: 18px;
+  font-size: 15px;
   color: #777;
   width: 0px;
   transition: 0.5s ease;
@@ -112,6 +114,8 @@ border-bottom: none;
 
 
         #skeleton {
+  /*        box-shadow:  0px 15px 12px rgba(0,0,0,0.22),0px 19px 30px rgba(0,0,0,0.3);*/
+  box-shadow: -4px 3px 9px 0px rgba(50,50,50,0.64);
           background: #000;
           height: 90vh;
           width: 90vw;
@@ -121,7 +125,7 @@ border-bottom: none;
 
 
         #editPage {
-          background-color: #F2F2F2;
+              background-color: #F2F2F2;
           // padding-right: 0px;
           // padding-left: 0px;
           width: 100%;

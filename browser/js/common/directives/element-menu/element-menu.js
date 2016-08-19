@@ -7,13 +7,14 @@ app.directive('elementMenu', function () {
           scope.click = function($event){
             var currentElement = $($event.currentTarget)
             if(currentElement.hasClass("activeCategory")){
+              console.log("here")
               currentElement.removeClass("activeCategory")
             } else {
-            $(".mySideNav").find(".category-links").removeClass("activeCategory").collapse()
+            $(".mySideNav").find(".collapse.in").removeClass("activeCategory").collapse('hide')
            currentElement.addClass("activeCategory")
            }
            }
-          }
+         }
           }
         }
     )

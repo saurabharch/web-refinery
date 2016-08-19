@@ -95,13 +95,14 @@ License: MIT
 }
 .sp-alpha {
     display: none;
-    position: absolute;
+    position: fixed;
     bottom: -14px;
     right: 0;
     left: 0;
     height: 8px;
 }
 .sp-alpha-inner {
+    position:absolute fixed;
     border: solid 1px #333;
 }
 
