@@ -12,6 +12,8 @@ app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, textSel
   };
 });
 
+
+
 app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory, allImages, $uibModal, $log) {
 
   $scope.animationsEnabled = false;
@@ -102,7 +104,14 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
     PageFactory.savePage({html: html, title: 'index', projectId:currentProject.id});
   }
 
-  $scope.currentProject = currentProject.title;
+  $scope.currentProject = currentProject.id;
+  
+  // $scope.download = function(projectId) { 
+  //   ProjectFactory.download(projectId)
+  //   .catch(function(err) {
+  //     console.error(err, currentProject.id);
+  //   })
+  // }
 
   $scope.projectUrl = 'hosted-projects/' + currentProject.id + '/index.html';
 
