@@ -24,11 +24,6 @@ projectFactory.getOne = function(id) {
     .then(getData)
 }
 
-// projectFactory.download = function(id) {
-//     return $http.get(baseUrl + id + '/download');    
-//     .then(getData);
-// } 
-
 return projectFactory;
 
 });
