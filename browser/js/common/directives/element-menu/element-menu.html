@@ -7,8 +7,11 @@
 <div class="mySideNav col-xs-12 col-md-12 col-lg-12">
 
 <h4 style="color:#777">Categories</h4>
-<div><a data-toggle="collapse" data-target="#demo" class="category-links">Text Elements</a></div>
-<div id="demo" class="collapse">
+
+<div>
+<div><a data-toggle="collapse" data-target="#text" class="category-links" ng-click="click($event)">Text Elements</a>
+</div>
+<div id="text" class="collapse">
   <ul id="dragitemslistcontainer" class="list-unstyled">
          <li draggable="true" data-insert-html="<h1>HEADER GOES HERE</h1>"><h1>H1 TEXT</h1></li>
          <li draggable="true" data-insert-html="<h2>HEADER GOES HERE</h2>"><h2>H2 Text</h2></li>
@@ -21,7 +24,7 @@
 </div>
 
 <!-- <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#buttons">Buttons</button> -->
-<div><a data-toggle="collapse" data-target="#buttons" class="category-links">Buttons</a></div>
+<div><a data-toggle="collapse" data-target="#buttons" class="category-links" ng-click="click($event)">Buttons</a></div>
 <div id="buttons" class="collapse">
   <ul id="dragitemslistcontainer">
     <li draggable="true" data-insert-html="<button type='button' class='btn btn-primary'>Primary</button>">
@@ -35,7 +38,7 @@
 </div>
 
 <!-- <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#image">Add Image</button> -->
-<div><a data-toggle="collapse" data-target="#image" class="category-links">Add Image</a></div>
+<div><a data-toggle="collapse" data-target="#image" class="category-links" ng-click="click($event)">Add Image</a></div>
 <div id="image" class="collapse">
   <ul id="dragitemslistcontainer">
     <li ng-repeat='image in allImages' draggable="true" >
@@ -48,7 +51,7 @@
 </div>
 
 <!-- <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#color">Change Color</button> -->
-<div><a data-toggle="collapse" data-target="#color" class="category-links">Change Color</a></div>
+<div><a data-toggle="collapse" data-target="#color" class="category-links" ng-click="click($event)">Change Color</a></div>
 <div id="color" class="collapse">
   <input id='colorpicker' />
   <button type="button" class="btn btn-info btn-spacer" onclick="changeContent()">Content Color</button>
