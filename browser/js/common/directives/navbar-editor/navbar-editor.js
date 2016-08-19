@@ -47,6 +47,11 @@ setUser();
   }
 
 
+scope.download = function() { 
+    scope.parseHtml();
+    var url = "http://localhost:1337/api/project/" + $stateParams.projectId + "/download/";
+    window.open(url, 'Download');
+  }
 
 
 $rootScope.$on(AUTH_EVENTS.loginSuccess, setUser);
