@@ -1,7 +1,44 @@
-#login-form {
-  width: 80%;
-  margin: 0 auto;
-  padding-top: 40px;
+#headerlogin {
+    font-size: 60px;
+    font-style: "open-sans" !important;
+    text-align: center;
+    letter-spacing: .1px;
+    color: #fff !important;
+    font-weight: 10 !important;
+    margin-bottom: 40px;
+}
+  
+#fill-in {
+  background: #000;
+  height: 100vh;
+  text-align: center;
+  display: block;
+  padding-top: 15%;
+}
+
+.forminput {
+  color: white;
+  text-align: center;
+  vertical-align: baseline;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 50px black inset;
+  -webkit-text-fill-color: white;
+}
+
+input[type=text] {
+  color:white;
+  font-size: 20px;
+  border: none;
+  border-bottom: 2px solid white;
+}
+
+input[type=password] {
+  color:white;
+  font-size: 20px;
+  border: none;
+  border-bottom: 2px solid white;
 }
 
 #auth {
@@ -10,7 +47,37 @@
 
 .btn-google {
   height: 40px;
-  .fa-google{
+  .fa-google {
     text-align: center;
   }
 }
+
+#email{
+  background-color: transparent;
+  width: 20%;
+  margin-bottom: 15px;
+}
+
+#login-password{
+  background-color: transparent;
+  width: 20%;
+}
+
+.submitBtn {
+  background: transparent;
+  border-color: white;
+  border-radius: 7px;
+  width: 20%;
+  height: 5%;
+  color: white;
+  margin-top: 15px;
+}
+
+.loginicon {
+  margin-top: 15px;
+  margin-right: 15px;
+  height: 50px;
+  width: 50px;
+}
+
+

@@ -6,10 +6,14 @@
 }
 
 #modalinput {
-  width:21%;
+  width: 21%;
   display: inline;
+  // text-align: center;
 }
 
+#signupBtn {
+  margin-bottom: 3px;
+}
 
 #home {
   .fullstack-logo {
@@ -21,6 +25,20 @@
     margin-top: 20px;
     text-align: center;
   }
+}
+
+#signupheader {
+  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(212, 228, 239, 1)), color-stop(34%, rgba(212, 228, 239, 1)), color-stop(54%, rgba(186, 210, 227, 1)), color-stop(94%, rgba(134, 174, 204, 1)));
+  background: -webkit-linear-gradient(left, rgba(212, 228, 239, 1) 0%, rgba(212, 228, 239, 1) 34%, rgba(186, 210, 227, 1) 54%, rgba(134, 174, 204, 1) 94%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#signuptext {
+  background: -webkit-linear-gradient( right, #1CACFF, #19E6DB, #82FFC1, #19E6DB, #1CACFF, #19E6DB);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 18px;
 }
 
 .homepage-hero-module {
@@ -95,7 +113,6 @@
     font-weight: 100 !important;
     text-align: center;
   }
-
   #btn {
     margin-top: 40px;
     background-color: transparent;
@@ -106,11 +123,9 @@
   }
 }
 
-
 // ------------------------------------------------
 // Navbar variables and custom styles for home page
 // ------------------------------------------------
-
 // Variables
 $brand-primary: #ffffff;
 $brand-danger: #e74c3c;
@@ -118,11 +133,9 @@ $gray-darkest: #222;
 $gray: #777;
 $gray-lighter: #f7f7f7;
 $placeholder-text: #bbbbbb;
-
 // Custom Navigation Bar
-
 #mainNav .nav > li > a.active {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 @media (min-width: 768px) {
@@ -147,8 +160,8 @@ $placeholder-text: #bbbbbb;
       margin-right: 5px;
     }
     .welcome-message {
-        float:left;
-        margin-top: 6px;
+      float: left;
+      margin-top: 6px;
     }
     a {
       color: #ffffff;
@@ -156,12 +169,10 @@ $placeholder-text: #bbbbbb;
       text-decoration: none;
     }
   }
-
   .login-button {
     color: #fff;
     border: 1px solid #fff;
   }
-
   .logout-button {
     color: #fff;
     float: right;
@@ -170,26 +181,22 @@ $placeholder-text: #bbbbbb;
     margin-top: 2px;
     // outline: none !important;
   }
-
   .navbar-buttons {
     margin-top: 2px;
   }
 }
 
 .navbar-home .nav > li > a.active {
-    color: #fff;
+  color: #fff;
 }
 
 .navbar-home {
   background-color: $gray-darkest;
   border-bottom: 0px solid transparent;
   border-color: transparent;
-
   background-color: transparent;
-
   .navbar-brand {
     color: $brand-primary;
-
     &.active,
     &:active,
     &:focus,
@@ -197,32 +204,26 @@ $placeholder-text: #bbbbbb;
       color: darken($brand-primary, 10%);
     }
   }
-
   .navbar-collapse {
     border-color: fade(white, 2%);
   }
-
   .navbar-toggle {
     background-color: $brand-primary;
     border-color: $brand-primary;
-
     .icon-bar {
       background-color: white;
     }
-
     &:focus,
     &:hover {
       background-color: $brand-primary;
     }
   }
-
   .nav {
     li {
       a {
         font-weight: 400;
         letter-spacing: 1px;
         color: white;
-
         &:focus,
         &:hover {
           color: $brand-primary;
@@ -231,13 +232,11 @@ $placeholder-text: #bbbbbb;
       }
     }
   }
-
   .navbar-nav > .active > a {
     border-radius: 0;
     color: white;
     background-color: $brand-primary;
   }
-
   .navbar-nav > .active > a:focus,
   .navbar-nav > .active > a:hover {
     color: white;
@@ -253,26 +252,31 @@ $placeholder-text: #bbbbbb;
     -moz-transition: padding 0.3s;
     transition: padding 0.3s;
     border: none;
-
     .navbar-brand {
       font-size: 2em;
       -webkit-transition: all 0.3s;
       -moz-transition: all 0.3s;
       transition: all 0.3s;
     }
-
     .navbar-nav > .active > a {
       border-radius: 3px;
     }
   }
-
   .navbar-home.navbar-shrink {
     background-color: $gray-darkest;
     padding: 10px 0;
-
     .navbar-brand {
       font-size: 1.5em;
     }
+  }
+}
+
+@media(min-width:1400px) {
+  .overlay {
+    left: 38%;
+  }
+  .modal-content {
+    right: 20px;
   }
 }
 
@@ -281,72 +285,58 @@ $placeholder-text: #bbbbbb;
     -webkit-transform: rotate(-12deg);
     transform: rotate(-12deg);
   }
-
   8% {
     -webkit-transform: rotate(12deg);
     transform: rotate(12deg);
   }
-
   10% {
     -webkit-transform: rotate(24deg);
     transform: rotate(24deg);
   }
-
   18% {
     -webkit-transform: rotate(-24deg);
     transform: rotate(-24deg);
   }
-
   20% {
     -webkit-transform: rotate(-24deg);
     transform: rotate(-24deg);
   }
-
   28% {
     -webkit-transform: rotate(24deg);
     transform: rotate(24deg);
   }
-
   30% {
     -webkit-transform: rotate(24deg);
     transform: rotate(24deg);
   }
-
   38% {
     -webkit-transform: rotate(-24deg);
     transform: rotate(-24deg);
   }
-
   40% {
     -webkit-transform: rotate(-24deg);
     transform: rotate(-24deg);
   }
-
   48% {
     -webkit-transform: rotate(24deg);
     transform: rotate(24deg);
   }
-
   50% {
     -webkit-transform: rotate(24deg);
     transform: rotate(24deg);
   }
-
   58% {
     -webkit-transform: rotate(-24deg);
     transform: rotate(-24deg);
   }
-
   60% {
     -webkit-transform: rotate(-24deg);
     transform: rotate(-24deg);
   }
-
   68% {
     -webkit-transform: rotate(24deg);
     transform: rotate(24deg);
   }
-
   75% {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
@@ -359,85 +349,71 @@ $placeholder-text: #bbbbbb;
     -ms-transform: rotate(-12deg);
     transform: rotate(-12deg);
   }
-
   8% {
     -webkit-transform: rotate(12deg);
     -ms-transform: rotate(12deg);
     transform: rotate(12deg);
   }
-
   10% {
     -webkit-transform: rotate(24deg);
     -ms-transform: rotate(24deg);
     transform: rotate(24deg);
   }
-
   18% {
     -webkit-transform: rotate(-24deg);
     -ms-transform: rotate(-24deg);
     transform: rotate(-24deg);
   }
-
   20% {
     -webkit-transform: rotate(-24deg);
     -ms-transform: rotate(-24deg);
     transform: rotate(-24deg);
   }
-
   28% {
     -webkit-transform: rotate(24deg);
     -ms-transform: rotate(24deg);
     transform: rotate(24deg);
   }
-
   30% {
     -webkit-transform: rotate(24deg);
     -ms-transform: rotate(24deg);
     transform: rotate(24deg);
   }
-
   38% {
     -webkit-transform: rotate(-24deg);
     -ms-transform: rotate(-24deg);
     transform: rotate(-24deg);
   }
-
   40% {
     -webkit-transform: rotate(-24deg);
     -ms-transform: rotate(-24deg);
     transform: rotate(-24deg);
   }
-
   48% {
     -webkit-transform: rotate(24deg);
     -ms-transform: rotate(24deg);
     transform: rotate(24deg);
   }
-
   50% {
     -webkit-transform: rotate(24deg);
     -ms-transform: rotate(24deg);
     transform: rotate(24deg);
   }
-
   58% {
     -webkit-transform: rotate(-24deg);
     -ms-transform: rotate(-24deg);
     transform: rotate(-24deg);
   }
-
   60% {
     -webkit-transform: rotate(-24deg);
     -ms-transform: rotate(-24deg);
     transform: rotate(-24deg);
   }
-
   68% {
     -webkit-transform: rotate(24deg);
     -ms-transform: rotate(24deg);
     transform: rotate(24deg);
   }
-
   75% {
     -webkit-transform: rotate(0deg);
     -ms-transform: rotate(0deg);
@@ -459,13 +435,11 @@ $placeholder-text: #bbbbbb;
   0% {
     opacity: .6;
   }
-
   50% {
     -webkit-transform: scale(1.8);
     transform: scale(1.8);
     opacity: 0;
   }
-
   100% {
     opacity: 0;
   }
@@ -475,14 +449,12 @@ $placeholder-text: #bbbbbb;
   0% {
     opacity: .6;
   }
-
   50% {
     -webkit-transform: scale(1.8);
     -ms-transform: scale(1.8);
     transform: scale(1.8);
     opacity: 0;
   }
-
   100% {
     opacity: 0;
   }
