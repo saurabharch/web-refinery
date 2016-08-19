@@ -6,6 +6,7 @@
 
 
 .category-links {
+  text-align: center;
   text-decoration: none;
   display: inline-block;
   border-bottom: 2px solid transparent;
@@ -21,32 +22,40 @@
   color: #777;
   text-decoration: none;
   border-bottom: 2px solid #777;
-  width: 115px;
+  width: 100%;
 }
 
-// .category-links a {
-  //     color: #ccc;
-  //     font: 800 24px/24px 'Vaud Display',Helvetica,sans-serif;
-  //     font-size: 18px;
-  //     border-bottom: 2px solid rgba(255,255,255,0);
-  //     display: inline;
-  // }
+.activeCategory{
+  color: #777;
+  text-decoration: none;
+  border-bottom: 2px solid #777;
+  width: 100%;
+}
 
-  // .category-links a:after {
-    //     text-decoration: none;
-    //     display: inline-block;
-    //     border-bottom: 3px solid transparent;
-    //     width: 0px;
-    //     transition: 0.5s ease;
-    //     white-space: nowrap;
-    //     height: 25px;
-    // }
+.category-links a {
+       color: red;
+      font: 800 24px/24px 'Vaud Display',Helvetica,sans-serif;
+       font-size: 18px;
+       border-bottom: 2px solid rgba(255,255,255,0);
+       display: inline;
+   }
 
-    // .category-links a:hover:after {
-      //   width: 100%;
-      //   background: blue;
-      // }
+ .category-links a:after {
+      text-decoration: none;
+         display: inline-block;
+         border-bottom: 3px solid transparent;
+         width: 100%;
+         transition: 0.5s ease;
+         white-space: nowrap;
+         height: 25px;
+     }
 
+/*     .category-links hover:after {
+border-bottom: none;
+  width: 0%;
+
+       }
+*/
       #dragitemslist {
 
         position: absolute;
@@ -62,6 +71,7 @@
         transition: all 0.5s ease;
         color: #3e3e3e;
         text-align: center;
+
       }
 
       // #dragitemslist + div {
@@ -70,6 +80,8 @@
         // }
 
         #dragitemslistcontainer {
+          border-radius: 5px;
+           background-color: rgba(47,64,80,0.2);
           list-style: block;
           padding: 0px;
         }
@@ -79,11 +91,12 @@
         }
 
         #dragitemslistcontainer > li {
+
           display: block;
           margin-bottom: 2px;
           padding: 1px 0;
           cursor: move;
-
+          text-align: center;
           font-style: "Gotham SSm A";
         }
 

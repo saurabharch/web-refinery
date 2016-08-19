@@ -4,12 +4,15 @@
 <div class ='row'>
   <!-- Sidebar - Left Column -->
   <div id="mySidenav" class="sidenav col-xs-3 col-md-3 col-lg-2" style="border-right: 1px solid #ededed;">
-    <div class="col-md-12">
+
+    <element-menu id='dragitemslistcontainer'></element-menu>
+
+     <div class="col-md-12 sidebarFooter">
       <h4 style="color:#777">Options</h4>
       <button id="htmlButton" type="button" ng-click="parseHtml()" class="btn btn-default btn-spacer">Save</button>
       <button id="htmlButton" type="button" class="btn btn-default btn-spacer" ng-click="download(currentProject)">Export Project</button>
     </div>
-    <element-menu id='dragitemslistcontainer'></element-menu>
+
   </div>
 
   <!-- IFrame - Right Column -->
