@@ -7,9 +7,7 @@ app.directive('navbarEditor', function ($rootScope, AuthService, AUTH_EVENTS, $s
         link: function (scope,elem,attr) {
             scope.items = [
                 { label: 'Home', state: 'home' },
-                // { label: 'Editor', state: 'editor' },
-                { label: 'Dashboard', state: 'dashboard', auth:true },
-                // { label: 'Members Only', state: 'membersOnly', auth: true }
+                { label: 'Dashboard', state: 'dashboard', auth:true }
                 ];
 
 
@@ -39,7 +37,6 @@ setUser();
 
 //parses HTML from iFrame
   scope.parseHtml = function() {
-    // console.log('made it');
     var beforeHtml = $('#skeleton').contents().find("html").html();
     var html = "<html>\n" + beforeHtml + "</html>";
     // saves HTML to backend
