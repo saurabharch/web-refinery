@@ -95,21 +95,10 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
         ProjectFactory.create(obj)
       }
 
-  //parses HTML from iFrame
-  $scope.parseHtml = function() {
-    // console.log('made it');
-    var beforeHtml = $('#skeleton').contents().find("html").html();
-    var html = "<html>\n" + beforeHtml + "</html>";
-    // saves HTML to backend
-    PageFactory.savePage({html: html, title: 'index', projectId:currentProject.id});
-  }
-
+  
   //will make a hardcoded request to backend and use the archiver to zip up the project
   $scope.currentProject = currentProject.id;
-  $scope.download = function() { 
-    var url = "http://localhost:1337/api/project/" + currentProject.id + "/download";
-    window.open(url, 'Download');
-  }
+  
 
   $scope.projectUrl = 'hosted-projects/' + currentProject.id + '/index.html';
 
