@@ -1,7 +1,7 @@
 .navbar-wr {
     background-color: #222;
     border-color: #ededed;
-    border-bottom: 1px solid #ededed !important;
+    border-bottom: transparent;
 
     .welcome {
     float: right;
@@ -16,13 +16,34 @@
     color: #777;
     border: 1px solid #777;
     }
+
+    .btn-wr {
+    color: #000;
+    border: 1px solid #777;
+    background: none;
+    margin-top: 2px;
+    border-radius: 0px;
+    transition: 0.3s ease;
+      &:hover {
+        color: #fff;
+        background-color: #000;
+        border: 1px solid #000;
+      }
+    }
+
     .logout-button {
-    color: #777;
+    color: #000;
     float: right;
     border: 1px solid #777;
     background: none;
     margin-top: 2px;
-    // outline: none !important;
+    border-radius: 0px;
+    transition: 0.5s ease;
+    &:hover {
+      color: #fff;
+      background-color: #000;
+      border: 1px solid #000;
+    }
     }
     span {
       color: black;
@@ -44,7 +65,7 @@
   background-color: transparent;
   background: transparent;
   min-width: 100%;
-  margin-bottom:20px;
+  margin-bottom: 5px;
   li {
     color: #000;
   }

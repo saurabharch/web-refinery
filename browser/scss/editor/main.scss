@@ -5,32 +5,39 @@
 }
 
 
+.sidebarFooter {
+  position: absolute !important;
+  bottom: 20px;
+}
 
 .category-links {
-  margin-bottom:12px;
-  text-align: center;
+  margin-bottom: 12px;
   text-decoration: none;
   display: inline-block;
-  border-bottom: 2px solid transparent;
   width: 200px;
   font-size: 15px;
-  color: #777;
+  color: #000;
+  font-weight: 500;
   width: 0px;
-  transition: 0.5s ease;
+  transition: 0.3s ease;
   white-space: nowrap;
   height: 25px;
+  text-align: left;
+  padding-left: 5px;
+  padding-top: 2px;
 }
 .category-links:hover {
-  color: #777;
+  color: #fff;
   text-decoration: none;
-  border-bottom: 2px solid #777;
+  background-color: #000;
   width: 100%;
+  padding-left: 5px;
 }
 
 .activeCategory{
-  color: #777;
+  color: #fff;
   text-decoration: none;
-  border-bottom: 2px solid #777;
+  background-color: #000;
   width: 100%;
 }
 
@@ -50,6 +57,7 @@
          transition: 0.5s ease;
          white-space: nowrap;
          height: 25px;
+         padding-left: 5px;
      }
 
 /*     .category-links hover:after {
@@ -83,7 +91,7 @@ border-bottom: none;
 
         #dragitemslistcontainer {
           border-radius: 5px;
-           background-color: rgba(47,64,80,0.2);
+           // background-color: rgba(47,64,80,0.2);
           list-style: block;
           padding: 0px;
         }
@@ -98,8 +106,8 @@ border-bottom: none;
           margin-bottom: 2px;
           padding: 1px 0;
           cursor: move;
-          text-align: center;
-          font-style: "Gotham SSm A";
+          // text-align: center;
+          font-style: "open-sans";
         }
 
         #dragitemslistcontainer > li i {
@@ -123,6 +131,10 @@ border-bottom: none;
           display: inline;
         }
 
+        .remove-padding {
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+        }
 
         #editPage {
               background-color: #F2F2F2;
