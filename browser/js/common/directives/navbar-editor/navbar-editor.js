@@ -51,11 +51,14 @@ var counter = 1
 scope.undo = function(){
 console.log(undoArray.length-counter)
 console.log(counter)
-
 $("#skeleton").contents().find("body").html(undoArray[undoArray.length-counter])
+if(undoArray.length-counter <=0){
+    counter = 1
+} else {
 counter ++
+}
 //document.getElementById("skeleton").contentWindow.location.reload(false);
-$("#skeleton").document.close()
+
 }
 
 
