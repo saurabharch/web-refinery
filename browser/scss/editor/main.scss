@@ -4,6 +4,11 @@
   font-style: "Gotham";
 }
 
+.modal-content  {
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important;
+}
 
 .sidebarFooter {
   position: absolute !important;

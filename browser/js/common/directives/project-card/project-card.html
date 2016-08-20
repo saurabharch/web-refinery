@@ -3,22 +3,13 @@
   <div class="col-md-12">
     <div class="col-md-6 col-md-offset-3 text-center">
       <!-- btn-block to take up entire div space -->
-    <button type="button" class="btn btn-default btn-block" ui-sref='new'>Start New Project</button>
+    <button type="button" class="btn btn-block btn-wr" ui-sref='new'>Start New Project</button>
     </div>
   </div>
 </div>
 <br>
 <div class="row">
   <div class="col-md-12">
-  <!--   <div class="col-md-6 col-md-4" ng-repeat="project in projects" >
-      <div class="project-content">
-        <span class="project-name">{{project.title}}</span>
-        <span class= "project-template">project</span>
-      </div>
-      <div class="thumbnail" ui-sref= "editor({projectId:project.id})">
-        <img src="http://placehold.it/350x150" >
-      </div>
-    </div> -->
     <!-- Bootstrap thumbnail content component -->
     <div class="col-sm-6 col-md-3" ng-repeat= 'project in projects'>
       <a href="#" class="thumbnail"  ui-sref= "editor({projectId:project.id})">
@@ -29,5 +20,18 @@
         </div>
       </a>
     </div>
+
+    <!-- Potential new design for dashboard -->
+<!--     <div class="col-sm-6 col-md-3" ng-repeat= 'project in projects'>
+      <a href="#" class="thumbnail-wr"  ui-sref= "editor({projectId:project.id})">
+        <div class="thumbnail-img">
+        <img ng-src="http://placehold.it/350x150" alt="...">
+        </div>
+        <div class="thumbnail-content">
+          <h4>Name: {{project.title}} </h4>
+          <h5>Template: {{project.template}} </h5>
+        </div>
+      </a>
+    </div> -->
   </div>
 </div>
