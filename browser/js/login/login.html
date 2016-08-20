@@ -1,8 +1,10 @@
 <!-- <navbar></navbar> -->
 <form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
-<alert type="danger" ng-show="error">
+<div class="col-md-12">
+  <div type="danger" ng-show="error" class="alert-login">
     {{ error }}
-  </alert>
+  </div>
+</div>
 <div id="fill-in">
 <center>
   <div>
@@ -10,13 +12,13 @@
   </div>
   <div class="forminput">
     <!--   <label for="email">Email address</label> -->
-    <input type="text" ng-model="login.email" id="email" placeholder="Enter email">
+    <input type="text" ng-model="login.email" id="email" class="login-page" placeholder="Enter email">
     <br>
   <!--   <label for="login-password">Password</label> -->
-    <input type="password" ng-model="login.password" id="login-password" placeholder="Password">
+    <input type="password" ng-model="login.password" id="login-password" class="login-page" placeholder="Password">
   </div>
   </center>
-  <button type="submit" class="submitBtn">LOGIN</button>
+  <button type="submit" class="submitBtn btn-wr">LOGIN</button>
   <br>
   <a href="/auth/github">
     <img src="/js/login/github.png" class="loginicon"/>
