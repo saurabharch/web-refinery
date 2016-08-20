@@ -1,8 +1,10 @@
 <!-- <navbar></navbar> -->
 <form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
-<alert type="danger" ng-show="error">
+<div class="col-md-12">
+  <div type="danger" ng-show="error" class="alert-login">
     {{ error }}
-  </alert>
+  </div>
+</div>
 <div id="fill-in">
 <center>
   <div>
