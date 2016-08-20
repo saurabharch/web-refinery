@@ -76,12 +76,7 @@ var hostedProjectsPath = __dirname + '/hosted-projects/';
 var mkdirSync = function (path) {
     try {
         fs.accessSync(path, fs.F_OK);
-        try {
-            remakeDir(path);
-        } catch(e) {
-            fs.mkdirSync(path);
-            if ( e.code != 'ERROR OCCURRED' ) throw e;
-        }
+        remakeDir(path);
     } catch(e) {
         // If user doesn't have the hosted-projects
         // directory, it's made here.
