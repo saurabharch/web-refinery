@@ -1,8 +1,21 @@
 //Changed Code -
 //$(clientFrameWindow.document.body).find('.reserved-drop-marker').remove();
 //$(event.target).append("<p class='reserved-drop-marker'></p>");
-
+var undoArray = []
 $(function(){
+
+    // first push to undo array
+$("#skeleton").on("load", function(){
+var clientFrameWindow = $('#skeleton').get(0).contentWindow;
+   var beforeHtml = $('#skeleton').contents().find("html").html();
+    var html = "<html>\n" + beforeHtml + "</html>";
+    undoArray.push(html)
+    console.log("this is the beginning",undoArray)
+})
+    //end of first push to undo array
+
+
+
 
     var currentElement,currentElementChangeFlag,elementRectangle,countdown,dragoverqueue_processtimer, elementToRemove;
 
@@ -11,6 +24,9 @@ $(function(){
     $("#dragitemslistcontainer").on('dragstart', function(event) {
         var insertingHTML;
         // console.log("Drag Started");
+
+
+
 
         ///<[a-z][\s\S]*>/i.test(e.dataTransfer.getData('text'))
         insertingHTML = $(event.target).attr('data-insert-html')
@@ -60,6 +76,7 @@ $(function(){
 
         htmlBody.on('dragstart', function(event) {
 
+
             dragoverqueue_processtimer = setInterval(function() {
                 DragDropFunctions.ProcessDragOverQueue();
             },100);
@@ -71,6 +88,8 @@ $(function(){
         });
 
         htmlBody.on('dragend', function(event) {
+
+
 
             // Cancels action that was setup with setInterval
             clearInterval(dragoverqueue_processtimer);
@@ -114,7 +133,28 @@ $(function(){
             event.preventDefault();
             event.stopPropagation();
             console.log('Drop event');
+            var html = "<html>\n" + beforeHtml + "</html>";
             var e;
+
+                            //START OF undo function
+        var clientFrameWindow = $('#skeleton').get(0).contentWindow;
+        var beforeHtml = $('#skeleton').contents().find("html").html();
+        var html = "<html>\n" + beforeHtml + "</html>";
+
+            var addToArray = function() {
+                // saves HTML to array
+                if(undoArray.length > 10){
+                    undoArray.pop();
+                    undoArray.push(html);
+                }
+
+            undoArray.push(html);
+            console.log(undoArray);
+
+                }
+                addToArray()
+            //END of Undo Function
+
             if (event.isTrigger)
                 e = triggerEvent.originalEvent;
             else
