@@ -49,12 +49,10 @@ setUser();
 var counter = 1
 //undo function
 scope.undo = function(){
-
-
 console.log(undoArray.length-counter)
 console.log(counter)
-$("#skeleton").contents().remove(".drop-marker")
-$("#skeleton").contents().find("html").html(undoArray[undoArray.length-counter])
+
+$("#skeleton").contents().find("body").html(undoArray[undoArray.length-counter])
 counter ++
 //document.getElementById("skeleton").contentWindow.location.reload(false);
 $("#skeleton").document.close()

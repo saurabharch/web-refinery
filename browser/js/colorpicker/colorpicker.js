@@ -13,7 +13,9 @@ var changeBorder = function(){
 }
 
 $(document).ready(function () {
+    console.log("ready")
     $("iframe").on('load').each(function () {
+        console.log("loaded")
         //Using closures to capture each one
         var iframe = $(this);
         iframe.on("load", function () { //Make sure it is fully loaded
@@ -30,16 +32,12 @@ $(event.target).addClass("changeThis").resizable()
 $("iframe").contents().find(".changeThis").css("border", "4px solid rgb(189, 195, 199)");
 
 // console.log($(event.target))
-
+console.log("added")
             });
         });
 
     });
-});
-
-
-$(document).ready(function() {
-   $("#colorpicker").spectrum({
+       $("#colorpicker").spectrum({
     flat:true,
     showInput:true,
     showAlpha:true,
@@ -51,4 +49,10 @@ $(document).ready(function() {
         $("iframe").contents().find(".changeThis").val(color.toRgbString())
     }
    });
+
 });
+
+
+// $(document).ready(function() {
+
+// });

@@ -7,8 +7,8 @@ $(function(){
     // first push to undo array
 $("#skeleton").on("load", function(){
 var clientFrameWindow = $('#skeleton').get(0).contentWindow;
-   var beforeHtml = $('#skeleton').contents().find("html").html();
-    var html = "<html>\n" + beforeHtml + "</html>";
+   var beforeHtml = $('#skeleton').contents().find("body").html();
+    var html = "<body>\n" + beforeHtml + "</body>";
     undoArray.push(html)
     console.log("this is the beginning",undoArray)
 })
@@ -138,8 +138,8 @@ var clientFrameWindow = $('#skeleton').get(0).contentWindow;
 
                             //START OF undo function
         var clientFrameWindow = $('#skeleton').get(0).contentWindow;
-        var beforeHtml = $('#skeleton').contents().find("html").html();
-        var html = "<html>\n" + beforeHtml + "</html>";
+        var beforeHtml = $('#skeleton').contents().find("body").html();
+        var html = "<body>\n" + beforeHtml + "</body>";
 
             var addToArray = function() {
                 // saves HTML to array
