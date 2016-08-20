@@ -54,8 +54,6 @@ app.controller('HomeCtrl', function($scope, userFactory, $state, AuthService) {
       videoWidth,
       videoHeight;
 
-    console.log(windowHeight);
-
     $(element).each(function() {
       var videoAspectRatio = $(this).data('height') / $(this).data('width');
 
@@ -85,17 +83,16 @@ app.controller('HomeCtrl', function($scope, userFactory, $state, AuthService) {
     userFactory.createUser($scope.user)
     .then(function() {
       var obj = {email: $scope.user.email, password: $scope.user.password};
-      console.log("USER OBJECT", obj);
       closeModal();
       AuthService.login(obj).then(function () {
             $state.go('dashboard');
       })
       .catch(function() {
-        console.log("ERROR!!!!");
+        console.log("ERROR!");
       })
     })
     .catch(function() {
-      console.log("ERRRRRRRORRRR!!!");
+      console.log("ERROR!");
     })
   }
 

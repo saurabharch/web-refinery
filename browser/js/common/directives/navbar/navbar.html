@@ -10,9 +10,9 @@
     </ul>
 
     <div ng-show="user" class="welcome">
-      <span class="welcome-message">Welcome, {{ user.email }}!</span>
+      <!-- <span class="welcome-message">Welcome, {{ user.email }}!</span> -->
       <span class="navbar-buttons">
-        <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
+        <button ng-show="!user" ui-sref="login" class="btn login-button" style="display: none;">Login</button>
         <button class="btn logout-button" ng-click="logout()">Logout</button>
       </span>
     </div>

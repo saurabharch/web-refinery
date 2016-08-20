@@ -29,6 +29,9 @@
         background-color: #000;
         border: 1px solid #000;
       }
+      &:focus {
+        box-shadow: 0px;
+      }
     }
 
     .logout-button {
@@ -43,6 +46,9 @@
       color: #fff;
       background-color: #000;
       border: 1px solid #000;
+    }
+    &:focus {
+      box-shadow: 0px;
     }
     }
     span {
@@ -60,7 +66,7 @@
 .navbar {
   display: block;
   background: #f2f2f2;
-  border-bottom: 1px solid #ededed;
+  border-bottom: 1px solid transparent;
   margin-bottom: 0px;
   background-color: transparent;
   background: transparent;

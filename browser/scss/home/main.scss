@@ -1,4 +1,4 @@
-.modal-content {
+.modal-content-home {
   background-color: transparent !important;
   text-align: center;
   font-family: 'Avenir Next', 'sans-serif';
@@ -172,6 +172,12 @@ $placeholder-text: #bbbbbb;
   .login-button {
     color: #fff;
     border: 1px solid #fff;
+    border-radius: 0px;
+    transition: 0.5s ease;
+    &:hover {
+      background-color: #fff;
+      color: #000;
+    }
   }
   .logout-button {
     color: #fff;
@@ -179,7 +185,12 @@ $placeholder-text: #bbbbbb;
     border: 1px solid #fff;
     background: none;
     margin-top: 2px;
+    border-radius: 0px;
     // outline: none !important;
+    &:hover {
+      background-color: #fff;
+      color: #000;
+    }
   }
   .navbar-buttons {
     margin-top: 2px;

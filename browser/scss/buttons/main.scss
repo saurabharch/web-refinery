@@ -1,0 +1,20 @@
+.btn-wr {
+color: #000;
+border: 1px solid #000;
+background: none;
+margin-top: 2px;
+border-radius: 0px;
+transition: 0.3s ease;
+  &:hover {
+    color: #fff;
+    background-color: #000;
+    border: 1px solid #000;
+  }
+  &:focus {
+    box-shadow: 0px;
+  }
+}
+
+.btn:focus,.btn:active {
+   outline: none !important;
+}
