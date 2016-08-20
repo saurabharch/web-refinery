@@ -20,6 +20,8 @@ name in the environment files.
 var chalk = require('chalk');
 var db = require('./server/db');
 var User = db.model('user');
+var fs = require('fs');
+var path = require('path');
 var Promise = require('sequelize').Promise;
 
 var seedUsers = function () {
@@ -42,6 +44,48 @@ var seedUsers = function () {
     return Promise.all(creatingUsers);
 
 };
+
+var remakeDir = function(dir) {
+    try {
+        var list = fs.readdirSync(dir);
+        for(var i = 0; i < list.length; i++) {
+            var filename = path.join(dir, list[i]);
+            var stat = fs.statSync(filename);
+
+            if(filename == "." || filename == "..") {
+                // pass these files
+            } else if(stat.isDirectory()) {
+                // rmdir recursively
+                rmdir(filename);
+            } else {
+                // rm fiilename
+                fs.unlinkSync(filename);
+            }
+        }
+        // Remove hosted-projects and sub directories
+        fs.rmdirSync(dir);
+        // Recreates the hosted-projects directory
+        fs.mkdirSync(dir);
+        console.log(chalk.green('hosted-projects directory was remade.'))
+    } catch(e) {
+        if ( e.code != 'ERROR OCCURRED IN REMAKEDIR' ) throw e;
+    }
+};
+
+var hostedProjectsPath = __dirname + '/hosted-projects/';
+var mkdirSync = function (path) {
+    try {
+        fs.accessSync(path, fs.F_OK);
+        remakeDir(path);
+    } catch(e) {
+        // If user doesn't have the hosted-projects
+        // directory, it's made here.
+        fs.mkdirSync(path);
+        console.log(chalk.green('hosted-projects directory was created.'));
+    }
+}
+
+mkdirSync(hostedProjectsPath);
 
 db.sync({ force: true })
     .then(function () {
