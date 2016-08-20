@@ -20,7 +20,7 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
 
     var modalInstance = $uibModal.open({
       animation: false,
-      templateUrl: 'editor.modal.html',
+      templateUrl: 'js/editor/editor.modal.html',
       controller: 'ModalInstanceCtrl',
       size: size,
       resolve: {
@@ -63,8 +63,8 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
       // are hovering over some style and remove it
       // Only works with find('h1,h2,h3,h4,h5,h6,p,span,button,a')
       if (self.text() != '') self.hover(handlerIn, handlerOut);
-
       if (!self.hasClass('alreadyEditable')) {
+
         self.addClass('alreadyEditable')
         self.dblclick(function() {
 
@@ -83,7 +83,6 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
   $scope.createProject = function(obj) {
     ProjectFactory.create(obj)
   }
-
 
   //will make a hardcoded request to backend and use the archiver to zip up the project
   $scope.currentProject = currentProject.id;
