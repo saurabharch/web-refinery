@@ -20,6 +20,92 @@ body {
   margin: 0 auto;
 }
 
+// #form-views.ng-enter,
+// #form-views.ng-leave      { position:absolute; left:30px; right:30px;
+//     transition:0.5s all ease; -moz-transition:0.5s all ease; -webkit-transition:0.5s all ease; 
+// }
+    
+// /* enter animation */
+// #form-views.ng-enter            { 
+//     -webkit-animation:slideInRight 0.5s both ease;
+//     -moz-animation:slideInRight 0.5s both ease;
+//     animation:slideInRight 0.5s both ease; 
+// }
+
+// /* leave animation */
+// #form-views.ng-leave            { 
+//     -webkit-animation:slideOutLeft 0.5s both ease;
+//     -moz-animation:slideOutLeft 0.5s both ease;
+//     animation:slideOutLeft 0.5s both ease;   
+// }
+
+// ANIMATIONS
+// =============================================================================
+// /* slide out to the left */
+// @keyframes slideOutLeft {
+//     to      { transform: translateX(-200%); }
+// }
+// @-moz-keyframes slideOutLeft {  
+//     to      { -moz-transform: translateX(-200%); }
+// }
+// @-webkit-keyframes slideOutLeft {
+//     to      { -webkit-transform: translateX(-200%); }
+// }
+
+// /* slide in from the right */
+// @keyframes slideInRight {
+//     from    { transform:translateX(200%); }
+//     to      { transform: translateX(0); }
+// }
+// @-moz-keyframes slideInRight {
+//     from    { -moz-transform:translateX(200%); }
+//     to      { -moz-transform: translateX(0); }
+// }
+// @-webkit-keyframes slideInRight {
+//     from    { -webkit-transform:translateX(200%); }
+//     to      { -webkit-transform: translateX(0); }
+// }
+
+#form-views {
+  transition: opacity 1s ease, transform 1s ease;
+  opacity: 1;
+  &.ng-enter {
+    opacity: 0;
+    transform: scale(0.95) translate3d(0, 0.5em, 0);
+  }
+  &.ng-enter-active {
+    opacity: 1;
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  &.ng-leave {
+    opacity: 1;
+  }
+  &.ng-leave-active {
+     opacity: 0;
+  }
+}
+// .backward {
+//   #form-views {
+//     transition: opacity 1s ease, transform 1s ease;
+//     opacity: 1;
+//     &.ng-enter {
+//       opacity: 0;
+//       transform: scale(1) translate3d(0, 0, 0);
+//     }
+//     &.ng-enter-active {
+//       opacity: 1;
+//       transform: scale(1) translate3d(0, 0, 0);
+//     }         
+//     &.ng-leave {
+//       opacity: 1;
+//       transform: scale(1) translate3d(0, 0, 0);
+//     }
+//     &.ng-leave-active {
+//       opacity: 0;
+//       transform: scale(0.95) translate3d(0, 0.5em, 0);
+//     }
+//   }
+// }
 
 @import 'directives/main';
 @import 'home/main';

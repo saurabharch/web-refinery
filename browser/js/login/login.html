@@ -1,33 +1,33 @@
 <!-- <navbar></navbar> -->
-<form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
-<div class="col-md-12">
-  <div type="danger" ng-show="error" class="alert-login">
-    {{ error }}
-  </div>
-</div>
-<div id="fill-in">
-<center>
-  <div>
-  <h1 id="headerlogin">Web-Refinery</h1>
-  </div>
-  <div class="forminput">
-    <!--   <label for="email">Email address</label> -->
-    <input type="text" ng-model="login.email" id="email" class="login-page" placeholder="Enter email">
-    <br>
-  <!--   <label for="login-password">Password</label> -->
-    <input type="password" ng-model="login.password" id="login-password" class="login-page" placeholder="Password">
-  </div>
-  </center>
-  <button type="submit" class="submitBtn btn-wr">LOGIN</button>
-  <br>
-  <a href="/auth/github">
-    <img src="/js/login/github.png" class="loginicon"/>
-  </a>
-  <a href="/auth/google" img src="">
-    <img src="/js/login/google.png" class="loginicon"/>
-  </a>
-  <a href="/auth/twitter" img src="">
-    <img src="/js/login/twitter.png" class="loginicon"/>
-  </a>
-</div>
-</form>
+  <form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
+    <div class="col-md-12">
+      <div type="danger" ng-show="error" class="alert-login">
+        {{ error }}
+      </div>
+    </div>
+    <div id="fill-in">
+      <center>
+        <div>
+          <h1 id="headerlogin">Web-Refinery</h1>
+        </div>
+        <div class="forminput">
+          <!--   <label for="email">Email address</label> -->
+          <input type="text" ng-model="login.email" id="email" class="login-page" placeholder="Enter email">
+          <br>
+          <!--   <label for="login-password">Password</label> -->
+          <input type="password" ng-model="login.password" id="login-password" class="login-page" placeholder="Password">
+        </div>
+      </center>
+      <button type="submit" class="submitBtn btn-wr">LOGIN</button>
+      <br>
+      <a href="/auth/github">
+        <img src="/js/login/github.png" class="loginicon" />
+      </a>
+      <a href="/auth/google" img src="">
+        <img src="/js/login/google.png" class="loginicon" />
+      </a>
+      <a href="/auth/twitter" img src="">
+        <img src="/js/login/twitter.png" class="loginicon" />
+      </a>
+    </div>
+  </form>
