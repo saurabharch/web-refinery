@@ -13,9 +13,7 @@ var changeBorder = function(){
 }
 
 $(document).ready(function () {
-    console.log("ready")
     $("iframe").on('load').each(function () {
-        console.log("loaded")
         //Using closures to capture each one
         var iframe = $(this);
         iframe.on("load", function () { //Make sure it is fully loaded
@@ -25,14 +23,12 @@ $(document).ready(function () {
         $("iframe").contents().find(".changeThis").css("border", "");
          $("iframe").contents().find(".ui-resizable").resizable().resizable("destroy")
         $("iframe").contents().find("*").removeClass("changeThis")
-        $(event.target).addClass("changeThis").resizable()
-
+        $(event.target).addClass("changeThis").resizable().draggable()
     }
 $(event.target).addClass("changeThis").resizable()
 $("iframe").contents().find(".changeThis").css("border", "4px solid rgb(189, 195, 199)");
 
 // console.log($(event.target))
-console.log("added")
             });
         });
 

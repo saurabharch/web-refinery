@@ -45,6 +45,7 @@ var clientFrameWindow = $('#skeleton').get(0).contentWindow;
     });
 
     $("#dragitemslistcontainer").on('dragend', function() {
+         console.log("Drag End");
         // Cancels action that was setup with setInterval
         clearInterval(dragoverqueue_processtimer);
 
@@ -95,7 +96,6 @@ addToArray()
 
         htmlBody.on('dragstart', function(event) {
 
-
             dragoverqueue_processtimer = setInterval(function() {
                 DragDropFunctions.ProcessDragOverQueue();
             },100);
@@ -107,14 +107,29 @@ addToArray()
         });
 
         htmlBody.on('dragend', function(event) {
-
-
-
             // Cancels action that was setup with setInterval
             clearInterval(dragoverqueue_processtimer);
-
             DragDropFunctions.removePlaceholder();
             DragDropFunctions.ClearContainerContext();
+            //START OF undo function
+var clientFrameWindow = $('#skeleton').get(0).contentWindow;
+var beforeHtml = $('#skeleton').contents().find("body").html();
+var html = "<body>\n" + beforeHtml + "</body>";
+
+var addToArray = function() {
+// saves HTML to array
+if(undoArray.length > 10){
+undoArray.pop();
+undoArray.push(html);
+}
+
+undoArray.push(html);
+console.log(undoArray);
+
+}
+addToArray()
+//END of Undo Function
+
             elementToRemove.remove();
             angular.element(document.getElementsByTagName('element-menu')[0]).scope().edit();
         });
@@ -148,7 +163,7 @@ addToArray()
         })
 
         // Event that's first called when you drop an item into the iframe
-        $(clientFrameWindow.document).find('body,html').on('drop', function(event) {
+        $(clientFrameWindow.document).find('body,html, button').on('drop', function(event) {
              var clientFrameWindow = $('#skeleton').get(0).contentWindow;
                var beforeHtml = $('#skeleton').contents().find("body").html();
             event.preventDefault();
