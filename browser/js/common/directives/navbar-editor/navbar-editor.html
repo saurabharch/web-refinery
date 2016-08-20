@@ -18,7 +18,7 @@
         <button id="htmlButton" type="button" ng-click="parseHtml()" class="btn btn-default btn-wr btn-spacer"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Save</button>
         <button id="htmlButton" type="button" class="btn btn-default btn-wr btn-spacer" ng-click="download(currentProject)"><i class="fa fa-cloud-download" aria-hidden="true"></i>&nbsp;Export</button>
         &nbsp; &#124; &nbsp;
-        <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
+        <button ng-show="!user" ui-sref="login" class="btn login-button" style="display: none;">Login</button>
         <button class="btn logout-button" ng-click="logout()">Logout</button>
       </span>
     </div>
