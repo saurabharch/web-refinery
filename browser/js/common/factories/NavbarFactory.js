@@ -4,7 +4,14 @@ app.factory('NavbarFactory', function (){
         this.classes = [];
         this.links = [];
         this.htmlString = '';
+
     };
+
+    Navbar.prototype.getClasses = function (outerHTML){
+        var classString = outerHTML.match(/<nav.+class="(.*?)"/)[1];
+        var classArray = classString.split(' ');
+        this.classes = classArray;
+    }
 
     Navbar.prototype.addClasses = function (classArray) {
         this.classes = classArray;
