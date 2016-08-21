@@ -9,4 +9,5 @@ app.controller('ModalInstanceCtrl', function($scope, $uibModalInstance, textSele
   $scope.cancel = function() {
     $uibModalInstance.dismiss('cancel');
   };
+  
 });

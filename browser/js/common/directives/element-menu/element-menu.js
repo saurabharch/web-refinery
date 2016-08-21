@@ -7,7 +7,6 @@ app.directive('elementMenu', function () {
           scope.click = function($event){
               var currentElement = $($event.currentTarget)
               if(currentElement.hasClass("activeCategory")){
-               console.log("here")
                 currentElement.removeClass("activeCategory")
               } else {
              $(".mySideNav").find("*").removeClass("activeCategory")

@@ -7,8 +7,20 @@
 <div class="mySideNav col-xs-12 col-md-12 col-lg-12">
 
 <div>
+<div><a data-toggle="collapse" data-target="#navEdit" class="category-links" ng-click="click($event)" style="text-transform: uppercase;">Edit Navbar</a>
+</div>
+
+<div id="navEdit" class="collapse">
+  <ul id="" class="list-unstyled">
+         <li><a ng-click='getNavbar()'>Nav</a></li>
+      
+    </li>
+  </ul>
+</div>
+
 <div><a data-toggle="collapse" data-target="#text" class="category-links" ng-click="click($event)" style="text-transform: uppercase;">Text Elements</a>
 </div>
+
 <div id="text" class="collapse">
   <ul id="dragitemslistcontainer" class="list-unstyled">
          <li draggable="true" data-insert-html="<h1>HEADER GOES HERE</h1>"><h1>H1 TEXT</h1></li>

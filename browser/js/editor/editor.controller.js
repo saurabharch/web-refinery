@@ -1,4 +1,4 @@
-app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory, allImages, $uibModal, $log) {
+app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory, NavbarFactory, allImages, $uibModal, $log) {
 
   $scope.animationsEnabled = false;
   $scope.open = function(size) {
@@ -76,7 +76,7 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
   $scope.projectUrl = 'hosted-projects/' + currentProject.id + '/index.html';
 
   $scope.allImages = allImages;
-  // console.log($scope.allImages)
+  
 
   $scope.upload = function() {
     var uploadUrl = '/api/upload';
@@ -96,6 +96,10 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
     }
   }
 
+  $scope.getNavbar = function () {
+    console.log($('#skeleton').find('nav').outerHTML);
+  }
+
   $scope.colorBool = false;
   $scope.toggleColor = function() {
     $scope.colorBool = !$scope.colorBool;
@@ -103,9 +107,8 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
 
   $('#skeleton').on('load', function() {
     $scope.edit();
-    // $('#skeleton').find('img').on('click', function(event){
-    //   $(event.target).attr('draggable', 'true')
-    // })
   })
+
+
 
 });
