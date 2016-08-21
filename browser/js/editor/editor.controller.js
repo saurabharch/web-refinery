@@ -97,7 +97,7 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
   }
 
   $scope.getNavbar = function () {
-    console.log($('#skeleton').find('nav').outerHTML);
+    console.log($('#skeleton').contents().find('nav')[0].outerHTML);
   }
 
   $scope.colorBool = false;
