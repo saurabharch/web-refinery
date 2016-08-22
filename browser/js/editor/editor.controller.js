@@ -1,5 +1,34 @@
 app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory, NavbarFactory, allImages, $uibModal, $log) {
 
+  //gets assigned in our onload function below 
+  var nav;
+
+   $('#skeleton').on('load', function() {
+    //gets the entire htmt of ur <nav> tag
+    nav = new NavbarFactory.Navbar($('#skeleton').contents().find('nav')[0].outerHTML);
+    nav.parseNavbar();
+    console.log(nav)
+    $scope.edit();
+  })
+
+  $scope.sides = [
+    'top',
+    'bottom',
+    'left',
+    'right'
+  ]
+
+  $scope.toggleInverse = function() {
+     if ($('#skeleton').contents().find('nav').hasClass('navbar-inverse')) 
+            $('#skeleton').contents().find('nav').removeClass('navbar-inverse')
+       
+        else $('#skeleton').contents().find('nav').addClass('navbar-inverse')
+  }
+
+  $scope.updateSide = function(){
+    nav.align($scope.side)
+  }
+
   $scope.animationsEnabled = false;
   $scope.open = function(size) {
 
@@ -96,11 +125,10 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
     }
   }
 
-  $scope.getNavbar = function () {
-    var nav = new NavbarFactory.Navbar();
-    var outerHTML = $('#skeleton').contents().find('nav')[0].outerHTML;
-    console.log(outerHTML)
-    nav.getClasses(outerHTML)
+ 
+
+  $scope.toggleClass = function(classString){
+    nav.toggleClass(classString);
     console.log(nav)
   }
 
@@ -109,9 +137,7 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
     $scope.colorBool = !$scope.colorBool;
   }
 
-  $('#skeleton').on('load', function() {
-    $scope.edit();
-  })
+ 
 
 
 

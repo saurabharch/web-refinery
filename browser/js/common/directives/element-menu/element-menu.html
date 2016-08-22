@@ -1,36 +1,41 @@
  <style type="text/css">
   form.tab-form-demo .tab-pane {
     margin: 20px 20px;
-    }
+  }
 </style>
 
 <div class="mySideNav col-xs-12 col-md-12 col-lg-12">
 
-<div>
-<div><a data-toggle="collapse" data-target="#navEdit" class="category-links" ng-click="click($event)" style="text-transform: uppercase;">Edit Navbar</a>
-</div>
+  <div>
+    <div><a data-toggle="collapse" data-target="#navEdit" class="category-links" ng-click="click($event)" style="text-transform: uppercase;">Edit Navbar</a>
+    </div>
 
-<div id="navEdit" class="collapse">
-  <ul id="" class="list-unstyled">
-         <li><a ng-click='getNavbar()'>Nav</a></li>
-      
-    </li>
-  </ul>
-</div>
+    <div id="navEdit" class="collapse">
+      <ul class="list-unstyled">
+        <li>
+          <p>Align</p>
+          <select ng-options='side as side for side in sides ' ng-model = 'side' ng-change='updateSide()' ng-init='side = sides[0]'>
+           {{side}}
+         </select>
+        </li>
+        <li>
+        <p><button class ='btn btn-default btn-wr btn-spacer' ng-click='toggleInverse()'>Inverse Colors</button></p>
+     </ul>
+   </div>
 
-<div><a data-toggle="collapse" data-target="#text" class="category-links" ng-click="click($event)" style="text-transform: uppercase;">Text Elements</a>
-</div>
+   <div><a data-toggle="collapse" data-target="#text" class="category-links" ng-click="click($event)" style="text-transform: uppercase;">Text Elements</a>
+   </div>
 
-<div id="text" class="collapse">
-  <ul id="dragitemslistcontainer" class="list-unstyled">
-         <li draggable="true" data-insert-html="<h1>HEADER GOES HERE</h1>"><h1>H1 TEXT</h1></li>
-         <li draggable="true" data-insert-html="<h2>HEADER GOES HERE</h2>"><h2>H2 Text</h2></li>
-         <li draggable="true" data-insert-html="<h3>HEADER GOES HERE</h3>"><h3>H3 Text</h3></li>
-         <li draggable="true" data-insert-html="<h4>HEADER GOES HERE</h4>"><h4>H4 Text</h4></li>
-         <li draggable="true" data-insert-html="<h5>HEADER GOES HERE</h5>"><h5>H5 Text</h5></li>
-         <li draggable="true" data-insert-html="<h6>HEADER GOES HERE</h6>"><h6>H6 Text</h6></li>
-    </li>
-  </ul>
+   <div id="text" class="collapse">
+    <ul id="dragitemslistcontainer" class="list-unstyled">
+     <li draggable="true" data-insert-html="<h1>HEADER GOES HERE</h1>"><h1>H1 TEXT</h1></li>
+     <li draggable="true" data-insert-html="<h2>HEADER GOES HERE</h2>"><h2>H2 Text</h2></li>
+     <li draggable="true" data-insert-html="<h3>HEADER GOES HERE</h3>"><h3>H3 Text</h3></li>
+     <li draggable="true" data-insert-html="<h4>HEADER GOES HERE</h4>"><h4>H4 Text</h4></li>
+     <li draggable="true" data-insert-html="<h5>HEADER GOES HERE</h5>"><h5>H5 Text</h5></li>
+     <li draggable="true" data-insert-html="<h6>HEADER GOES HERE</h6>"><h6>H6 Text</h6></li>
+   </li>
+ </ul>
 </div>
 
 <!-- <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#buttons">Buttons</button> -->
@@ -38,15 +43,15 @@
 <div id="buttons" class="collapse">
   <ul id="dragitemslistcontainer">
     <li draggable="true" data-insert-html="<button type='button' class='btn btn-primary'>Primary</button>">
-<div id='fb-root'></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = '//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-       </li>
+      <div id='fb-root'></div>
+      <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = '//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+    </li>
     <li draggable="true" data-insert-html="<button type='button' class='btn btn-secondary'>Secondary</button>"><button type='button' class='btn btn-secondary'>Secondary</button></li>
     <li draggable="true" data-insert-html="<button type='button' class='btn btn-success'>Secondary</button>"><button type='button' class='btn btn-success'>Success</button></li>
     <li draggable="true" data-insert-html="<button type='button' class='btn btn-info'>Success</button>"><button type='button' class='btn btn-info'>Info</button></li>
