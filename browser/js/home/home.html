@@ -10,13 +10,13 @@
         <p id="signuptext">Design, prototype, and launch dynamic, responsive websites
           <br> All in your browser, without writing code.
         </p>
-        <input class="form-control" id="modalinput" type="text" placeholder="First Name" ng-model="user.first_name" required>
+        <input class="form-control form-signup-home" id="modalinput" type="text" placeholder="First Name" ng-model="user.first_name" required>
         <!-- <div ng-messages="loginForm.first_name.$error" ng-show="loginForm.first_name.$invalid && loginForm.first_name.$dirty" role="alert">
           <div ng-message="required" class="alert alert-danger">Please Enter First Name</div>
         </div> -->
-        <input class="form-control" id="modalinput" type="text" placeholder="Last Name" ng-model="user.last_name" required>
-        <input class="form-control" id="modalinput" type="text" placeholder="Email" ng-model="user.email" required>
-        <input class="form-control" id="modalinput" type="text" placeholder="password" ng-model="user.password" required>
+        <input class="form-control form-signup-home" id="modalinput" type="text" placeholder="Last Name" ng-model="user.last_name" required>
+        <input class="form-control form-signup-home" id="modalinput" type="email" placeholder="Email" ng-model="user.email" required>
+        <input class="form-control form-signup-home" id="modalinput" type="password" placeholder="password" ng-model="user.password" required>
         <button type="submit" class="btn btn-info" id='signupBtn' ng-disabled="loginForm.$invalid">Sign-Up</button>
       </div>
     </div>
