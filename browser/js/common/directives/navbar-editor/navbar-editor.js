@@ -67,7 +67,7 @@ app.directive('navbarEditor', function($rootScope, AuthService, AUTH_EVENTS, $st
 
       scope.download = function() {
         scope.parseHtml();
-        var url = "http://localhost:1337/api/project/" + $stateParams.projectId + "/download/";
+        var url = "api/project/" + $stateParams.projectId + "/download/";
         window.open(url, 'Download');
       }
 
