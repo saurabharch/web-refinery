@@ -28,12 +28,23 @@ router.post('/', function (req, res, next){
 
 // deletes a project
 router.delete('/:id', function (req, res, next){
-  console.log('===============');
-  console.log('route beginning');
-  console.log('===============');
   Project.findById(req.params.id)
-  .then(function(product){
-    return product.destroy()
+  .then(function(project){
+
+    // Delete a project's directory that's located in hosted-projects
+    var projectDir = baseDir + project.id + '/';
+    try {
+      workHorse.removeDirRecursive(projectDir);
+    } catch(e) {
+        console.log(e);
+    }
+
+    return project;
+  })
+  .then(function(project){
+    // See db/index for more info.
+    // It will delete data from projects/pages tables
+    return project.destroy();
   })
   .then(function() {
     res.status(200).send("deleted")

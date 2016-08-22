@@ -82,6 +82,31 @@ getImageList: function (projectId) {
     })
     return images;
   })
+},
+
+// Similar to seed file. Will delete a directory and any sub directories/files
+removeDirRecursive: function(dir) {
+    try {
+      var list = fs.readdirSync(dir);
+      for(var i = 0; i < list.length; i++) {
+          var filename = path.join(dir, list[i]);
+          var stat = fs.statSync(filename);
+
+          if(filename == "." || filename == "..") {
+          // pass these files
+          } else if(stat.isDirectory()) {
+            // removeDir recursively
+            this.removeDirRecursive(filename);
+          } else {
+            // rm fiilename
+            fs.unlinkSync(filename);
+          }
+      }
+      // Remove hosted-projects and sub directories
+      fs.rmdirSync(dir);
+    } catch(e) {
+        if ( e.code != 'ERROR OCCURRED IN REMAKEDIR' ) throw e;
+    }
 }
 
 }
