@@ -24,6 +24,28 @@ app.factory('NavbarFactory', function (){
         this.classes = classArray;
     }
 
+    Navbar.prototype.createLink = function (name){
+        var nameParsed = name.replace(' ', '_')
+        var html =  `<li class="nav-item">
+                <a class="nav-link" href="#${nameParsed}">${name}</a>
+                </li>`
+        this.links.push({html: html, name: name});
+        var newSection = `<section id='${nameParsed}'>
+          <div class='row' >
+            <h1>${name}</h1>
+            <p class="lead">Complete with pre-defined file paths that you won't have to change!!</p>
+            <ul class="list-unstyled">
+                <li>Bootstrap v3.3.7</li>
+                <li>Made with Bootstrap and Web Refinery</li>
+            </ul>
+        </div>
+        </section>`
+
+        $('#skeleton').contents().find('#contentColumn').append(newSection)
+
+        return html;
+    }
+
     Navbar.prototype.addClasses = function (classArray) {
         this.classes = classArray;
     };
@@ -47,7 +69,7 @@ app.factory('NavbarFactory', function (){
     }
 
     Navbar.prototype.align = function(side){
-        console.log(side);
+       
         if (side === 'top') {
             $('#skeleton').contents().find('nav').removeClass('navbar-fixed-bottom navbar-fixed-side');
             $('#skeleton').contents().find('nav').addClass('navbar-fixed-top');
@@ -87,13 +109,6 @@ app.factory('NavbarFactory', function (){
         }
     }
 
-    //  Navbar.protoype.toggleInverse = function() {
-
-    //     if ($('#skeleton').contents().find('nav').hasClass('navbar-inverse')) 
-    //         $('#skeleton').contents().find('nav').removeClass('navbar-inverse')
-
-    //     else $('#skeleton').contents().find('nav').addClass('navbar-inverse')
-    // }
 
     return {
         Navbar: Navbar

@@ -7,24 +7,28 @@
 <div class="mySideNav col-xs-12 col-md-12 col-lg-12">
 
   <div>
-    <div><a data-toggle="collapse" data-target="#navEdit" class="category-links" ng-click="click($event)" style="text-transform: uppercase;">Edit Navbar</a>
+    <div><a  ng-show='currentProject.template === "bare-essentials" ' data-toggle="collapse" data-target="#navEdit" class="category-links" ng-click="click($event)" style="text-transform: uppercase;">Edit Navbar</a>
     </div>
 
     <div id="navEdit" class="collapse">
       <ul class="list-unstyled">
         <li>
-          <p>Align</p>
+          <span>Align</span>
           <select ng-options='side as side for side in sides ' ng-model = 'side' ng-change='updateSide()' ng-init='side = sides[0]'>
            {{side}}
          </select>
         </li>
         <li>
-        <p><button class ='btn btn-default btn-wr btn-spacer' ng-click='toggleInverse()'>Inverse Colors</button></p>
+        <p><br><br><br><button class ='btn btn-default btn-wr btn-spacer' ng-click='toggleInverse()'>Inverse Colors</button></p>
+        </li>
      </ul>
 
-     <ul>
+     <ul class= 'list-unstyled'>
+     <li><h3>Nav Links</h3></li> 
        <li ng-repeat = 'link in links'>{{link.name}}  <a ng-show = "link.name != 'Home'" ng-click = removeLink(link.name)>[x]</a></li>
-
+       <li id='addLink'><a ng-hide='showTextbox' ng-click = 'clickAddLink()'>Add Section</a>
+       <div ng-show = 'showTextbox'><input type ='text' ng-model = 'linkName'><br><button ng-click='addLink()'>Add link</button></div>
+       </li>
      </ul>
    </div>
 

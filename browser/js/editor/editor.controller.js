@@ -9,8 +9,11 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
     nav.parseNavbar();
     $scope.edit();
     $scope.links = nav.links;
+    nav.align('top')
     console.log(nav)
   })
+
+  console.log(currentProject)
 
   $scope.sides = [
   'top',
@@ -18,6 +21,13 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
   'left',
   'bottom'
   ]
+
+  $scope.showTextbox = false;
+
+  $scope.clickAddLink = function() {
+    $scope.showTextbox = true;
+
+  }
 
   $scope.toggleInverse = function() {
    if ($('#skeleton').contents().find('nav').hasClass('navbar-inverse')) 
@@ -100,7 +110,7 @@ $scope.toggleAnimation = function() {
   }
 
   //will make a hardcoded request to backend and use the archiver to zip up the project
-  $scope.currentProject = currentProject.id;
+  $scope.currentProject = currentProject;
 
 
   $scope.projectUrl = 'hosted-projects/' + currentProject.id + '/index.html';
@@ -138,18 +148,23 @@ $scope.toggleAnimation = function() {
     $scope.colorBool = !$scope.colorBool;
   }
 
-  $scope.addMoreLinks = function () {
-    console.log('hhehe')
-    $('#skeleton').contents().find('#navUl').append(nav.links[1])
-
+  $scope.addLink = function () {
+    
+    var newLink = nav.createLink($scope.linkName)
+    $('#skeleton').contents().find('#navUl').append(newLink)
+    $scope.showTextbox= false;
+    $scope.edit();
   }
 
   $scope.removeLink = function(text){
     console.log($scope.links)
+    var textParsed = text.replace(' ', '_')
     $('#skeleton').contents().find('a:contains(' + text + ')').parent().remove();
     _.remove($scope.links, function(link){
       return link.name === text;
     })
+    $('#skeleton').contents().find('#'+textParsed).remove();
+    $scope.edit();
     console.log($scope.links)
   }
 
