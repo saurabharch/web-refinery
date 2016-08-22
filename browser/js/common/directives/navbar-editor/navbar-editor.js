@@ -46,8 +46,39 @@ setUser();
     PageFactory.savePage({html: html, title: 'index', projectId:$stateParams.projectId});
   }
 
+var counter = undoArray.length
+//undo function
+scope.undo = function(){
+console.log("array length", undoArray.length)
+console.log("undo counter", counter)
+if(counter === 0){
+   console.log( "we are at the beginning")
+    counter = undoArray.length - 1
+    $("#skeleton").contents().find("body").html(undoArray[counter])
+} else {
+    counter --
+    $("#skeleton").contents().find("body").html(undoArray[counter])
+}
+//document.getElementById("skeleton").contentWindow.location.reload(false);
 
-scope.download = function() { 
+}
+
+scope.redo = function(){
+console.log("array length", undoArray.length)
+console.log("redo", counter)
+if(counter > undoArray.length){
+    console.log("were at the end")
+    counter = undoArray.length +1
+    $("#skeleton").contents().find("body").html(undoArray[counter])
+} else {
+counter++
+$("#skeleton").contents().find("body").html(undoArray[counter])
+}
+//document.getElementById("skeleton").contentWindow.location.reload(false);
+
+}
+
+scope.download = function() {
     scope.parseHtml();
     var url = "http://localhost:1337/api/project/" + $stateParams.projectId + "/download/";
     window.open(url, 'Download');
