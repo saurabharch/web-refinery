@@ -19,52 +19,8 @@ $(function(){
         var beforeHtml = $('#skeleton').contents().find("body").html();
         var undoHtml = "<body>\n" + beforeHtml + "</body>";
         undoArray.push(undoHtml);
-    });
+        console.log(undoArray)
 
-    var currentElement,currentElementChangeFlag,elementRectangle,countdown,dragoverqueue_processtimer, elementToRemove;
-    // Dragstart/dragend HTML5 event
-    // Only items with the #dragitemslistcontainer will respond
-    $("#dragitemslistcontainer").on('dragstart', function(event) {
-        var insertingHTML;
-
-        insertingHTML = $(event.target).attr('data-insert-html');
-        dragoverqueue_processtimer = setInterval(function() {
-            DragDropFunctions.ProcessDragOverQueue();
-        },100);
-        // data-insert-html holds html data. insertingHTML grabs that html
-
-        //old code i edited , changed it up top in insertingHTMl
-        // var insertingHTML = $(this).attr('data-insert-html');
-
-        // Event is jquery event. Comes with additional functions and properties
-        // OriginalEvent is the unmodified version
-        // DataTransfer holds data that will be transferred during drap/drop
-        event.originalEvent.dataTransfer.setData("Text",insertingHTML);
-    });
-
-    $("#dragitemslistcontainer").on('dragend', function() {
-        // Cancels action that was setup with setInterval
-        clearInterval(dragoverqueue_processtimer);
-
-        // Removes the outlines that you see when dragging in the iframe
-        // First one is the drop marker (blue) second represents the
-        // container that you're dropping the data in (green).
-        DragDropFunctions.removePlaceholder();
-        DragDropFunctions.ClearContainerContext();
-
-            // Get HTML and add to undoArray
-            var beforeHtml = $('#skeleton').contents().find("body").html();
-            var undoHtml = "<body>\n" + beforeHtml + "</body>";
-            // console.log('outisde iframe: ',undoHtml);
-            addToArray(undoHtml);
-            // console.log('outisde iframe: ', undoArray);
-
-        //re runs the edit() function on our controller on every drop
-        //to recheck all the elements and make them editable
-        angular.element(document.getElementsByTagName('element-menu')[0]).scope().edit();
-    });
-
-    $('#skeleton').on('load', function() {
         // as our outer/main window
          var clientFrameWindow = $('#skeleton').get(0).contentWindow;
         //Add CSS File to iFrame
@@ -100,9 +56,9 @@ $(function(){
             // Get HTML and add to undoArray
             var beforeHtml = $('#skeleton').contents().find("body").html();
             var undoHtml = "<body>\n" + beforeHtml + "</body>";
-            // console.log('within iframe: ',undoHtml);
+
             addToArray(undoHtml);
-            // console.log('within iframe: ', undoArray);
+            console.log('within iframe: ', undoArray);
 
             angular.element(document.getElementsByTagName('element-menu')[0]).scope().edit();
         });
@@ -165,7 +121,55 @@ $(function(){
                 console.log(e);
             }
         });
+
+
     });
+
+    var currentElement,currentElementChangeFlag,elementRectangle,countdown,dragoverqueue_processtimer, elementToRemove;
+    // Dragstart/dragend HTML5 event
+    // Only items with the #dragitemslistcontainer will respond
+    $("#dragitemslistcontainer").on('dragstart', function(event) {
+        var insertingHTML;
+
+        insertingHTML = $(event.target).attr('data-insert-html');
+        dragoverqueue_processtimer = setInterval(function() {
+            DragDropFunctions.ProcessDragOverQueue();
+        },100);
+        // data-insert-html holds html data. insertingHTML grabs that html
+
+        //old code i edited , changed it up top in insertingHTMl
+        // var insertingHTML = $(this).attr('data-insert-html');
+
+        // Event is jquery event. Comes with additional functions and properties
+        // OriginalEvent is the unmodified version
+        // DataTransfer holds data that will be transferred during drap/drop
+        event.originalEvent.dataTransfer.setData("Text",insertingHTML);
+    });
+
+    $("#dragitemslistcontainer").on('dragend', function() {
+        // Cancels action that was setup with setInterval
+        clearInterval(dragoverqueue_processtimer);
+
+        // Removes the outlines that you see when dragging in the iframe
+        // First one is the drop marker (blue) second represents the
+        // container that you're dropping the data in (green).
+        DragDropFunctions.removePlaceholder();
+        DragDropFunctions.ClearContainerContext();
+
+            // Get HTML and add to undoArray
+            var beforeHtml = $('#skeleton').contents().find("body").html();
+            var undoHtml = "<body>\n" + beforeHtml + "</body>";
+            // console.log('outisde iframe: ',undoHtml);
+            addToArray(undoHtml);
+            console.log(undoArray)
+            console.log('outisde iframe: ', undoArray);
+
+        //re runs the edit() function on our controller on every drop
+        //to recheck all the elements and make them editable
+        angular.element(document.getElementsByTagName('element-menu')[0]).scope().edit();
+    });
+
+
 
     var DragDropFunctions = {
         dragoverqueue : [],

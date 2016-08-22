@@ -49,7 +49,7 @@ setUser();
 var counter = 1
 //undo function
 scope.undo = function(){
-console.log(undoArray.length-counter)
+console.log(undoArray.length)
 console.log(counter)
 $("#skeleton").contents().find("body").html(undoArray[undoArray.length-counter])
 if(undoArray.length-counter <=0){
