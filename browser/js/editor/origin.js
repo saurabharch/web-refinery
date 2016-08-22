@@ -1,35 +1,33 @@
 //Changed Code -
 //$(clientFrameWindow.document.body).find('.reserved-drop-marker').remove();
 //$(event.target).append("<p class='reserved-drop-marker'></p>");
-var undoArray = []
+var undoArray = [];
+var addToArray = function(html) {
+    // saves HTML to array
+    if(undoArray.length > 10){
+        undoArray.pop();
+        undoArray.push(html);
+    }
+
+    undoArray.push(html);
+}
+
 $(function(){
 
     // first push to undo array
-$("#skeleton").on("load", function(){
-var clientFrameWindow = $('#skeleton').get(0).contentWindow;
-   var beforeHtml = $('#skeleton').contents().find("body").html();
-    var html = "<body>\n" + beforeHtml + "</body>";
-    undoArray.push(html)
-    console.log("this is the beginning",undoArray)
-})
-    //end of first push to undo array
-
-
-
+    $("#skeleton").on("load", function(){
+        var beforeHtml = $('#skeleton').contents().find("body").html();
+        var undoHtml = "<body>\n" + beforeHtml + "</body>";
+        undoArray.push(undoHtml);
+    });
 
     var currentElement,currentElementChangeFlag,elementRectangle,countdown,dragoverqueue_processtimer, elementToRemove;
-
     // Dragstart/dragend HTML5 event
     // Only items with the #dragitemslistcontainer will respond
     $("#dragitemslistcontainer").on('dragstart', function(event) {
         var insertingHTML;
-        // console.log("Drag Started");
 
-
-
-
-        ///<[a-z][\s\S]*>/i.test(e.dataTransfer.getData('text'))
-        insertingHTML = $(event.target).attr('data-insert-html')
+        insertingHTML = $(event.target).attr('data-insert-html');
         dragoverqueue_processtimer = setInterval(function() {
             DragDropFunctions.ProcessDragOverQueue();
         },100);
@@ -45,7 +43,6 @@ var clientFrameWindow = $('#skeleton').get(0).contentWindow;
     });
 
     $("#dragitemslistcontainer").on('dragend', function() {
-         console.log("Drag End");
         // Cancels action that was setup with setInterval
         clearInterval(dragoverqueue_processtimer);
 
@@ -54,26 +51,13 @@ var clientFrameWindow = $('#skeleton').get(0).contentWindow;
         // container that you're dropping the data in (green).
         DragDropFunctions.removePlaceholder();
         DragDropFunctions.ClearContainerContext();
-console.log("outside drop event")
 
-//START OF undo function
-var clientFrameWindow = $('#skeleton').get(0).contentWindow;
-var beforeHtml = $('#skeleton').contents().find("body").html();
-var html = "<body>\n" + beforeHtml + "</body>";
-
-var addToArray = function() {
-// saves HTML to array
-if(undoArray.length > 10){
-undoArray.pop();
-undoArray.push(html);
-}
-
-undoArray.push(html);
-console.log(undoArray);
-
-}
-addToArray()
-//END of Undo Function
+            // Get HTML and add to undoArray
+            var beforeHtml = $('#skeleton').contents().find("body").html();
+            var undoHtml = "<body>\n" + beforeHtml + "</body>";
+            // console.log('outisde iframe: ',undoHtml);
+            addToArray(undoHtml);
+            // console.log('outisde iframe: ', undoArray);
 
         //re runs the edit() function on our controller on every drop
         //to recheck all the elements and make them editable
@@ -81,9 +65,7 @@ addToArray()
     });
 
     $('#skeleton').on('load', function() {
-         // $('#skeleton').get(0).contentWindow equivalent to window
-     // with clientFrameWindow our iframe has all the functionality
-         // as our outer/main window
+        // as our outer/main window
          var clientFrameWindow = $('#skeleton').get(0).contentWindow;
         //Add CSS File to iFrame
         //----------------------
@@ -94,6 +76,7 @@ addToArray()
 
         var htmlBody = $(clientFrameWindow.document).find('body,html');
 
+        // Code to make items within the iframe draggable - START
         htmlBody.on('dragstart', function(event) {
 
             dragoverqueue_processtimer = setInterval(function() {
@@ -109,30 +92,21 @@ addToArray()
         htmlBody.on('dragend', function(event) {
             // Cancels action that was setup with setInterval
             clearInterval(dragoverqueue_processtimer);
+
             DragDropFunctions.removePlaceholder();
             DragDropFunctions.ClearContainerContext();
-            //START OF undo function
-var clientFrameWindow = $('#skeleton').get(0).contentWindow;
-var beforeHtml = $('#skeleton').contents().find("body").html();
-var html = "<body>\n" + beforeHtml + "</body>";
-
-var addToArray = function() {
-// saves HTML to array
-if(undoArray.length > 10){
-undoArray.pop();
-undoArray.push(html);
-}
-
-undoArray.push(html);
-console.log(undoArray);
-
-}
-addToArray()
-//END of Undo Function
-
             elementToRemove.remove();
+
+            // Get HTML and add to undoArray
+            var beforeHtml = $('#skeleton').contents().find("body").html();
+            var undoHtml = "<body>\n" + beforeHtml + "</body>";
+            // console.log('within iframe: ',undoHtml);
+            addToArray(undoHtml);
+            // console.log('within iframe: ', undoArray);
+
             angular.element(document.getElementsByTagName('element-menu')[0]).scope().edit();
         });
+        // Code to make items within the iframe draggable - END
 
         // Register event for when something is dragged into the iframe
         htmlBody.find('*').addBack().on('dragenter', function(event) {
@@ -163,16 +137,11 @@ addToArray()
         })
 
         // Event that's first called when you drop an item into the iframe
-        $(clientFrameWindow.document).find('body,html, button').on('drop', function(event) {
-             var clientFrameWindow = $('#skeleton').get(0).contentWindow;
-               var beforeHtml = $('#skeleton').contents().find("body").html();
+        $(clientFrameWindow.document).find('body,html').on('drop', function(event) {
             event.preventDefault();
             event.stopPropagation();
-            console.log('inside Drop event');
-            var html = "<html>\n" + beforeHtml + "</html>";
+
             var e;
-
-
             if (event.isTrigger)
                 e = triggerEvent.originalEvent;
             else
@@ -181,27 +150,20 @@ addToArray()
                 // dataTransfer setData added in dragstart event
                 if (/<[a-z][\s\S]*>/i.test(e.dataTransfer.getData('text'))) {
                     var textData = e.dataTransfer.getData('text');
-
                 }
                 else {
-
-                    console.log('==== Something went wrong ====');
-                    console.log(e);
-                    console.log('==============================');
+                    // Get textData when you drag within the ifram
                     var textData = e.dataTransfer.getData('text');
-                           $("#skeleton").contents().find(".drop-marker").remove();
-
                 }
+
                 var insertionPoint = $("#skeleton").contents().find(".drop-marker");
                 var checkDiv = $(textData);
-                checkDiv.removeClass('alreadyEditable')
+                // checkDiv.removeClass('alreadyEditable');
                 insertionPoint.after(checkDiv);
                 insertionPoint.remove();
             } catch(e) {
                 console.log(e);
             }
-
-
         });
     });
 
