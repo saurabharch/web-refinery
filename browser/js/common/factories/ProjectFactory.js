@@ -25,8 +25,15 @@ projectFactory.getOne = function(id) {
 }
 
 // projectFactory.download = function(id) {
-//     return $http.get(baseUrl + id + '/download');    
-// } 
+//     return $http.get(baseUrl + id + '/download');
+// }
+
+projectFactory.deleteProject = function(projectId) {
+    console.log('project factory');
+    return $http.delete(baseUrl + projectId)
+    .then(getData);
+}
+
 
 return projectFactory;
 

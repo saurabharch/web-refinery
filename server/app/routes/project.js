@@ -26,6 +26,20 @@ router.post('/', function (req, res, next){
   .catch(next);
 });
 
+// deletes a project
+router.delete('/:id', function (req, res, next){
+  console.log('===============');
+  console.log('route beginning');
+  console.log('===============');
+  Project.findById(req.params.id)
+  .then(function(product){
+    return product.destroy()
+  })
+  .then(function() {
+    res.status(200).send("deleted")
+  })
+  .catch(next);
+});
 
 //fetch all projects for a specific user
 router.get('/', function (req, res, next){
