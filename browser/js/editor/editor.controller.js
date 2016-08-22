@@ -1,48 +1,73 @@
-app.controller('ModalInstanceCtrl', function($scope, $uibModalInstance, textSelected) {
+app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory, NavbarFactory, allImages, $uibModal, $log) {
 
-  $scope.textSelected = textSelected;
+  //gets assigned in our onload function below 
+  var nav;
 
-  $scope.ok = function() {
-    $uibModalInstance.close($scope.textSelected);
-  };
+  $('#skeleton').on('load', function() {
+    //gets the entire htmt of ur <nav> tag
+    nav = new NavbarFactory.Navbar($('#skeleton').contents().find('nav')[0].outerHTML);
+    nav.parseNavbar();
+    $scope.edit();
+    $scope.links = nav.links;
+    nav.align('top')
+    console.log(nav)
+  })
 
-  $scope.cancel = function() {
-    $uibModalInstance.dismiss('cancel');
-  };
-});
+  console.log(currentProject)
 
+  $scope.sides = [
+  'top',
+  'right',
+  'left',
+  'bottom'
+  ]
 
+  $scope.showTextbox = false;
 
-app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory, allImages, $uibModal, $log) {
+  $scope.clickAddLink = function() {
+    $scope.showTextbox = true;
 
-  $scope.animationsEnabled = false;
-  $scope.open = function(size) {
+  }
 
-    var modalInstance = $uibModal.open({
-      animation: false,
-      templateUrl: 'js/editor/editor.modal.html',
-      controller: 'ModalInstanceCtrl',
-      size: size,
-      resolve: {
-        textSelected: function() {
-          return $scope.textSelected;
-        }
+  $scope.toggleInverse = function() {
+   if ($('#skeleton').contents().find('nav').hasClass('navbar-inverse')) 
+    $('#skeleton').contents().find('nav').removeClass('navbar-inverse')
+
+  else $('#skeleton').contents().find('nav').addClass('navbar-inverse')
+}
+
+$scope.updateSide = function(){
+  nav.align($scope.side)
+}
+
+$scope.animationsEnabled = false;
+$scope.open = function(size) {
+
+  var modalInstance = $uibModal.open({
+    animation: false,
+    templateUrl: 'js/modalInstance/editor.modal.html',
+    controller: 'ModalInstanceCtrl',
+    size: size,
+    resolve: {
+      textSelected: function() {
+        return $scope.textSelected;
       }
-    });
+    }
+  });
 
-    modalInstance.result.then(function(editedModalText) {
-      $scope.textSelected = editedModalText;
+  modalInstance.result.then(function(editedModalText) {
+    $scope.textSelected = editedModalText;
 
-      $($scope.textTag).html($scope.textSelected);
+    $($scope.textTag).html($scope.textSelected);
 
-    }, function() {
-      $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
+  }, function() {
+    $log.info('Modal dismissed at: ' + new Date());
+  });
+};
 
-  $scope.toggleAnimation = function() {
-    $scope.animationsEnabled = !$scope.animationsEnabled;
-  };
+$scope.toggleAnimation = function() {
+  $scope.animationsEnabled = !$scope.animationsEnabled;
+};
 
   //makes all elements in body editable
   $scope.edit = function() {
@@ -85,13 +110,13 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
   }
 
   //will make a hardcoded request to backend and use the archiver to zip up the project
-  $scope.currentProject = currentProject.id;
+  $scope.currentProject = currentProject;
 
 
   $scope.projectUrl = 'hosted-projects/' + currentProject.id + '/index.html';
 
   $scope.allImages = allImages;
-  // console.log($scope.allImages)
+  
 
   $scope.upload = function() {
     var uploadUrl = '/api/upload';
@@ -104,11 +129,18 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
       alert("Please upload an image")
     } else {
       return fileUpload.upload(uploadObj, uploadUrl)
-        .then(function(imageArray) {
-          $scope.allImages = imageArray;
+      .then(function(imageArray) {
+        $scope.allImages = imageArray;
           // console.log($scope.allImages)
         })
     }
+  }
+
+
+
+  $scope.toggleClass = function(classString){
+    nav.toggleClass(classString);
+    console.log(nav)
   }
 
   $scope.colorBool = false;
@@ -116,11 +148,28 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
     $scope.colorBool = !$scope.colorBool;
   }
 
-  $('#skeleton').on('load', function() {
+  $scope.addLink = function () {
+    
+    var newLink = nav.createLink($scope.linkName)
+    $('#skeleton').contents().find('#navUl').append(newLink)
+    $scope.showTextbox= false;
     $scope.edit();
-    // $('#skeleton').find('img').on('click', function(event){
-    //   $(event.target).attr('draggable', 'true')
-    // })
-  })
+  }
+
+  $scope.removeLink = function(text){
+    console.log($scope.links)
+    var textParsed = text.replace(' ', '_')
+    $('#skeleton').contents().find('a:contains(' + text + ')').parent().remove();
+    _.remove($scope.links, function(link){
+      return link.name === text;
+    })
+    $('#skeleton').contents().find('#'+textParsed).remove();
+    $scope.edit();
+    console.log($scope.links)
+  }
+
+
+
+
 
 });

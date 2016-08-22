@@ -1,31 +1,56 @@
  <style type="text/css">
   form.tab-form-demo .tab-pane {
     margin: 20px 20px;
-    }
+  }
 </style>
 
 <div class="mySideNav col-xs-12 col-md-12 col-lg-12">
 
-<div>
-<div><a data-toggle="collapse" data-target="#text" class="category-links" ng-click="click($event)" style="text-transform: uppercase;">Text Elements</a>
-</div>
-<div id="text" class="collapse">
-  <ul id="dragitemslistcontainer" class="list-unstyled">
-         <li draggable="true" data-insert-html="<h1>HEADER GOES HERE</h1>"><h1>H1 TEXT</h1></li>
-         <li draggable="true" data-insert-html="<h2>HEADER GOES HERE</h2>"><h2>H2 Text</h2></li>
-         <li draggable="true" data-insert-html="<h3>HEADER GOES HERE</h3>"><h3>H3 Text</h3></li>
-         <li draggable="true" data-insert-html="<h4>HEADER GOES HERE</h4>"><h4>H4 Text</h4></li>
-         <li draggable="true" data-insert-html="<h5>HEADER GOES HERE</h5>"><h5>H5 Text</h5></li>
-         <li draggable="true" data-insert-html="<h6>HEADER GOES HERE</h6>"><h6>H6 Text</h6></li>
-    </li>
-  </ul>
+  <div>
+    <div><a  ng-show='currentProject.template === "bare-essentials" ' data-toggle="collapse" data-target="#navEdit" class="category-links" ng-click="click($event)" style="text-transform: uppercase;">Edit Navbar</a>
+    </div>
+
+    <div id="navEdit" class="collapse">
+      <ul class="list-unstyled">
+        <li>
+          <span>Align</span>
+          <select ng-options='side as side for side in sides ' ng-model = 'side' ng-change='updateSide()' ng-init='side = sides[0]'>
+           {{side}}
+         </select>
+        </li>
+        <li>
+        <p><br><br><br><button class ='btn btn-default btn-wr btn-spacer' ng-click='toggleInverse()'>Inverse Colors</button></p>
+        </li>
+     </ul>
+
+     <ul class= 'list-unstyled'>
+     <li><h3>Nav Links</h3></li> 
+       <li ng-repeat = 'link in links'>{{link.name}}  <a ng-show = "link.name != 'Home'" ng-click = removeLink(link.name)>[x]</a></li>
+       <li id='addLink'><a ng-hide='showTextbox' ng-click = 'clickAddLink()'>Add Section</a>
+       <div ng-show = 'showTextbox'><input type ='text' ng-model = 'linkName'><br><button ng-click='addLink()'>Add link</button></div>
+       </li>
+     </ul>
+   </div>
+
+   <div><a data-toggle="collapse" data-target="#text" class="category-links" ng-click="click($event)" style="text-transform: uppercase;">Text Elements</a>
+   </div>
+
+   <div id="text" class="collapse">
+    <ul id="dragitemslistcontainer" class="list-unstyled">
+     <li draggable="true" data-insert-html="<h1>HEADER GOES HERE</h1>"><h1>H1 TEXT</h1></li>
+     <li draggable="true" data-insert-html="<h2>HEADER GOES HERE</h2>"><h2>H2 Text</h2></li>
+     <li draggable="true" data-insert-html="<h3>HEADER GOES HERE</h3>"><h3>H3 Text</h3></li>
+     <li draggable="true" data-insert-html="<h4>HEADER GOES HERE</h4>"><h4>H4 Text</h4></li>
+     <li draggable="true" data-insert-html="<h5>HEADER GOES HERE</h5>"><h5>H5 Text</h5></li>
+     <li draggable="true" data-insert-html="<h6>HEADER GOES HERE</h6>"><h6>H6 Text</h6></li>
+   </li>
+ </ul>
 </div>
 
 <!-- <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#buttons">Buttons</button> -->
 <div><a data-toggle="collapse" data-target="#buttons" class="category-links" ng-click="click($event)" style="text-transform: uppercase;">Buttons</a></div>
 <div id="buttons" class="collapse">
   <ul id="dragitemslistcontainer">
-    <li draggable="true" data-insert-html="<button type='button' class='btn btn-secondary'>Secondary</button>"><button type='button' class='btn btn-secondary'>Secondary</button></li>
     <li draggable="true" data-insert-html="<button type='button' class='btn btn-secondary'>Secondary</button>"><button type='button' class='btn btn-secondary'>Secondary</button></li>
     <li draggable="true" data-insert-html="<button type='button' class='btn btn-success'>Secondary</button>"><button type='button' class='btn btn-success'>Success</button></li>
     <li draggable="true" data-insert-html="<button type='button' class='btn btn-info'>Success</button>"><button type='button' class='btn btn-info'>Info</button></li>
