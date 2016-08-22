@@ -47,35 +47,32 @@ setUser();
   }
 
 $("iframe").on("load", function(){
-var currentIndex = 1
+var counter = 0
 //undo function
 scope.undo = function(){
-    currentIndex ++
+    counter ++
 console.log("undo arraylength", undoArray.length)
-console.log("undo current", currentIndex)
-$("#skeleton").contents().find("body").html(undoArray[(undoArray.length)-currentIndex])
-if(undoArray.length-currentIndex ===0){
-    currentIndex = 1
+console.log("undo current", counter)
+$("#skeleton").contents().find("body").html(undoArray[(undoArray.length-1)-counter])
+if(undoArray.length-counter ===0){
+    counter = 1
 } else {
 return
 }
-//document.getElementById("skeleton").contentWindow.location.reload(false);
-
 }
 
 scope.redo = function(){
-    currentIndex --
+    console.log("redo beginning counter", counter)
+    counter --
 console.log("redo array", undoArray.length)
-console.log("redo current", currentIndex)
-    $("#skeleton").contents().find("body").html(undoArray[(undoArray.length)-currentIndex])
-console.log("diff", undoArray.length-currentIndex)
-if((undoArray.length-currentIndex) === undoArray.length+1){
-    currentIndex = undoArray.length
+console.log("redo current", counter)
+    $("#skeleton").contents().find("body").html(undoArray[(undoArray.length-1)-counter])
+console.log("diff", undoArray.length-counter)
+if((undoArray.length-counter) === undoArray.length+1){
+    counter = undoArray.length-1
 } else {
 return
 }
-//document.getElementById("skeleton").contentWindow.location.reload(false);
-
 }
 })
 
