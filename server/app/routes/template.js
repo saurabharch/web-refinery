@@ -7,13 +7,13 @@ var Page = db.model("page");
 var Project = db.model("project");
 
 //get an array of all folders in our template folders
-//this is an array of all our templates 
+//this is an array of all our templates
 router.get('/', function (req,res,next){
-   return workHorse.getTemplateList()
-   .then(function (templateArray) {
-       return res.send(templateArray)
+  return workHorse.getTemplateList()
+  .then(function (templateArray) {
+    return res.send(templateArray)
    })
-    .catch(next)
+  .catch(next)
 })
 
 
