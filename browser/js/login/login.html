@@ -1,24 +1,25 @@
-<!-- <navbar></navbar> -->
-  <form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
-    <div class="col-md-12">
-      <div type="danger" ng-show="error" class="alert-login">
-        {{ error }}
-      </div>
+<!-- <navbar-home></navbar-home> -->
+  <div class="col-md-12">
+    <div type="danger" ng-show="error" class="alert-login">
+      {{ error }}
     </div>
+  </div>
+  <form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
     <div id="fill-in">
       <center>
         <div>
-          <h1 id="headerlogin">Web-Refinery</h1>
+          <h1 id="headerlogin" style='font-weight: 100;'>Web-Refinery</h1>
         </div>
         <div class="forminput">
-          <!--   <label for="email">Email address</label> -->
-          <input type="text" ng-model="login.email" id="email" class="login-page" placeholder="Enter email">
+          <input type="email" ng-model="login.email" name="email" id="email" class="login-page" placeholder="Enter Address" required>
           <br>
-          <!--   <label for="login-password">Password</label> -->
-          <input type="password" ng-model="login.password" id="login-password" class="login-page" placeholder="Password">
+          <input type="password" ng-model="login.password" id="login-password" class="login-page" placeholder="Password" required>
+        </div>
+        <br>
+        <div class="row">
+          <button type="submit" class="submitBtn btn-wr-login">LOGIN</button>
         </div>
       </center>
-      <button type="submit" class="submitBtn btn-wr">LOGIN</button>
       <br>
       <a href="/auth/github">
         <img src="/js/login/github.png" class="loginicon" />
