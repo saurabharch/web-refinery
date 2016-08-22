@@ -3,60 +3,61 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
   //gets assigned in our onload function below 
   var nav;
 
-   $('#skeleton').on('load', function() {
+  $('#skeleton').on('load', function() {
     //gets the entire htmt of ur <nav> tag
     nav = new NavbarFactory.Navbar($('#skeleton').contents().find('nav')[0].outerHTML);
     nav.parseNavbar();
-    console.log(nav)
     $scope.edit();
+    $scope.links = nav.links;
+    console.log(nav)
   })
 
   $scope.sides = [
-    'top',
-    'bottom',
-    'left',
-    'right'
+  'top',
+  'right',
+  'left',
+  'bottom'
   ]
 
   $scope.toggleInverse = function() {
-     if ($('#skeleton').contents().find('nav').hasClass('navbar-inverse')) 
-            $('#skeleton').contents().find('nav').removeClass('navbar-inverse')
-       
-        else $('#skeleton').contents().find('nav').addClass('navbar-inverse')
-  }
+   if ($('#skeleton').contents().find('nav').hasClass('navbar-inverse')) 
+    $('#skeleton').contents().find('nav').removeClass('navbar-inverse')
 
-  $scope.updateSide = function(){
-    nav.align($scope.side)
-  }
+  else $('#skeleton').contents().find('nav').addClass('navbar-inverse')
+}
 
-  $scope.animationsEnabled = false;
-  $scope.open = function(size) {
+$scope.updateSide = function(){
+  nav.align($scope.side)
+}
 
-    var modalInstance = $uibModal.open({
-      animation: false,
-      templateUrl: 'js/modalInstance/editor.modal.html',
-      controller: 'ModalInstanceCtrl',
-      size: size,
-      resolve: {
-        textSelected: function() {
-          return $scope.textSelected;
-        }
+$scope.animationsEnabled = false;
+$scope.open = function(size) {
+
+  var modalInstance = $uibModal.open({
+    animation: false,
+    templateUrl: 'js/modalInstance/editor.modal.html',
+    controller: 'ModalInstanceCtrl',
+    size: size,
+    resolve: {
+      textSelected: function() {
+        return $scope.textSelected;
       }
-    });
+    }
+  });
 
-    modalInstance.result.then(function(editedModalText) {
-      $scope.textSelected = editedModalText;
+  modalInstance.result.then(function(editedModalText) {
+    $scope.textSelected = editedModalText;
 
-      $($scope.textTag).html($scope.textSelected);
+    $($scope.textTag).html($scope.textSelected);
 
-    }, function() {
-      $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
+  }, function() {
+    $log.info('Modal dismissed at: ' + new Date());
+  });
+};
 
-  $scope.toggleAnimation = function() {
-    $scope.animationsEnabled = !$scope.animationsEnabled;
-  };
+$scope.toggleAnimation = function() {
+  $scope.animationsEnabled = !$scope.animationsEnabled;
+};
 
   //makes all elements in body editable
   $scope.edit = function() {
@@ -118,14 +119,14 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
       alert("Please upload an image")
     } else {
       return fileUpload.upload(uploadObj, uploadUrl)
-        .then(function(imageArray) {
-          $scope.allImages = imageArray;
+      .then(function(imageArray) {
+        $scope.allImages = imageArray;
           // console.log($scope.allImages)
         })
     }
   }
 
- 
+
 
   $scope.toggleClass = function(classString){
     nav.toggleClass(classString);
@@ -137,7 +138,22 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
     $scope.colorBool = !$scope.colorBool;
   }
 
- 
+  $scope.addMoreLinks = function () {
+    console.log('hhehe')
+    $('#skeleton').contents().find('#navUl').append(nav.links[1])
+
+  }
+
+  $scope.removeLink = function(text){
+    console.log($scope.links)
+    $('#skeleton').contents().find('a:contains(' + text + ')').parent().remove();
+    _.remove($scope.links, function(link){
+      return link.name === text;
+    })
+    console.log($scope.links)
+  }
+
+
 
 
 

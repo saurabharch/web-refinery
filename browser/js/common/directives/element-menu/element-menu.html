@@ -21,6 +21,11 @@
         <li>
         <p><button class ='btn btn-default btn-wr btn-spacer' ng-click='toggleInverse()'>Inverse Colors</button></p>
      </ul>
+
+     <ul>
+       <li ng-repeat = 'link in links'>{{link.name}}  <a ng-show = "link.name != 'Home'" ng-click = removeLink(link.name)>[x]</a></li>
+
+     </ul>
    </div>
 
    <div><a data-toggle="collapse" data-target="#text" class="category-links" ng-click="click($event)" style="text-transform: uppercase;">Text Elements</a>
