@@ -1,6 +1,3 @@
 app.controller('DashboardCtrl', function($scope, ProjectFactory, PageFactory, allProjects) {
-
-$scope.projects = allProjects;
-
-
+  $scope.projects = allProjects;
 });

@@ -1,6 +1,6 @@
 <navbar></navbar>
 <div class="col-md-6 col-md-offset-3">
-<form id="new-form" name="newForm" ng-submit="newForm.$valid && newProject(new)">
+<form id="new-form" novalidate name="newForm" ng-submit="newForm.$valid && newProject(new)">
 
     <alert type="danger" ng-show="error">
         {{ error }}
@@ -8,20 +8,23 @@
 
     <div class="form-group">
         <label for="email">Project name</label>
-        <input type="text" ng-model="new.title" class="form-control" id="title" placeholder="Enter project name">
+        <input type="text" ng-model="new.title" class="form-control" id="title" name="title" placeholder="Enter project name" required>
+    </div>
+    <div ng-messages="newForm.title.$error" ng-show="newForm.title.$invalid && newForm.title.$dirty" role="alert">
+      <div ng-message="required" class="alert alert-danger">Please enter a title</div>
     </div>
 
     <strong>Pick a template</strong>
     <div class="row">
       <!-- Template Columns -->
       <!-- Single template thumbnail/radio - START -->
-      <div class="col-sm-6 col-md-4" ng-repeat= 'template in templates'>
+      <div class="col-sm-6 col-md-4" ng-repeat="template in templates">
         <div class="thumbnail">
           <img ng-src="images/{{template.title}}.png" alt="...">
           <div class="caption">
             <div class="radio">
               <label>
-                <input type="radio" name="template" ng-model="new.template" value="{{template.title}}">{{template.title}}
+                <input type="radio" ng-model="new.template" name="template" value="{{template.title}}" ng-value="template.title">{{template.title}}
               </label>
             </div>
           </div>
@@ -32,7 +35,7 @@
 
     <div class="row">
       <div class="col-sm-12 col-md-12">
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default" ng-disabled="newForm.$invalid">Submit</button>
       </div>
     </div>
 </form>

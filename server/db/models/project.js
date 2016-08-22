@@ -7,6 +7,7 @@ module.exports = db.define('project', {
       type:Sequelize.STRING
     },
     template:{
-        type: Sequelize.ENUM('simple','Grayscale', 'bare-essentials', 'blog', 'freelancer')
+        type: Sequelize.ENUM('simple','Grayscale', 'store', 'blog', 'freelancer', 'Templify', 'bare-essentials')
     }
+}, {
 });

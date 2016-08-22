@@ -21,6 +21,8 @@
     margin: 20px;
     border: 0px solid transparent;
     border-radius: 0px;
+    color: #a94442;
+    background-color: rgba(235,204,209, 0.9);
 }
 
 #fill-in {
@@ -42,7 +44,7 @@
   -webkit-text-fill-color: white;
 }
 
-.login-page[type=text] {
+.login-page[type=email] {
   color:white;
   font-size: 16px;
   border: none;
@@ -91,26 +93,26 @@
 
 #email{
   background-color: transparent;
-  width: 20%;
+  width: 30%;
   margin-bottom: 15px;
 }
 
 #login-password{
   background-color: transparent;
-  width: 20%;
+  width: 30%;
+  margin-bottom: 15px;
 }
 
 .submitBtn {
   background: transparent;
   border-color: white;
   border-radius: 0px;
-  width: 20%;
+  width: 30%;
   color: white;
-  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .loginicon {
-  margin-top: 25px;
   margin-right: 25px;
   height: 50px;
   width: 50px;

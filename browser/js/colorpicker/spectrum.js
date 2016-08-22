@@ -572,6 +572,16 @@
             isDragging = false;
             container.removeClass(draggingClass);
             boundElement.trigger('dragstop.spectrum', [ get() ]);
+
+            //UNDO FOR COLOR
+            var beforeHtml = $('#skeleton').contents().find("body").html();
+            var undoHtml = "<body>\n" + beforeHtml + "</body>";
+
+            undoArray.push(undoHtml);
+            console.log('color Change: ', undoArray);
+            //UNDO FOR COLOR
+
+
         }
 
         function setFromTextInput() {

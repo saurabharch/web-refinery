@@ -7,13 +7,13 @@ var getData = function (res){
     return res.data;
 };
 
-//creates project
+// creates project
 projectFactory.create = function (obj){
     return $http.post(baseUrl, obj)
     .then(getData);
 };
 
-//retrieves project
+// retrieves project
 projectFactory.getAll = function(){
     return $http.get(baseUrl)
     .then(getData);
@@ -25,9 +25,14 @@ projectFactory.getOne = function(id) {
 }
 
 // projectFactory.download = function(id) {
-//     return $http.get(baseUrl + id + '/download');    
-// } 
+//     return $http.get(baseUrl + id + '/download');
+// }
+
+// deletes project
+projectFactory.deleteProject = function(projectId) {
+    return $http.delete(baseUrl + projectId)
+    .then(getData);
+}
 
 return projectFactory;
-
 });

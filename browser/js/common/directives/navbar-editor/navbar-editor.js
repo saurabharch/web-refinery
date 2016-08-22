@@ -46,8 +46,37 @@ setUser();
     PageFactory.savePage({html: html, title: 'index', projectId:$stateParams.projectId});
   }
 
+$("iframe").on("load", function(){
+var counter = 0
+//undo function
+scope.undo = function(){
+    counter ++
+console.log("undo arraylength", undoArray.length)
+console.log("undo current", counter)
+$("#skeleton").contents().find("body").html(undoArray[(undoArray.length-1)-counter])
+if(undoArray.length-counter ===0){
+    counter = 1
+} else {
+return
+}
+}
 
-scope.download = function() { 
+scope.redo = function(){
+    console.log("redo beginning counter", counter)
+    counter --
+console.log("redo array", undoArray.length)
+console.log("redo current", counter)
+    $("#skeleton").contents().find("body").html(undoArray[(undoArray.length-1)-counter])
+console.log("diff", undoArray.length-counter)
+if((undoArray.length-counter) === undoArray.length+1){
+    counter = undoArray.length-1
+} else {
+return
+}
+}
+})
+
+scope.download = function() {
     scope.parseHtml();
     var url = "http://localhost:1337/api/project/" + $stateParams.projectId + "/download/";
     window.open(url, 'Download');
