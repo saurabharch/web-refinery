@@ -51,7 +51,7 @@ var counter = 1
 scope.undo = function(){
 console.log(undoArray.length)
 console.log(counter)
-$("#skeleton").contents().find("body").html(undoArray[undoArray.length-counter])
+$("#skeleton").contents().find("body").html(undoArray[(undoArray.length-1)-counter])
 if(undoArray.length-counter <=0){
     counter = 1
 } else {
