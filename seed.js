@@ -55,8 +55,8 @@ var remakeDir = function(dir) {
             if(filename == "." || filename == "..") {
                 // pass these files
             } else if(stat.isDirectory()) {
-                // rmdir recursively
-                rmdir(filename);
+                // remakeDir recursively
+                remakeDir(filename);
             } else {
                 // rm fiilename
                 fs.unlinkSync(filename);
@@ -64,9 +64,6 @@ var remakeDir = function(dir) {
         }
         // Remove hosted-projects and sub directories
         fs.rmdirSync(dir);
-        // Recreates the hosted-projects directory
-        fs.mkdirSync(dir);
-        console.log(chalk.green('hosted-projects directory was remade.'))
     } catch(e) {
         if ( e.code != 'ERROR OCCURRED IN REMAKEDIR' ) throw e;
     }
@@ -75,11 +72,14 @@ var remakeDir = function(dir) {
 var hostedProjectsPath = __dirname + '/hosted-projects/';
 var mkdirSync = function (path) {
     try {
-        fs.accessSync(path, fs.F_OK);
         remakeDir(path);
+        // Recreates the hosted-projects directory
+        fs.mkdirSync(dir);
+        // Directories were removed successfully
+        console.log(chalk.green('hosted-projects directory was remade.'))
     } catch(e) {
         // If user doesn't have the hosted-projects
-        // directory, it's made here.
+        // directory, it's made here
         fs.mkdirSync(path);
         console.log(chalk.green('hosted-projects directory was created.'));
     }
