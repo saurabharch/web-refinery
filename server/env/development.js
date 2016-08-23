@@ -11,6 +11,12 @@ module.exports = {
     "clientSecret": "INSERT_FACEBOOK_CLIENT_SECRET_HERE",
     "callbackURL": "INSERT_FACEBOOK_CALLBACK_HERE"
   },
+  "GITHUB": {
+    "clientID": "INSERT_GITHUB_CLIENTID_HERE",
+    "clientSecret": "INSERT_GITHUB_CLIENT_SECRET_HERE",
+    "callbackURL": "INSERT_GITHUB_CALLBACK_HERE"
+  },
+
   "GOOGLE": {
     "clientID": "INSERT_GOOGLE_CLIENTID_HERE",
     "clientSecret": "INSERT_GOOGLE_CLIENT_SECRET_HERE",
