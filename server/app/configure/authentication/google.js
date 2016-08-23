@@ -7,12 +7,12 @@ module.exports = function (app, db) {
 
     var User = db.model('user');
 
-    var config = require('../../../../config.json');
+        var googleConfig = require('../../../env').GOOGLE;
 
     var googleCredentials = {
-        clientID: config[0].googleConfig.clientID,
-        clientSecret: config[0].googleConfig.clientSecret,
-        callbackURL: config[0].googleConfig.callbackURL
+        clientID: googleConfig.clientID,
+        clientSecret: googleConfig.clientSecret,
+        callbackURL: googleConfig.callbackURL
     };
 
     var verifyCallback = function (accessToken, refreshToken, profile, done) {

@@ -7,12 +7,12 @@ module.exports = function(app, db) {
 
   var User = db.model('user');
 
-  var config = require('../../../../config.json');
+      var twitterConfig = require('../../../env').TWITTER;;
 
   var twitterCredentials = {
-    consumerKey: config[2].twitterConfig.consumerKey,
-    consumerSecret: config[2].twitterConfig.consumerSecret,
-    callbackUrl: config[2].twitterConfig.callbackUrl
+    consumerKey: twitterConfig.consumerKey,
+    consumerSecret: twitterConfig.consumerSecret,
+    callbackUrl: twitterConfig.callbackUrl
   };
 
   // var createNewUser = function (token, tokenSecret, profile) {

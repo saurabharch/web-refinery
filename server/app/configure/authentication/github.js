@@ -7,12 +7,12 @@ module.exports = function (app, db) {
 
     var User = db.model('user');
 
-    var config = require('../../../../config.json');
+    var githubConfig = require('../../../env').GITHUB;
 
     var githubCredentials = {
-        clientID: config[1].githubConfig.clientID,
-        clientSecret: config[1].githubConfig.clientSecret,
-        callbackURL: config[1].githubConfig.callbackURL
+        clientID: githubConfig.clientID,
+        clientSecret: githubConfig.clientSecret,
+        callbackURL: githubConfig.callbackURL
     };
 
     var createNewUser = function (token, tokenSecret, profile) {
