@@ -65,7 +65,7 @@
   <ul id="dragitemslistcontainer">
     <li ng-repeat='image in allImages' draggable="true" >
       <span>{{image.title}}</span>
-      <img  class="icon" ng-src='{{image.url}}' data-insert-html="<img src= 'img/{{image.title}}'> "/>
+      <img  class="icon" ng-src='{{image.url}}' data-insert-html="<div class='col-md-12 col-sm-12'><img class='img-responsive' src='img/{{image.title}}'></div>"/>
     </li>
   </ul>
   <input type="file" file-model="file">
