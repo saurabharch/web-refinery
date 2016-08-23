@@ -24,7 +24,7 @@
      </ul>
 
      <ul class= 'list-unstyled'>
-     <li><h3>Nav Links</h3></li> 
+     <li><h3>Nav Links</h3></li>
        <li ng-repeat = 'link in links'>{{link.name}}  <a ng-show = "link.name != 'Home'" ng-click = removeLink(link.name)>[x]</a></li>
        <li id='addLink'><a ng-hide='showTextbox' ng-click = 'clickAddLink()'>Add Section</a>
        <div ng-show = 'showTextbox'><input type ='text' ng-model = 'linkName'><br><button ng-click='addLink()'>Add link</button></div>
@@ -65,7 +65,7 @@
   <ul id="dragitemslistcontainer">
     <li ng-repeat='image in allImages' draggable="true" >
       <span>{{image.title}}</span>
-      <img  class="icon" ng-src='{{image.url}}' data-insert-html="<img src= '{{image.url}}'> "/>
+      <img  class="icon" ng-src='{{image.url}}' data-insert-html="<img src= 'img/{{image.title}}'> "/>
     </li>
   </ul>
   <input type="file" file-model="file">
