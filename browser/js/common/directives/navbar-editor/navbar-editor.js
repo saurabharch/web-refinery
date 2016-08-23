@@ -52,17 +52,19 @@ app.directive('navbarEditor', function($rootScope, AuthService, AUTH_EVENTS, $st
         scope.undo = function() {
           if (counter < undoArray.length - 1) {
             counter++;
-            $("#skeleton").contents().find("body").html(undoArray[(undoArray.length - 1) - counter])
+            $("#skeleton").contents().find("body").html(undoArray[(undoArray.length - 1) - counter]);
+            scope.edit();
           }
         }
 
         scope.redo = function() {
           if (counter > 0) {
             counter--;
-            $("#skeleton").contents().find("body").html(undoArray[(undoArray.length - 1) - counter])
+            $("#skeleton").contents().find("body").html(undoArray[(undoArray.length - 1) - counter]);
+            scope.edit();
           }
         }
-      
+
       })
 
       scope.download = function() {
