@@ -20,24 +20,24 @@ body {
   margin: 0 auto;
 }
 
-#form-views {
-  transition: opacity 1s ease, transform 1s ease;
-  opacity: 1;
-  &.ng-enter {
-    opacity: 0;
-    transform: scale(0.95) translate3d(0, 0.5em, 0);
-  }
-  &.ng-enter-active {
-    opacity: 1;
-    transform: scale(1) translate3d(0, 0, 0);
-  }
-  &.ng-leave {
-    opacity: 1;
-  }
-  &.ng-leave-active {
-     opacity: 0;
-  }
-}
+// #form-views {
+//   transition: opacity 1s ease, transform 1s ease;
+//   opacity: 1;
+//   &.ng-enter {
+//     opacity: 0;
+//     transform: scale(0.95) translate3d(0, 0.5em, 0);
+//   }
+//   &.ng-enter-active {
+//     opacity: 1;
+//     transform: scale(1) translate3d(0, 0, 0);
+//   }
+//   &.ng-leave {
+//     opacity: 1;
+//   }
+//   &.ng-leave-active {
+//      opacity: 0;
+//   }
+// }
 
 @import 'directives/main';
 @import 'home/main';
