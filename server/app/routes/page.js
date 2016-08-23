@@ -7,6 +7,7 @@ var Page = db.model("page");
 var Project = db.model("project");
 var webshot = require('webshot');
 var path = require('path');
+var Promise = require('bluebird');
 
 var rootPath = path.join(__dirname, '../../../');
 
@@ -27,10 +28,21 @@ router.post('/', function (req, res, next){
         height: '800px'
       },
       quality: 75
-    }
+    };
+
+    console.log('=======');
+    console.log(fullUrl);
+    console.log(picUrl + posted.projectId + '.png');
+    console.log('=======');
 
     postedData = posted;
-    return webshot(fullUrl, picUrl + posted.projectId + '.png', options, function() {});
+    return webshot(fullUrl, picUrl + posted.projectId + '.png', function() {
+
+    });
+
+    // webshotPromise(fullUrl, picUrl + posted.projectId + '.png', options, function(err) {
+    //   console.log(err);
+    // });
   })
   .then(function(posted){
      return handler.renderHTML(postedData.html,req.body.projectId);
