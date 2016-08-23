@@ -1,11 +1,10 @@
 .idea
 node_modules/
 npm-debug.log
-public/
+
 .DS_Store
 coverage
 hosted-projects/
 bower_components/
 config.json
-templates/
-screenshots/
+
