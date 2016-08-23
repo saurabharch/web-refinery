@@ -12,18 +12,14 @@
   <div class="col-md-12">
     <!-- Bootstrap thumbnail content component -->
     <div class="col-sm-6 col-md-3" ng-repeat= 'project in projects'>
-        <a href="#" class="thumbnail"  ui-sref= "editor({projectId:project.id})">
-        <img ng-src="http://placehold.it/350x150" alt="...">
-        <div class="caption">
+        <a href="#" class="thumbnail"  ui-sref="editor({projectId:project.id})">
+        <img ng-src="{{project.id}}.png" alt="..." onerror="this.src='http://placehold.it/350x270'"/>
           <h4>Name: {{project.title}} </h4>
-
           <h5>Template: {{project.template}} </h5>
-        </div>
         </a>
         <div>
           <button type="button" class="btn btn-danger btn-sm" ng-click="deleteProject(project.id)">Delete</button>
         </div>
-
     </div>
 
     <!-- Potential new design for dashboard -->

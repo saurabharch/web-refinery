@@ -17,14 +17,14 @@ var rootPath = path.join(__dirname, '../../../');
 router.get('/:id/*', function(req,res,next){
     Project.findById(req.params.id)
     .then(function(project){
-        if (req.user){
-            if (req.user.id === project.userId) 
+        // if (req.user){
+            // if (req.user.id === project.userId)
                 //change this to a rootPath later
                 res.sendFile(rootPath + req.originalUrl);
-            else res.sendStatus(401);
-        }
-    else 
-        res.sendStatus(401);
+            // else res.sendStatus(401);
+        // }
+    // else
+        // res.sendStatus(401);
 
     })
     .catch(next);
