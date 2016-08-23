@@ -1,5 +1,5 @@
 /*!
- * Start Bootstrap - Grayscale v1.1.1 (http://startbootstrap.com/template-overviews/grayscale)
+ * Start Bootstrap - Grayscale v3.3.7+1 (http://startbootstrap.com/template-overviews/grayscale)
  * Copyright 2013-2016 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
@@ -190,7 +190,7 @@ a:focus {
   -moz-animation-timing-function: linear;
 }
 @-webkit-keyframes pulse {
-  0 {
+  0% {
     -webkit-transform: scale(1);
     transform: scale(1);
   }
@@ -204,7 +204,7 @@ a:focus {
   }
 }
 @-moz-keyframes pulse {
-  0 {
+  0% {
     -moz-transform: scale(1);
     transform: scale(1);
   }
