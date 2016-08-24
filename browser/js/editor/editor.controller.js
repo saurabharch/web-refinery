@@ -74,14 +74,11 @@ $scope.toggleAnimation = function() {
     $('#skeleton').contents().find('h1,h2,h3,h4,h5,h6,p,span,button,a').each(function() {
       var self = $(this);
       var handlerIn = function() {
-        self.css('border', '2px dashed rgb(189, 195, 199)');
+        self.addClass('dashedBorder')
       };
 
       var handlerOut = function() {
-        if (!self.hasClass('changeThis')) {
-          self.css('border', '');
-
-        }
+          self.removeClass('dashedBorder')
       };
 
       // Function to give the element that you

@@ -18,6 +18,7 @@ $(document).ready(function () {
         var iframe = $(this);
         iframe.on("load", function () { //Make sure it is fully loaded
             iframe.contents().click(function (event) {
+                console.log(event.target)
             var counter = $("iframe").contents().find(".changeThis").length
     if(counter>=1){
         $("iframe").contents().find(".changeThis").css("border", "");
@@ -26,7 +27,7 @@ $(document).ready(function () {
         $(event.target).addClass("changeThis").resizable()
     }
 $(event.target).addClass("changeThis").resizable()
-$("iframe").contents().find(".changeThis").css("border", "4px solid rgb(189, 195, 199)");
+// $("iframe").contents().find(".changeThis").css("border", "4px solid rgb(189, 195, 199)");
 
 // console.log($(event.target))
             });
