@@ -1,4 +1,4 @@
-app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory, NavbarFactory, allImages, $uibModal, $log) {
+app.controller('EditorCtrl', function($scope, $timeout, fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory, NavbarFactory, allImages, $uibModal, $log) {
 
   //gets assigned in our onload function below
   var nav;
@@ -58,9 +58,16 @@ $scope.open = function(size) {
   modalInstance.result.then(function(editedModalText) {
     $scope.textSelected = editedModalText;
 
-    $scope.textSelected.removeClass('dashedBorder, alreadyEditable');
+    // $scope.textSelected.removeClass('alreadyEditable');
     $($scope.textTag)[0].outerHTML =  $scope.textSelected;
+    $('#skeleton').contents().find('*').each(function () {
+      $(this).removeClass('alreadyEditable')
+      $(this).removeClass('dashedBorder')
+      $(this).off();
+    })
 
+    $scope.edit();
+    
   }, function() {
     $log.info('Modal dismissed at: ' + new Date());
   });
