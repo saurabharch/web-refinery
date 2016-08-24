@@ -5,7 +5,7 @@ var undoArray = [];
 var addToArray = function(html) {
     // saves HTML to array
     if(undoArray.length > 10){
-        undoArray.pop();
+        undoArray.shift();
         undoArray.push(html);
     }
 
