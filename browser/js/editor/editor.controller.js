@@ -1,6 +1,6 @@
 app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory, NavbarFactory, allImages, $uibModal, $log) {
 
-  //gets assigned in our onload function below 
+  //gets assigned in our onload function below
   var nav;
 
   $('#skeleton').on('load', function() {
@@ -30,7 +30,7 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
   }
 
   $scope.toggleInverse = function() {
-   if ($('#skeleton').contents().find('nav').hasClass('navbar-inverse')) 
+   if ($('#skeleton').contents().find('nav').hasClass('navbar-inverse'))
     $('#skeleton').contents().find('nav').removeClass('navbar-inverse')
 
   else $('#skeleton').contents().find('nav').addClass('navbar-inverse')
@@ -58,7 +58,8 @@ $scope.open = function(size) {
   modalInstance.result.then(function(editedModalText) {
     $scope.textSelected = editedModalText;
 
-    $($scope.textTag).html($scope.textSelected);
+    $($scope.textTag)[0].outerHTML =  $scope.textSelected;
+    $($scope.textSelected).removeClass('dashedBorder');
 
   }, function() {
     $log.info('Modal dismissed at: ' + new Date());
@@ -89,8 +90,8 @@ $scope.toggleAnimation = function() {
 
         self.addClass('alreadyEditable')
         self.dblclick(function() {
-
           $scope.textSelected = $(this)[0].outerHTML;
+
           $scope.textTag = $(this);
           $scope.open();
         })
@@ -113,7 +114,7 @@ $scope.toggleAnimation = function() {
   $scope.projectUrl = 'hosted-projects/' + currentProject.id + '/index.html';
 
   $scope.allImages = allImages;
-  
+
 
   $scope.upload = function() {
     var uploadUrl = '/api/upload';
@@ -146,7 +147,7 @@ $scope.toggleAnimation = function() {
   }
 
   $scope.addLink = function () {
-    
+
     var newLink = nav.createLink($scope.linkName)
     $('#skeleton').contents().find('#navUl').append(newLink)
     $scope.showTextbox= false;
