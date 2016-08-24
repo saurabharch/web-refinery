@@ -63,7 +63,7 @@ $scope.open = function(size) {
     $('#skeleton').contents().find('*').each(function () {
       $(this).removeClass('alreadyEditable')
       $(this).removeClass('dashedBorder')
-      $(this).off();
+      $(this).off('dblclick');
     })
 
     $scope.edit();
