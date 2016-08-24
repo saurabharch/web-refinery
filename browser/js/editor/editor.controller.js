@@ -58,8 +58,8 @@ $scope.open = function(size) {
   modalInstance.result.then(function(editedModalText) {
     $scope.textSelected = editedModalText;
 
+    $scope.textSelected.removeClass('dashedBorder, alreadyEditable');
     $($scope.textTag)[0].outerHTML =  $scope.textSelected;
-    $($scope.textSelected).removeClass('dashedBorder');
 
   }, function() {
     $log.info('Modal dismissed at: ' + new Date());
