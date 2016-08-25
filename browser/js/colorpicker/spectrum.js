@@ -578,7 +578,6 @@
             var undoHtml = "<body>\n" + beforeHtml + "</body>";
 
             undoArray.push(undoHtml);
-            console.log('color Change: ', undoArray);
             //UNDO FOR COLOR
 
 
