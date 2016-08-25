@@ -1,41 +1,9 @@
-app.controller('EditorCtrl', function($scope, $timeout, fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory, NavbarFactory, allImages, $uibModal, $log) {
-
-  //gets assigned in our onload function below
-  var nav;
+app.controller('EditorCtrl', function($scope, $timeout, fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory, GalleryFactory, allImages, $uibModal, $log) {
 
   $('#skeleton').on('load', function() {
     //gets the entire htmt of ur <nav> tag
-    nav = new NavbarFactory.Navbar($('#skeleton').contents().find('nav')[0].outerHTML);
-    nav.parseNavbar();
     $scope.edit();
-    $scope.links = nav.links;
-    nav.align('top');
   });
-
-  $scope.sides = [
-  'top',
-  'right',
-  'left',
-  'bottom'
-  ];
-
-  $scope.showTextbox = false;
-
-  $scope.clickAddLink = function() {
-    $scope.showTextbox = true;
-  }
-
-  $scope.toggleInverse = function() {
-    if ($('#skeleton').contents().find('nav').hasClass('navbar-inverse')) {
-      $('#skeleton').contents().find('nav').removeClass('navbar-inverse');
-    } else {
-      $('#skeleton').contents().find('nav').addClass('navbar-inverse');
-    }
-  }
-
-  $scope.updateSide = function(){
-    nav.align($scope.side);
-  }
 
   $scope.animationsEnabled = false;
   $scope.open = function(size) {
@@ -107,10 +75,6 @@ app.controller('EditorCtrl', function($scope, $timeout, fileUpload, ProjectFacto
     });
   }
 
-  $scope.createProject = function(obj) {
-    ProjectFactory.create(obj)
-  }
-
   // Will make a hardcoded request to backend and use the archiver to zip up the project
   $scope.currentProject = currentProject;
 
@@ -131,38 +95,12 @@ app.controller('EditorCtrl', function($scope, $timeout, fileUpload, ProjectFacto
       return fileUpload.upload(uploadObj, uploadUrl)
       .then(function(imageArray) {
         $scope.allImages = imageArray;
-          // console.log($scope.allImages)
-        })
+      })
     }
   }
 
-  $scope.toggleClass = function(classString){
-    nav.toggleClass(classString);
-    console.log(nav)
-  }
-
-  $scope.colorBool = false;
-  $scope.toggleColor = function() {
-    $scope.colorBool = !$scope.colorBool;
-  }
-
-  $scope.addLink = function () {
-    var newLink = nav.createLink($scope.linkName);
-    $('#skeleton').contents().find('#navUl').append(newLink);
-    $scope.showTextbox= false;
-    $scope.edit();
-  }
-
-  $scope.removeLink = function(text){
-    var textParsed = text.replace(' ', '_');
-    $('#skeleton').contents().find('a:contains(' + text + ')').parent().remove();
-
-    _.remove($scope.links, function(link) {
-      return link.name === text;
-    });
-
-    $('#skeleton').contents().find('#'+textParsed).remove();
-    $scope.edit();
-  }
+  $scope.addGalleryRow = GalleryFactory.addGalleryRow;
+  $scope.removeLastRow = GalleryFactory.removeLastRow;
+  $scope.newRow = GalleryFactory.newGalleryRow;
 
 });
