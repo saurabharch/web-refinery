@@ -17,9 +17,9 @@ var setWallpaper = function (selectedWallpaper){
             var undoHtml = "<body>\n" + beforeHtml + "</body>";
 
             undoArray.push(undoHtml);
-            console.log('background Change: ', undoArray);
+
     $("iframe").contents().find(".changeThis").css("background-image","url("+$(selectedWallpaper).parent().children()[0].currentSrc+")").css("background-size", "100% 100%")
-    console.log($(selectedWallpaper).parent().children()[0].currentSrc)
+
 }
 
 $(document).ready(function () {
@@ -41,7 +41,7 @@ $(document).ready(function () {
         var iframe = $(this);
         iframe.on("load", function () { //Make sure it is fully loaded
             iframe.contents().click(function (event) {
-                console.log(event.target)
+
             var counter = $("iframe").contents().find(".changeThis").length
     if(counter>=1){
         $("iframe").contents().find(".changeThis").css("border", "");
