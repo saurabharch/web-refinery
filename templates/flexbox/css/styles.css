@@ -1,0 +1,50 @@
+/* 
+// CSS3 Flexbox Flexible Box Layouts
+// Made with ❤ by @Pawan_Mall
+// http://www.pawanmall.net 
+*/
+@import url(http://fonts.googleapis.com/css?family=Kalam);
+
+body{
+  margin:0px;
+  font-family: 'Kalam', cursive;
+}
+body > div{
+  display:flex;
+  flex-flow:row wrap;
+}
+body > div > header, nav, main, aside, footer{
+  color: #f0f0f0;
+  font-size: 20px;
+  text-shadow: 2px 2px 6px #000;
+  text-align: center;
+  background: #999999;
+  background: linear-gradient(#999, #333);
+  background-color: gray;
+  border-radius:7px;
+  margin:5px;
+  padding:20px;
+}
+body > div > header{
+  order:1;
+  height:100px;
+  flex:0 1 100%;
+}
+body > div > nav{
+  order:2;
+  flex:0 1 200px;
+}
+body > div > main{
+  order:3;
+  min-height:400px;
+  flex:1;
+}
+body > div > aside{
+  order:4;
+  flex:0 1 200px;
+}
+body > div > footer{
+  height:100px;
+  order:5;
+  flex:0 1 100%;
+}

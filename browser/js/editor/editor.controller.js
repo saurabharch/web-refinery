@@ -1,16 +1,12 @@
-app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory, NavbarFactory, allImages, $uibModal, $log) {
+app.controller('EditorCtrl', function($scope, $timeout, fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory, GalleryFactory, allImages, $uibModal, $log) {
 
-  //gets assigned in our onload function below 
+  //gets assigned in our onload function below
   var nav;
 
   $('#skeleton').on('load', function() {
     //gets the entire htmt of ur <nav> tag
-    nav = new NavbarFactory.Navbar($('#skeleton').contents().find('nav')[0].outerHTML);
-    nav.parseNavbar();
     $scope.edit();
-    $scope.links = nav.links;
-    nav.align('top')
-    console.log(nav)
+    
   })
 
   console.log(currentProject)
@@ -30,7 +26,7 @@ app.controller('EditorCtrl', function($scope, fileUpload, ProjectFactory, PageFa
   }
 
   $scope.toggleInverse = function() {
-   if ($('#skeleton').contents().find('nav').hasClass('navbar-inverse')) 
+   if ($('#skeleton').contents().find('nav').hasClass('navbar-inverse'))
     $('#skeleton').contents().find('nav').removeClass('navbar-inverse')
 
   else $('#skeleton').contents().find('nav').addClass('navbar-inverse')
@@ -58,8 +54,16 @@ $scope.open = function(size) {
   modalInstance.result.then(function(editedModalText) {
     $scope.textSelected = editedModalText;
 
-    $($scope.textTag).html($scope.textSelected);
+    // $scope.textSelected.removeClass('alreadyEditable');
+    $($scope.textTag)[0].outerHTML =  $scope.textSelected;
+    $('#skeleton').contents().find('*').each(function () {
+      $(this).removeClass('alreadyEditable')
+      $(this).removeClass('dashedBorder')
+      $(this).off('dblclick');
+    })
 
+    $scope.edit();
+    
   }, function() {
     $log.info('Modal dismissed at: ' + new Date());
   });
@@ -74,14 +78,11 @@ $scope.toggleAnimation = function() {
     $('#skeleton').contents().find('h1,h2,h3,h4,h5,h6,p,span,button,a').each(function() {
       var self = $(this);
       var handlerIn = function() {
-        self.css('border', '2px dashed rgb(189, 195, 199)');
+        self.addClass('dashedBorder')
       };
 
       var handlerOut = function() {
-        if (!self.hasClass('changeThis')) {
-          self.css('border', '');
-
-        }
+          self.removeClass('dashedBorder')
       };
 
       // Function to give the element that you
@@ -92,8 +93,8 @@ $scope.toggleAnimation = function() {
 
         self.addClass('alreadyEditable')
         self.dblclick(function() {
-
           $scope.textSelected = $(this)[0].outerHTML;
+
           $scope.textTag = $(this);
           $scope.open();
         })
@@ -116,7 +117,7 @@ $scope.toggleAnimation = function() {
   $scope.projectUrl = 'hosted-projects/' + currentProject.id + '/index.html';
 
   $scope.allImages = allImages;
-  
+
 
   $scope.upload = function() {
     var uploadUrl = '/api/upload';
@@ -149,7 +150,7 @@ $scope.toggleAnimation = function() {
   }
 
   $scope.addLink = function () {
-    
+
     var newLink = nav.createLink($scope.linkName)
     $('#skeleton').contents().find('#navUl').append(newLink)
     $scope.showTextbox= false;
@@ -168,6 +169,9 @@ $scope.toggleAnimation = function() {
     console.log($scope.links)
   }
 
+  $scope.addGalleryRow = GalleryFactory.addGalleryRow;
+  $scope.removeLastRow = GalleryFactory.removeLastRow;
+  $scope.newRow = GalleryFactory.newGalleryRow;
 
 
 

@@ -6,5 +6,8 @@ npm-debug.log
 coverage
 hosted-projects/
 bower_components/
+templates/
+screenshots/
+public/
 config.json
 

@@ -6,8 +6,8 @@ app.directive('navbarEditor', function($rootScope, AuthService, AUTH_EVENTS, $st
     templateUrl: 'js/common/directives/navbar-editor/navbar-editor.html',
     link: function(scope, elem, attr) {
       scope.items = [
-        { label: 'Home', state: 'home' },
-        { label: 'Dashboard', state: 'dashboard', auth: true }
+      { label: 'Home', state: 'home' },
+      { label: 'Dashboard', state: 'dashboard', auth: true }
       ];
 
 
@@ -36,10 +36,14 @@ app.directive('navbarEditor', function($rootScope, AuthService, AUTH_EVENTS, $st
       setUser();
 
       //parses HTML from iFrame
-      scope.parseHtml = function() {
+      scope.parseHtml = function(exportBool) {
         $('#skeleton').contents().find('h1,h2,h3,h4,h5,h6,p,span,button,a').each(function() {
-          if ($(this).hasClass('alreadyEditable')) $(this).removeClass('alreadyEditable')
+          $(this).removeClass('alreadyEditable changeThis dashedBorder')
         })
+      if (exportBool){
+        $("#skeleton").contents().find('[data-dragcontext-marker],.drop-marker,[class^="ui-resizable"]').remove();
+        }
+        
         var beforeHtml = $('#skeleton').contents().find("html").html();
         var html = "<html>\n" + beforeHtml + "</html>";
         // saves HTML to backend
@@ -53,7 +57,7 @@ app.directive('navbarEditor', function($rootScope, AuthService, AUTH_EVENTS, $st
           if (counter < undoArray.length - 1) {
             counter++;
             $("#skeleton").contents().find("body").html(undoArray[(undoArray.length - 1) - counter]);
-            scope.edit();
+            angular.element(document.getElementsByTagName('element-menu')[0]).scope().edit();
           }
         }
 
@@ -61,14 +65,14 @@ app.directive('navbarEditor', function($rootScope, AuthService, AUTH_EVENTS, $st
           if (counter > 0) {
             counter--;
             $("#skeleton").contents().find("body").html(undoArray[(undoArray.length - 1) - counter]);
-            scope.edit();
+            angular.element(document.getElementsByTagName('element-menu')[0]).scope().edit();
           }
         }
 
       })
 
       scope.download = function() {
-        scope.parseHtml();
+        scope.parseHtml(true);
         var url = "api/project/" + $stateParams.projectId + "/download/";
         window.open(url, 'Download');
       }
