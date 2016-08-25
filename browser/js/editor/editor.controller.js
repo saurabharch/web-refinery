@@ -1,16 +1,12 @@
-app.controller('EditorCtrl', function($scope, $timeout, fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory, NavbarFactory, allImages, $uibModal, $log) {
+app.controller('EditorCtrl', function($scope, $timeout, fileUpload, ProjectFactory, PageFactory, currentProject, ImageFactory, GalleryFactory, allImages, $uibModal, $log) {
 
   //gets assigned in our onload function below
   var nav;
 
   $('#skeleton').on('load', function() {
     //gets the entire htmt of ur <nav> tag
-    nav = new NavbarFactory.Navbar($('#skeleton').contents().find('nav')[0].outerHTML);
-    nav.parseNavbar();
     $scope.edit();
-    $scope.links = nav.links;
-    nav.align('top')
-    console.log(nav)
+    
   })
 
   console.log(currentProject)
@@ -173,6 +169,9 @@ $scope.toggleAnimation = function() {
     console.log($scope.links)
   }
 
+  $scope.addGalleryRow = GalleryFactory.addGalleryRow;
+  $scope.removeLastRow = GalleryFactory.removeLastRow;
+  $scope.newRow = GalleryFactory.newGalleryRow;
 
 
 
