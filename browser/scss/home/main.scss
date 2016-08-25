@@ -3,8 +3,6 @@
   color: #333
 }
 
-
-
 #simple {
   text-align: left;
   margin-top: 30%;
@@ -32,10 +30,25 @@
 
 #secondanimation {
   text-align: center;
-  font-family: 'effra', 'proxima';
+  font-family: 'Avenir Next', 'sans-serif';
   bottom: 45vh;
   background-color: #32cdc7;
   color: white;
+  padding-right: 11%;
+  padding-left: 11%;
+  font-size: 40px;
+  padding-bottom: 10%;
+}
+
+.secondtext {
+  font-size: 50px;
+  font-weight: 100 !important;
+}
+
+#secondtext {
+  font-size: 30px;
+  margin-bottom: 5%;
+  font-weight: 100 !important;
 }
 
 .modal-content-home {
