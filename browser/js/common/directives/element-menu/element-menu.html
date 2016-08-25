@@ -50,8 +50,8 @@
 <!-- <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#buttons">Buttons</button> -->
 <div><a data-toggle="collapse" data-target="#buttons" class="category-links" ng-click="click($event)" style="text-transform: uppercase;">Gallery</a></div>
 <div id="buttons" class="collapse">
-  <ul id="galleryEditor" class='list-unstyled'>
-    <li><span ng-click = 'addGalleryRow()' class='btn btn-wr'>New Row</span></li>
+  <ul id="dragitemslistcontainer" class='list-unstyled'>
+    <li draggable='true' data-insert-html = '{{newRow}}'><span class = 'btn btn-default'>[img] [img] [img]</span></li>
     <li><span ng-click = 'removeLastRow()' class='btn btn-wr'>Remove Last Row</span></li>
   </ul>
 </div>

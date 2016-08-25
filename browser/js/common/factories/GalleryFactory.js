@@ -6,20 +6,19 @@ app.factory('GalleryFactory', function() {
 
     });
     var newGalleryRow = `<div class = 'row'>
-                        <div class = 'col-md-4'><h3 class='text-center'>Title</h3></div>
-                        <div class = 'col-md-4'><h3 class='text-center'>Title</h3></div>
-                        <div class = 'col-md-4'><h3 class='text-center'>Title</h3></div>
-                        </div>`;
+    <div class = 'col-md-4'><h3 class='text-center'>Title</h3></div>
+    <div class = 'col-md-4'><h3 class='text-center'>Title</h3></div>
+    <div class = 'col-md-4'><h3 class='text-center'>Title</h3></div>
+    </div>`;
 
     return {
-        addGalleryRow: function() {
-            
-            $gallery.append(newGalleryRow);
-        },
         removeLastRow: function(){
-            console.log($gallery);
-            console.log($gallery.children().last());
+
+         $gallery = $('#skeleton').contents().find('#gallery');
+
+
+         if($gallery.children().length > 1)
             $gallery.children().last().remove();
-        }
     }
+}
 })

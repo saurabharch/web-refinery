@@ -171,6 +171,11 @@ $scope.toggleAnimation = function() {
 
   $scope.addGalleryRow = GalleryFactory.addGalleryRow;
   $scope.removeLastRow = GalleryFactory.removeLastRow;
+  $scope.newRow = `<div class = 'row'>
+                        <div class = 'col-md-4'><h3 class='text-center'>Title</h3></div>
+                        <div class = 'col-md-4'><h3 class='text-center'>Title</h3></div>
+                        <div class = 'col-md-4'><h3 class='text-center'>Title</h3></div>
+                        </div>`
 
 
 
