@@ -4,7 +4,7 @@ npm-debug.log
 
 .DS_Store
 coverage
-hosted-projects/
+
 bower_components/
 templates/
 screenshots/
