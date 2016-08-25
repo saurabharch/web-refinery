@@ -19,6 +19,7 @@ app.factory('GalleryFactory', function() {
 
          if($gallery.children().length > 1)
             $gallery.children().last().remove();
-    }
+    },
+    newGalleryRow: newGalleryRow
 }
 })
