@@ -7,7 +7,7 @@
 <div class="mySideNav col-xs-12 col-md-12 col-lg-12">
 
   <div>
-    <div><a  ng-show='currentProject.template === "bare-essentials" ' data-toggle="collapse" data-target="#navEdit" class="category-links" ng-click="click($event)" style="text-transform: uppercase;">Edit Navbar</a>
+    <!-- <div><a  ng-show='currentProject.template === "bare-essentials" ' data-toggle="collapse" data-target="#navEdit" class="category-links" ng-click="click($event)" style="text-transform: uppercase;">Edit Navbar</a>
     </div>
 
     <div id="navEdit" class="collapse">
@@ -30,7 +30,7 @@
        <div ng-show = 'showTextbox'><input type ='text' ng-model = 'linkName'><br><button ng-click='addLink()'>Add link</button></div>
        </li>
      </ul>
-   </div>
+   </div> -->
 
    <div><a data-toggle="collapse" data-target="#text" class="category-links" ng-click="click($event)" style="text-transform: uppercase;">Text Elements</a>
    </div>
@@ -48,14 +48,11 @@
 </div>
 
 <!-- <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#buttons">Buttons</button> -->
-<div><a data-toggle="collapse" data-target="#buttons" class="category-links" ng-click="click($event)" style="text-transform: uppercase;">Buttons</a></div>
+<div><a data-toggle="collapse" data-target="#buttons" class="category-links" ng-click="click($event)" style="text-transform: uppercase;">Gallery</a></div>
 <div id="buttons" class="collapse">
-  <ul id="dragitemslistcontainer">
-    <li draggable="true" data-insert-html="<button type='button' class='btn btn-secondary'>Secondary</button>"><button type='button' class='btn btn-secondary'>Secondary</button></li>
-    <li draggable="true" data-insert-html="<button type='button' class='btn btn-success'>Secondary</button>"><button type='button' class='btn btn-success'>Success</button></li>
-    <li draggable="true" data-insert-html="<button type='button' class='btn btn-info'>Success</button>"><button type='button' class='btn btn-info'>Info</button></li>
-    <li draggable="true" data-insert-html="<button type='button' class='btn btn-warning'>Warning</button>"><button type='button' class='btn btn-warning'>Warning</button></li>
-    <li draggable="true" data-insert-html="<button type='button' class='btn btn-danger'>Danger</button>"><button type='button' class='btn btn-danger'>Danger</button></li>
+  <ul id="galleryEditor" class='list-unstyled'>
+    <li><span ng-click = 'addGalleryRow()' class='btn btn-wr'>New Row</span></li>
+    <li><span ng-click = 'removeLastRow()' class='btn btn-wr'>Remove Last Row</span></li>
   </ul>
 </div>
 
