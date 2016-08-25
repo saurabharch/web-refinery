@@ -1,3 +1,6 @@
+<script src="js/colorpicker/colorpicker.js"></script>
+<link rel="stylesheet" type="text/css" href="js/colorpicker/spectrum.css">
+
  <style type="text/css">
   form.tab-form-demo .tab-pane {
     margin: 20px 20px;
@@ -61,8 +64,12 @@
 <div id="image" class="collapse">
   <ul id="dragitemslistcontainer">
     <li ng-repeat='image in allImages' draggable="true" >
-      <span>{{image.title}}</span>
+
       <img  class="icon" ng-src='{{image.url}}' data-insert-html="<div class='col-md-12 col-sm-12'><img class='img-responsive' src='img/{{image.title}}'></div>"/>
+      <br>
+        <span>set as wallpaper</span>
+        <input type="radio" name="wallpaper" onclick="setWallpaper(this)"/>
+
     </li>
   </ul>
   <input type="file" file-model="file">

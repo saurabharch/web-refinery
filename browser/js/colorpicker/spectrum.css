@@ -102,7 +102,7 @@ License: MIT
     height: 8px;
 }
 .sp-alpha-inner {
-    position:absolute fixed;
+    position: fixed;
     border: solid 1px #333;
 }
 
