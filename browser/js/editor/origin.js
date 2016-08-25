@@ -19,7 +19,6 @@ $(function(){
         var beforeHtml = $('#skeleton').contents().find("body").html();
         var undoHtml = "<body>\n" + beforeHtml + "</body>";
         undoArray.push(undoHtml);
-        console.log(undoArray)
 
         // as our outer/main window
          var clientFrameWindow = $('#skeleton').get(0).contentWindow;
@@ -37,10 +36,12 @@ $(function(){
 
             dragoverqueue_processtimer = setInterval(function() {
                 DragDropFunctions.ProcessDragOverQueue();
-            },100);
+            }, 100);
+            // lowered to 10 to make dragging within iframe
 
             var htmlElement = event.target.outerHTML;
             elementToRemove = $(event.target);
+            elementToRemoveTest = $(event);
             event.originalEvent.dataTransfer.setData("Text",htmlElement);
 
         });
@@ -53,14 +54,13 @@ $(function(){
             DragDropFunctions.ClearContainerContext();
             elementToRemove.remove();
 
+
             // Get HTML and add to undoArray
             var beforeHtml = $('#skeleton').contents().find("body").html();
             var undoHtml = "<body>\n" + beforeHtml + "</body>";
 
             addToArray(undoHtml);
-            console.log('within iframe: ', undoArray);
-
-            angular.element(document.getElementsByTagName('element-menu')[0]).scope().edit();
+            // angular.element(document.getElementsByTagName('element-menu')[0]).scope().edit();
         });
         // Code to make items within the iframe draggable - END
 
@@ -110,13 +110,17 @@ $(function(){
                 else {
                     // Get textData when you drag within the ifram
                     var textData = e.dataTransfer.getData('text');
+                    // elementToRemove.remove();
                 }
 
                 var insertionPoint = $("#skeleton").contents().find(".drop-marker");
                 var checkDiv = $(textData);
-                // checkDiv.removeClass('alreadyEditable');
+
+                checkDiv.removeClass('alreadyEditable');
                 insertionPoint.after(checkDiv);
                 insertionPoint.remove();
+
+                angular.element(document.getElementsByTagName('element-menu')[0]).scope().edit();
             } catch(e) {
                 console.log(e);
             }
@@ -159,14 +163,11 @@ $(function(){
             // Get HTML and add to undoArray
             var beforeHtml = $('#skeleton').contents().find("body").html();
             var undoHtml = "<body>\n" + beforeHtml + "</body>";
-            // console.log('outisde iframe: ',undoHtml);
             addToArray(undoHtml);
-            console.log(undoArray)
-            console.log('outisde iframe: ', undoArray);
 
         //re runs the edit() function on our controller on every drop
         //to recheck all the elements and make them editable
-        angular.element(document.getElementsByTagName('element-menu')[0]).scope().edit();
+        // angular.element(document.getElementsByTagName('element-menu')[0]).scope().edit();
     });
 
 
@@ -375,7 +376,7 @@ $(function(){
         },
 
         removePlaceholder : function() {
-            $("#skeleton").contents().find(".drop-marker").remove();
+            $("#skeleton").contents().find(".drop-marker, dashedBorder").remove();
         },
 
         getPlaceHolder : function() {
