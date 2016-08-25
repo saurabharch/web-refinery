@@ -1,1 +1,0 @@
-Welcome to Templify img!
