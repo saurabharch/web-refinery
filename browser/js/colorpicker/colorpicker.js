@@ -12,7 +12,25 @@ var changeBorder = function(){
     thingToChange = "border-color"
 }
 
+var setWallpaper = function (selectedWallpaper){
+    $("iframe").contents().find(".changeThis").css("background-image","url("+$(selectedWallpaper).parent().children()[0].currentSrc+")").css("background-size", "100% 100%")
+    console.log($(selectedWallpaper).parent().children()[0].currentSrc)
+}
+
 $(document).ready(function () {
+    $("#colorpicker").spectrum({
+    flat:true,
+    showInput:true,
+    showAlpha:true,
+    showPalette: true,
+    palette: [],
+    color: "#000",
+    move:function(color){
+    $("iframe").contents().find(".changeThis").css(thingToChange, color.toRgbString());
+        $("iframe").contents().find(".changeThis").val(color.toRgbString())
+    }
+   });
+
     $("iframe").on('load').each(function () {
         //Using closures to capture each one
         var iframe = $(this);
@@ -34,18 +52,7 @@ $(event.target).addClass("changeThis").resizable()
         });
 
     });
-       $("#colorpicker").spectrum({
-    flat:true,
-    showInput:true,
-    showAlpha:true,
-    showPalette: true,
-    palette: [],
-    color: "#000",
-    move:function(color){
-    $("iframe").contents().find(".changeThis").css(thingToChange, color.toRgbString());
-        $("iframe").contents().find(".changeThis").val(color.toRgbString())
-    }
-   });
+
 
 });
 
