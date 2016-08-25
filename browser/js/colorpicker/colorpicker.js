@@ -13,6 +13,11 @@ var changeBorder = function(){
 }
 
 var setWallpaper = function (selectedWallpaper){
+          var beforeHtml = $('#skeleton').contents().find("body").html();
+            var undoHtml = "<body>\n" + beforeHtml + "</body>";
+
+            undoArray.push(undoHtml);
+            console.log('background Change: ', undoArray);
     $("iframe").contents().find(".changeThis").css("background-image","url("+$(selectedWallpaper).parent().children()[0].currentSrc+")").css("background-size", "100% 100%")
     console.log($(selectedWallpaper).parent().children()[0].currentSrc)
 }
