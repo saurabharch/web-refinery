@@ -10,7 +10,6 @@ app.directive('navbarEditor', function($rootScope, AuthService, AUTH_EVENTS, $st
       { label: 'Dashboard', state: 'dashboard', auth: true }
       ];
 
-
       scope.user = null;
 
       scope.isLoggedIn = function() {
@@ -40,10 +39,11 @@ app.directive('navbarEditor', function($rootScope, AuthService, AUTH_EVENTS, $st
         $('#skeleton').contents().find('h1,h2,h3,h4,h5,h6,p,span,button,a').each(function() {
           $(this).removeClass('alreadyEditable changeThis dashedBorder')
         })
-      if (exportBool){
-        $("#skeleton").contents().find('[data-dragcontext-marker],.drop-marker,[class^="ui-resizable"]').remove();
+
+        if (exportBool){
+        $("#skeleton").contents().find('[data-dragcontext-marker],.drop-marker,[class^="ui-resizable"], dashedBorder').remove();
         }
-        
+
         var beforeHtml = $('#skeleton').contents().find("html").html();
         var html = "<html>\n" + beforeHtml + "</html>";
         // saves HTML to backend
@@ -68,8 +68,7 @@ app.directive('navbarEditor', function($rootScope, AuthService, AUTH_EVENTS, $st
             angular.element(document.getElementsByTagName('element-menu')[0]).scope().edit();
           }
         }
-
-      })
+      });
 
       scope.download = function() {
         scope.parseHtml(true);
@@ -77,13 +76,9 @@ app.directive('navbarEditor', function($rootScope, AuthService, AUTH_EVENTS, $st
         window.open(url, 'Download');
       }
 
-
       $rootScope.$on(AUTH_EVENTS.loginSuccess, setUser);
       $rootScope.$on(AUTH_EVENTS.logoutSuccess, removeUser);
       $rootScope.$on(AUTH_EVENTS.sessionTimeout, removeUser);
-
     }
-
   };
-
 });
