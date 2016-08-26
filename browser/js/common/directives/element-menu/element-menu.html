@@ -54,8 +54,8 @@
 <div><a data-toggle="collapse" data-target="#buttons" class="category-links" ng-click="click($event)" style="text-transform: uppercase;">Gallery</a></div>
 <div id="buttons" class="collapse">
   <ul id="dragitemslistcontainer" class='list-unstyled'>
-    <li draggable='true' data-insert-html = '{{newRow}}'><span class = 'btn btn-default'>[img] [img] [img]</span></li>
-    <li><span ng-click = 'removeLastRow()' class='btn btn-wr'>Remove Last Row</span></li>
+    <li draggable='true' data-insert-html = '{{newRow}}'><span class = 'btn btn-default'>New Row</span></li>
+    <li ng-show = 'currentProject.template === "Grayscale" ' ><span  ng-click = 'removeLastRow()' class='btn btn-wr'>Remove Last Row</span></li>
   </ul>
 </div>
 
