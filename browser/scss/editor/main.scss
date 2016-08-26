@@ -10,6 +10,11 @@
     border-radius: 0px !important;
 }
 
+.sidenav{
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 .sidebarFooter {
   position: absolute !important;
   bottom: 20px;
