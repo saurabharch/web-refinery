@@ -45,7 +45,7 @@
      <li draggable="true" data-insert-html="<h3>HEADER GOES HERE</h3>"><h3>H3 Text</h3></li>
      <li draggable="true" data-insert-html="<h4>HEADER GOES HERE</h4>"><h4>H4 Text</h4></li>
      <li draggable="true" data-insert-html="<h5>HEADER GOES HERE</h5>"><h5>H5 Text</h5></li>
-     <li draggable="true" data-insert-html="<h6>HEADER GOES HERE</h6>"><h6>H6 Text</h6></li>
+     <li draggable="true" data-insert-html="<p>Fill with text.</p>"><h6>Paragraph</h6></li>
    </li>
  </ul>
 </div>
@@ -54,7 +54,7 @@
 <div><a data-toggle="collapse" data-target="#buttons" class="category-links" ng-click="click($event)" style="text-transform: uppercase;">Gallery</a></div>
 <div id="buttons" class="collapse">
   <ul id="dragitemslistcontainer" class='list-unstyled'>
-    <li draggable='true' data-insert-html = '{{newRow}}'><span class = 'btn btn-default'>New Row</span></li>
+    <li id='newRow' draggable='true' data-insert-html = '{{newRow}}'><span id='disabledBtn' class = 'btn'>New Row</span></li>
     <li ng-show = 'currentProject.template === "Grayscale" ' ><span  ng-click = 'removeLastRow()' class='btn btn-wr'>Remove Last Row</span></li>
   </ul>
 </div>
