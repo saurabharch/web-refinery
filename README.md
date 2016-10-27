@@ -2,12 +2,15 @@
 
 http://webrefinery.us
 
+![Alt Text](https://github.com/ivanyyuk/web-refinery/raw/master/browser/images/webrefinery_interface.gif)
+
+![Alt Text](https://github.com/ivanyyuk/web-refinery/raw/master/browser/images/webrefinery_export.gif)
+
 ##Requirements
 - node
 - npm
 - bower
 - postgres
-
 
 ##Installing
 Run __npm install__ and __bower install__ to install the necessary packages for the app. 
@@ -19,7 +22,3 @@ Once you're finished, create a database called __web-refinary__ and run __node s
 To login, you can use:  
  id: testing@fsa.com  
  pass: password
- 
-![Alt Text](https://github.com/ivanyyuk/web-refinery/raw/master/browser/images/webrefinery_interface.gif)
-
-![Alt Text](https://github.com/ivanyyuk/web-refinery/raw/master/browser/images/webrefinery_export.gif)
