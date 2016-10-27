@@ -20,6 +20,6 @@ To login, you can use:
  id: testing@fsa.com  
  pass: password
  
-![alt tag](https://raw.githubusercontent.com/ivanyyuk/web-refinery/master/browser/images/webrefinery_interface.gif)
+![alt tag](https://cdn.rawgit.com/ivanyyuk/web-refinery/master/browser/images/webrefinery_interface.gif)
 
-![alt tag](https://raw.githubusercontent.com/ivanyyuk/web-refinery/master/browser/images/webrefinery_export.gif)
+![alt tag](https://cdn.rawgit.com/ivanyyuk/web-refinery/master/browser/images/webrefinery_export.gif)
