@@ -15,7 +15,7 @@ http://webrefinery.us
 ##Installing
 Run __npm install__ and __bower install__ to install the necessary packages for the app. 
 
-Once you're finished, create a database called __web-refinary__ and run __node seed.js__ to install the required tables, sample data, and create a directory called hosted-projects. 
+Once you're finished, create a database called __web-refinery__ and run __node seed.js__ to install the required tables, sample data, and create a directory called hosted-projects. 
 
 ## Logging In
 
